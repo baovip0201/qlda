@@ -1,0 +1,1042 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<Form version="1.5" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
+  <Properties>
+    <Property name="defaultCloseOperation" type="int" value="3"/>
+  </Properties>
+  <SyntheticProperties>
+    <SyntheticProperty name="formSizePolicy" type="int" value="1"/>
+    <SyntheticProperty name="generateCenter" type="boolean" value="false"/>
+  </SyntheticProperties>
+  <AuxValues>
+    <AuxValue name="FormSettings_autoResourcing" type="java.lang.Integer" value="0"/>
+    <AuxValue name="FormSettings_autoSetComponentName" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_generateFQN" type="java.lang.Boolean" value="true"/>
+    <AuxValue name="FormSettings_generateMnemonicsCode" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_i18nAutoMode" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_layoutCodeTarget" type="java.lang.Integer" value="1"/>
+    <AuxValue name="FormSettings_listenerGenerationStyle" type="java.lang.Integer" value="0"/>
+    <AuxValue name="FormSettings_variablesLocal" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_variablesModifier" type="java.lang.Integer" value="2"/>
+  </AuxValues>
+
+  <Layout>
+    <DimensionLayout dim="0">
+      <Group type="103" groupAlignment="0" attributes="0">
+          <Component id="jPanel1" max="32767" attributes="0"/>
+          <Component id="jTabbedPane1" alignment="0" max="32767" attributes="0"/>
+      </Group>
+    </DimensionLayout>
+    <DimensionLayout dim="1">
+      <Group type="103" groupAlignment="0" attributes="0">
+          <Group type="102" alignment="0" attributes="0">
+              <Component id="jPanel1" min="-2" max="-2" attributes="0"/>
+              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+              <Component id="jTabbedPane1" max="32767" attributes="0"/>
+          </Group>
+      </Group>
+    </DimensionLayout>
+  </Layout>
+  <SubComponents>
+    <Container class="javax.swing.JPanel" name="jPanel1">
+
+      <Layout>
+        <DimensionLayout dim="0">
+          <Group type="103" groupAlignment="0" attributes="0">
+              <Group type="102" alignment="1" attributes="0">
+                  <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
+                  <Component id="jButton1" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="375" max="-2" attributes="0"/>
+                  <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace max="32767" attributes="0"/>
+              </Group>
+          </Group>
+        </DimensionLayout>
+        <DimensionLayout dim="1">
+          <Group type="103" groupAlignment="0" attributes="0">
+              <Group type="102" alignment="0" attributes="0">
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
+                      <Component id="jButton1" min="-2" max="-2" attributes="0"/>
+                  </Group>
+              </Group>
+          </Group>
+        </DimensionLayout>
+      </Layout>
+      <SubComponents>
+        <Component class="javax.swing.JLabel" name="jLabel1">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Times New Roman" size="36" style="1"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="Qu&#x1ea3;n l&#xfd; s&#xe1;ch"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JButton" name="jButton1">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Times New Roman" size="18" style="1"/>
+            </Property>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="2" name="D:\Java\QuanLyBanHang\img\arrow-back-icon.png"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="H&#x1ec7; th&#x1ed1;ng"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton1ActionPerformed"/>
+          </Events>
+        </Component>
+      </SubComponents>
+    </Container>
+    <Container class="javax.swing.JTabbedPane" name="jTabbedPane1">
+      <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Times New Roman" size="14" style="1"/>
+        </Property>
+      </Properties>
+
+      <Layout class="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout"/>
+      <SubComponents>
+        <Container class="javax.swing.JPanel" name="jPanel2">
+          <Constraints>
+            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
+              <JTabbedPaneConstraints tabName="Th&#xf4;ng tin s&#xe1;ch">
+                <Property name="tabTitle" type="java.lang.String" value="Th&#xf4;ng tin s&#xe1;ch"/>
+              </JTabbedPaneConstraints>
+            </Constraint>
+          </Constraints>
+
+          <Layout>
+            <DimensionLayout dim="0">
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" attributes="0">
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="102" alignment="0" attributes="0">
+                              <Component id="lb_hinhanh" min="-2" pref="116" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="btn_capNhatAnh" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jLabel2" alignment="0" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                  <Component id="txt_fileSach" linkSize="1" max="32767" attributes="0"/>
+                                  <Component id="cbb_loaiSach" linkSize="1" pref="120" max="32767" attributes="0"/>
+                              </Group>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="jLabel3" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jLabel4" alignment="0" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                  <Component id="txt_maSach" linkSize="1" max="32767" attributes="0"/>
+                                  <Component id="txt_tenSach" max="32767" attributes="0"/>
+                              </Group>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                                      <Component id="jLabel5" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
+                                      <Component id="jLabel6" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                              </Group>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                  <Component id="txt_soLuong" linkSize="1" max="32767" attributes="0"/>
+                                  <Component id="txt_gia" max="32767" attributes="0"/>
+                              </Group>
+                              <EmptySpace min="-2" pref="70" max="-2" attributes="0"/>
+                              <Component id="jLabel7" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                              <Component id="cbb_nhaXuatBan" linkSize="1" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Component id="btn_taiLai_tts" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <Component id="btn_them_tts" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <Component id="btn_sua_tts" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <Component id="btn_xoa_tts" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <Component id="btn_luu_tts" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                              <Component id="jPanel5" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <Component id="btn_in_tts" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                      </Group>
+                      <EmptySpace pref="24" max="32767" attributes="0"/>
+                  </Group>
+                  <Component id="jScrollPane1" alignment="1" max="32767" attributes="0"/>
+              </Group>
+            </DimensionLayout>
+            <DimensionLayout dim="1">
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" alignment="0" attributes="0">
+                      <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                          <Group type="102" attributes="0">
+                              <EmptySpace min="-2" pref="22" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="btn_capNhatAnh" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="txt_fileSach" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jLabel3" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="txt_maSach" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jLabel5" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="txt_soLuong" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jLabel7" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="cbb_nhaXuatBan" alignment="3" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Group type="102" attributes="0">
+                                      <Group type="103" groupAlignment="3" attributes="0">
+                                          <Component id="jLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          <Component id="cbb_loaiSach" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          <Component id="jLabel4" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          <Component id="txt_tenSach" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          <Component id="jLabel6" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          <Component id="txt_gia" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                      <EmptySpace max="32767" attributes="0"/>
+                                      <Component id="jPanel5" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Group type="102" attributes="0">
+                                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                                      <Component id="btn_in_tts" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                              </Group>
+                          </Group>
+                          <Group type="102" attributes="0">
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="lb_hinhanh" min="-2" pref="106" max="-2" attributes="0"/>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="btn_taiLai_tts" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="btn_them_tts" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="btn_sua_tts" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="btn_xoa_tts" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="btn_luu_tts" alignment="3" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                          </Group>
+                      </Group>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Component id="jScrollPane1" pref="170" max="32767" attributes="0"/>
+                  </Group>
+              </Group>
+            </DimensionLayout>
+          </Layout>
+          <SubComponents>
+            <Component class="javax.swing.JLabel" name="lb_hinhanh">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="&#x1ea2;nh"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JButton" name="btn_capNhatAnh">
+              <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Times New Roman" size="14" style="0"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="C&#x1ead;p nh&#x1ead;t &#x1ea3;nh..."/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JLabel" name="jLabel2">
+              <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Times New Roman" size="18" style="0"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="Lo&#x1ea1;i s&#xe1;ch:"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JTextField" name="txt_fileSach">
+              <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Times New Roman" size="14" style="0"/>
+                </Property>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JComboBox" name="cbb_loaiSach">
+              <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Times New Roman" size="14" style="0"/>
+                </Property>
+                <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+                  <StringArray count="0"/>
+                </Property>
+              </Properties>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+              </AuxValues>
+            </Component>
+            <Component class="javax.swing.JLabel" name="jLabel3">
+              <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Times New Roman" size="18" style="0"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="M&#xe3; s&#xe1;ch:"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JTextField" name="txt_maSach">
+              <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Times New Roman" size="14" style="0"/>
+                </Property>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JLabel" name="jLabel4">
+              <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Times New Roman" size="18" style="0"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="T&#xea;n s&#xe1;ch:"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JTextField" name="txt_tenSach">
+              <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Times New Roman" size="14" style="0"/>
+                </Property>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JLabel" name="jLabel5">
+              <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Times New Roman" size="18" style="0"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="S&#x1ed1; l&#x1b0;&#x1ee3;ng:"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JTextField" name="txt_soLuong">
+              <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Times New Roman" size="14" style="0"/>
+                </Property>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JLabel" name="jLabel6">
+              <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Times New Roman" size="18" style="0"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="Gi&#xe1;:"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JTextField" name="txt_gia">
+              <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Times New Roman" size="14" style="0"/>
+                </Property>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JLabel" name="jLabel7">
+              <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Times New Roman" size="18" style="0"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="Nh&#xe0; xu&#x1ea5;t b&#x1ea3;n:"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JComboBox" name="cbb_nhaXuatBan">
+              <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Times New Roman" size="14" style="0"/>
+                </Property>
+                <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+                  <StringArray count="0"/>
+                </Property>
+              </Properties>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+              </AuxValues>
+            </Component>
+            <Component class="javax.swing.JButton" name="btn_taiLai_tts">
+              <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Times New Roman" size="18" style="1"/>
+                </Property>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="2" name="D:\Java\QuanLyBanHang\img\reload-icon.png"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="T&#x1ea3;i l&#x1ea1;i"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JButton" name="btn_them_tts">
+              <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Times New Roman" size="18" style="1"/>
+                </Property>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="2" name="D:\Java\QuanLyBanHang\img\Sign-Add-icon.png"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="Th&#xea;m"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JButton" name="btn_sua_tts">
+              <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Times New Roman" size="18" style="1"/>
+                </Property>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="2" name="D:\Java\QuanLyBanHang\img\Repair-icon.png"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="S&#x1eed;a"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JButton" name="btn_xoa_tts">
+              <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Times New Roman" size="18" style="1"/>
+                </Property>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="2" name="D:\Java\QuanLyBanHang\img\Trash-icon.png"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="X&#xf3;a"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JButton" name="btn_luu_tts">
+              <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Times New Roman" size="18" style="1"/>
+                </Property>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="2" name="D:\Java\QuanLyBanHang\img\save.png"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="L&#x1b0;u"/>
+              </Properties>
+            </Component>
+            <Container class="javax.swing.JPanel" name="jPanel5">
+
+              <Layout>
+                <DimensionLayout dim="0">
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="102" alignment="0" attributes="0">
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="btn_sapXep_tts" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="rbtn_tensach_tts" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                          <Component id="rbtn_gia_tts" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace max="32767" attributes="0"/>
+                      </Group>
+                  </Group>
+                </DimensionLayout>
+                <DimensionLayout dim="1">
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="102" alignment="1" attributes="0">
+                          <EmptySpace pref="20" max="32767" attributes="0"/>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="btn_sapXep_tts" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="rbtn_tensach_tts" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="rbtn_gia_tts" alignment="3" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace min="-2" pref="22" max="-2" attributes="0"/>
+                      </Group>
+                  </Group>
+                </DimensionLayout>
+              </Layout>
+              <SubComponents>
+                <Component class="javax.swing.JButton" name="btn_sapXep_tts">
+                  <Properties>
+                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                      <Font name="Times New Roman" size="18" style="1"/>
+                    </Property>
+                    <Property name="text" type="java.lang.String" value="S&#x1eaf;p x&#x1ebf;p"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JRadioButton" name="rbtn_tensach_tts">
+                  <Properties>
+                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                      <Font name="Times New Roman" size="12" style="0"/>
+                    </Property>
+                    <Property name="text" type="java.lang.String" value="T&#xea;n s&#xe1;ch"/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="rbtn_tensach_ttsActionPerformed"/>
+                  </Events>
+                </Component>
+                <Component class="javax.swing.JRadioButton" name="rbtn_gia_tts">
+                  <Properties>
+                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                      <Font name="Times New Roman" size="12" style="0"/>
+                    </Property>
+                    <Property name="text" type="java.lang.String" value="Gi&#xe1; ti&#x1ec1;n"/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="rbtn_gia_ttsActionPerformed"/>
+                  </Events>
+                </Component>
+              </SubComponents>
+            </Container>
+            <Component class="javax.swing.JButton" name="btn_in_tts">
+              <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Times New Roman" size="18" style="1"/>
+                </Property>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="2" name="D:\Java\QuanLyBanHang\img\save.png"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="In danh s&#xe1;ch"/>
+              </Properties>
+            </Component>
+            <Container class="javax.swing.JScrollPane" name="jScrollPane1">
+              <AuxValues>
+                <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
+              </AuxValues>
+
+              <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+              <SubComponents>
+                <Component class="javax.swing.JTable" name="jTable1">
+                  <Properties>
+                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                      <Font name="Times New Roman" size="14" style="0"/>
+                    </Property>
+                    <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
+                      <Table columnCount="7" rowCount="4">
+                        <Column editable="true" title="M&#xe3; s&#xe1;ch" type="java.lang.Object"/>
+                        <Column editable="true" title="T&#xea;n s&#xe1;ch" type="java.lang.Object"/>
+                        <Column editable="true" title="Lo&#x1ea1;i s&#xe1;ch" type="java.lang.Object"/>
+                        <Column editable="true" title="S&#x1ed1; l&#x1b0;&#x1ee3;ng" type="java.lang.Object"/>
+                        <Column editable="true" title="Gi&#xe1;" type="java.lang.Object"/>
+                        <Column editable="true" title="Nh&#xe0; xu&#x1ea5;t b&#x1ea3;n" type="java.lang.Object"/>
+                        <Column editable="true" title="File &#x1ea3;nh" type="java.lang.Object"/>
+                      </Table>
+                    </Property>
+                    <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
+                      <TableColumnModel selectionModel="0">
+                        <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                          <Title/>
+                          <Editor/>
+                          <Renderer/>
+                        </Column>
+                        <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                          <Title/>
+                          <Editor/>
+                          <Renderer/>
+                        </Column>
+                        <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                          <Title/>
+                          <Editor/>
+                          <Renderer/>
+                        </Column>
+                        <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                          <Title/>
+                          <Editor/>
+                          <Renderer/>
+                        </Column>
+                        <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                          <Title/>
+                          <Editor/>
+                          <Renderer/>
+                        </Column>
+                        <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                          <Title/>
+                          <Editor/>
+                          <Renderer/>
+                        </Column>
+                        <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                          <Title/>
+                          <Editor/>
+                          <Renderer/>
+                        </Column>
+                      </TableColumnModel>
+                    </Property>
+                    <Property name="tableHeader" type="javax.swing.table.JTableHeader" editor="org.netbeans.modules.form.editors2.JTableHeaderEditor">
+                      <TableHeader reorderingAllowed="true" resizingAllowed="true"/>
+                    </Property>
+                  </Properties>
+                </Component>
+              </SubComponents>
+            </Container>
+          </SubComponents>
+        </Container>
+        <Container class="javax.swing.JPanel" name="jPanel3">
+          <Constraints>
+            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
+              <JTabbedPaneConstraints tabName="C&#x1ead;p nh&#x1ead;t lo&#x1ea1;i s&#xe1;ch">
+                <Property name="tabTitle" type="java.lang.String" value="C&#x1ead;p nh&#x1ead;t lo&#x1ea1;i s&#xe1;ch"/>
+              </JTabbedPaneConstraints>
+            </Constraint>
+          </Constraints>
+
+          <Layout>
+            <DimensionLayout dim="0">
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" attributes="0">
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="102" alignment="0" attributes="0">
+                              <EmptySpace min="-2" pref="310" max="-2" attributes="0"/>
+                              <Component id="jLabel8" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="txt_maLoai_cnls" linkSize="2" min="-2" pref="144" max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="102" alignment="0" attributes="0">
+                              <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
+                              <Component id="btn_taiLai_cnls" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="117" max="-2" attributes="0"/>
+                              <Component id="btn_them_cnls" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                      </Group>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="102" alignment="0" attributes="0">
+                              <EmptySpace min="-2" pref="133" max="-2" attributes="0"/>
+                              <Component id="jLabel9" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="txt_tenLoai_cnls" linkSize="2" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="32767" attributes="0"/>
+                          </Group>
+                          <Group type="102" alignment="0" attributes="0">
+                              <EmptySpace min="0" pref="40" max="32767" attributes="0"/>
+                              <Component id="btn_sua_cnls" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="119" max="-2" attributes="0"/>
+                              <Component id="btn_xoa_cnls" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="120" max="-2" attributes="0"/>
+                              <Component id="btn_luu_cnls" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="79" max="-2" attributes="0"/>
+                          </Group>
+                      </Group>
+                  </Group>
+                  <Component id="jScrollPane2" alignment="1" max="32767" attributes="0"/>
+              </Group>
+            </DimensionLayout>
+            <DimensionLayout dim="1">
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" attributes="0">
+                      <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="jLabel8" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="txt_maLoai_cnls" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jLabel9" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="txt_tenLoai_cnls" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="btn_taiLai_cnls" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="btn_them_cnls" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="btn_sua_cnls" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="btn_xoa_cnls" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="btn_luu_cnls" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="jScrollPane2" min="-2" pref="232" max="-2" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
+                  </Group>
+              </Group>
+            </DimensionLayout>
+          </Layout>
+          <SubComponents>
+            <Component class="javax.swing.JLabel" name="jLabel8">
+              <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Times New Roman" size="18" style="0"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="M&#xe3; lo&#x1ea1;i:"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JTextField" name="txt_maLoai_cnls">
+              <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Times New Roman" size="18" style="0"/>
+                </Property>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JLabel" name="jLabel9">
+              <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Times New Roman" size="18" style="0"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="T&#xea;n lo&#x1ea1;i s&#xe1;ch:"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JTextField" name="txt_tenLoai_cnls">
+              <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Times New Roman" size="18" style="0"/>
+                </Property>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JButton" name="btn_taiLai_cnls">
+              <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Times New Roman" size="18" style="1"/>
+                </Property>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="2" name="D:\Java\QuanLyBanHang\img\reload-icon.png"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="T&#x1ea3;i l&#x1ea1;i"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JButton" name="btn_them_cnls">
+              <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Times New Roman" size="18" style="1"/>
+                </Property>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="2" name="D:\Java\QuanLyBanHang\img\Sign-Add-icon.png"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="Th&#xea;m"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JButton" name="btn_sua_cnls">
+              <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Times New Roman" size="18" style="1"/>
+                </Property>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="2" name="D:\Java\QuanLyBanHang\img\Repair-icon.png"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="S&#x1eed;a"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JButton" name="btn_xoa_cnls">
+              <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Times New Roman" size="18" style="1"/>
+                </Property>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="2" name="D:\Java\QuanLyBanHang\img\Trash-icon.png"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="X&#xf3;a"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JButton" name="btn_luu_cnls">
+              <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Times New Roman" size="18" style="1"/>
+                </Property>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="2" name="D:\Java\QuanLyBanHang\img\save.png"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="L&#x1b0;u"/>
+              </Properties>
+            </Component>
+            <Container class="javax.swing.JScrollPane" name="jScrollPane2">
+              <AuxValues>
+                <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
+              </AuxValues>
+
+              <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+              <SubComponents>
+                <Component class="javax.swing.JTable" name="jTable2">
+                  <Properties>
+                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                      <Font name="Times New Roman" size="14" style="0"/>
+                    </Property>
+                    <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
+                      <Table columnCount="2" rowCount="4">
+                        <Column editable="false" title="M&#xe3; lo&#x1ea1;i s&#xe1;ch" type="java.lang.Object"/>
+                        <Column editable="false" title="T&#xea;n lo&#x1ea1;i s&#xe1;ch" type="java.lang.Object"/>
+                      </Table>
+                    </Property>
+                    <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
+                      <TableColumnModel selectionModel="0">
+                        <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                          <Title/>
+                          <Editor/>
+                          <Renderer/>
+                        </Column>
+                        <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                          <Title/>
+                          <Editor/>
+                          <Renderer/>
+                        </Column>
+                      </TableColumnModel>
+                    </Property>
+                    <Property name="tableHeader" type="javax.swing.table.JTableHeader" editor="org.netbeans.modules.form.editors2.JTableHeaderEditor">
+                      <TableHeader reorderingAllowed="true" resizingAllowed="true"/>
+                    </Property>
+                  </Properties>
+                </Component>
+              </SubComponents>
+            </Container>
+          </SubComponents>
+        </Container>
+        <Container class="javax.swing.JPanel" name="jPanel4">
+          <Constraints>
+            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
+              <JTabbedPaneConstraints tabName="C&#x1ead;p nh&#x1ead;t nh&#xe0; xu&#x1ea5;t b&#x1ea3;n">
+                <Property name="tabTitle" type="java.lang.String" value="C&#x1ead;p nh&#x1ead;t nh&#xe0; xu&#x1ea5;t b&#x1ea3;n"/>
+              </JTabbedPaneConstraints>
+            </Constraint>
+          </Constraints>
+
+          <Layout>
+            <DimensionLayout dim="0">
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" attributes="0">
+                      <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                          <Group type="102" alignment="1" attributes="0">
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="jLabel10" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="txt_maNxb_cnnxb" linkSize="3" min="-2" pref="139" max="-2" attributes="0"/>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <Component id="jLabel11" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="txt_tenNxb_cnnxb" linkSize="3" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <Component id="jLabel12" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="txt_diaChi_cnnxb" linkSize="3" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="102" alignment="1" attributes="0">
+                              <EmptySpace min="-2" pref="54" max="-2" attributes="0"/>
+                              <Component id="btn_taitai_cnnxb" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="32767" attributes="0"/>
+                              <Component id="btn_them_cnnxb" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="104" max="-2" attributes="0"/>
+                              <Component id="btn_sua_cnnxb" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="109" max="-2" attributes="0"/>
+                          </Group>
+                      </Group>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="102" attributes="0">
+                              <Component id="jLabel13" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="txt_sdt_cnnxb" linkSize="3" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <Component id="jLabel14" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="txt_mail_cnnxb" max="32767" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="102" attributes="0">
+                              <Component id="btn_xoa_cnnxb" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace pref="99" max="32767" attributes="0"/>
+                              <Component id="btn_luu_cnnxb" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="103" max="-2" attributes="0"/>
+                          </Group>
+                      </Group>
+                  </Group>
+                  <Component id="jScrollPane3" alignment="1" max="32767" attributes="0"/>
+              </Group>
+            </DimensionLayout>
+            <DimensionLayout dim="1">
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="jLabel10" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="txt_maNxb_cnnxb" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jLabel11" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="txt_tenNxb_cnnxb" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jLabel12" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="txt_diaChi_cnnxb" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jLabel13" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="txt_sdt_cnnxb" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jLabel14" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="txt_mail_cnnxb" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="btn_taitai_cnnxb" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="btn_them_cnnxb" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="btn_sua_cnnxb" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="btn_xoa_cnnxb" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="btn_luu_cnnxb" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="jScrollPane3" pref="246" max="32767" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                  </Group>
+              </Group>
+            </DimensionLayout>
+          </Layout>
+          <SubComponents>
+            <Component class="javax.swing.JLabel" name="jLabel10">
+              <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Times New Roman" size="18" style="0"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="M&#xe3; nh&#xe0; xu&#x1ea5;t b&#x1ea3;n:"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JTextField" name="txt_maNxb_cnnxb">
+              <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Times New Roman" size="14" style="0"/>
+                </Property>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JLabel" name="jLabel11">
+              <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Times New Roman" size="18" style="0"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="T&#xea;n nh&#xe0; xu&#x1ea5;t b&#x1ea3;n:"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JTextField" name="txt_tenNxb_cnnxb">
+              <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Times New Roman" size="14" style="0"/>
+                </Property>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JLabel" name="jLabel12">
+              <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Times New Roman" size="18" style="0"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="&#x110;&#x1ecb;a ch&#x1ec9;:"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JTextField" name="txt_diaChi_cnnxb">
+              <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Times New Roman" size="14" style="0"/>
+                </Property>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JLabel" name="jLabel13">
+              <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Times New Roman" size="18" style="0"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="S&#x1ed1; &#x111;i&#x1ec7;n tho&#x1ea1;i:"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JTextField" name="txt_sdt_cnnxb">
+              <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Times New Roman" size="14" style="0"/>
+                </Property>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JLabel" name="jLabel14">
+              <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Times New Roman" size="18" style="0"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="Email:"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JTextField" name="txt_mail_cnnxb">
+              <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Times New Roman" size="14" style="0"/>
+                </Property>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JButton" name="btn_taitai_cnnxb">
+              <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Times New Roman" size="18" style="1"/>
+                </Property>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="2" name="D:\Java\QuanLyBanHang\img\reload-icon.png"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="T&#x1ea3;i l&#x1ea1;i"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JButton" name="btn_them_cnnxb">
+              <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Times New Roman" size="18" style="1"/>
+                </Property>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="2" name="D:\Java\QuanLyBanHang\img\Sign-Add-icon.png"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="Th&#xea;m"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JButton" name="btn_sua_cnnxb">
+              <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Times New Roman" size="18" style="1"/>
+                </Property>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="2" name="D:\Java\QuanLyBanHang\img\Repair-icon.png"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="S&#x1eed;a"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JButton" name="btn_xoa_cnnxb">
+              <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Times New Roman" size="18" style="1"/>
+                </Property>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="2" name="D:\Java\QuanLyBanHang\img\Trash-icon.png"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="X&#xf3;a"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JButton" name="btn_luu_cnnxb">
+              <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Times New Roman" size="18" style="1"/>
+                </Property>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="2" name="D:\Java\QuanLyBanHang\img\save.png"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="L&#x1b0;u"/>
+              </Properties>
+            </Component>
+            <Container class="javax.swing.JScrollPane" name="jScrollPane3">
+              <AuxValues>
+                <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
+              </AuxValues>
+
+              <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+              <SubComponents>
+                <Component class="javax.swing.JTable" name="jTable3">
+                  <Properties>
+                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                      <Font name="Times New Roman" size="14" style="0"/>
+                    </Property>
+                    <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
+                      <Table columnCount="5" rowCount="4">
+                        <Column editable="false" title="M&#xe3; nh&#xe0; xu&#x1ea5;t b&#x1ea3;n" type="java.lang.Object"/>
+                        <Column editable="false" title="T&#xea;n nh&#xe0; xu&#x1ea5;t b&#x1ea3;n" type="java.lang.Object"/>
+                        <Column editable="false" title="&#x110;&#x1ecb;a ch&#x1ec9;" type="java.lang.Object"/>
+                        <Column editable="false" title="Email" type="java.lang.Object"/>
+                        <Column editable="false" title="S&#x1ed1; &#x111;i&#x1ec7;n tho&#x1ea1;i" type="java.lang.Object"/>
+                      </Table>
+                    </Property>
+                    <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
+                      <TableColumnModel selectionModel="0">
+                        <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                          <Title/>
+                          <Editor/>
+                          <Renderer/>
+                        </Column>
+                        <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                          <Title/>
+                          <Editor/>
+                          <Renderer/>
+                        </Column>
+                        <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                          <Title/>
+                          <Editor/>
+                          <Renderer/>
+                        </Column>
+                        <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                          <Title/>
+                          <Editor/>
+                          <Renderer/>
+                        </Column>
+                        <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                          <Title/>
+                          <Editor/>
+                          <Renderer/>
+                        </Column>
+                      </TableColumnModel>
+                    </Property>
+                    <Property name="tableHeader" type="javax.swing.table.JTableHeader" editor="org.netbeans.modules.form.editors2.JTableHeaderEditor">
+                      <TableHeader reorderingAllowed="true" resizingAllowed="true"/>
+                    </Property>
+                  </Properties>
+                </Component>
+              </SubComponents>
+            </Container>
+          </SubComponents>
+        </Container>
+      </SubComponents>
+    </Container>
+  </SubComponents>
+</Form>
