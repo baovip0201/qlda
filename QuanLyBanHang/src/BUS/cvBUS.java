@@ -14,26 +14,26 @@ import java.util.ArrayList;
  * @author MSI
  */
 public class cvBUS {
-    public static ArrayList<ChucVu> dscv;
-    public static ArrayList<String> list;
+    public ArrayList<ChucVu> dscv;
+    public ArrayList<String> list;
     public cvBUS(){
         
     }
-    public static void doc(){
+    public void doc(){
         if(dscv==null) dscv=new ArrayList<>();
         dscv=cvDAO.getListCV();
     }
-    public static void them(ChucVu cv){
+    public void add(ChucVu cv){
         cvDAO.them(cv);
         dscv.add(cv);
     }
-    public static void sua(ChucVu cv){
+    public void sua(ChucVu cv){
         cvDAO.sua(cv);
     }
-    public static void xoa(ChucVu cv){
+    public void xoa(ChucVu cv){
         cvDAO.xoa(cv);
     }
-    public static void loadCbb(){
+    public void loadCbb(){
         if(list==null) list=new ArrayList<>();
         list=cvDAO.getListCBB();
     }

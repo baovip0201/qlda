@@ -13,6 +13,7 @@ import BUS.nvBUS;
 import DAO.nvDAO;
 import BUS.batLoi;
 import BUS.cvBUS;
+import DAO.cvDAO;
 import DTO.ChucVu;
 import java.util.Vector;
 import javax.swing.JOptionPane;
@@ -23,16 +24,19 @@ import javax.swing.JOptionPane;
  */
 public class QLNV_Frame extends javax.swing.JFrame {
     DefaultTableModel tableModel;
-    DefaultTableModel model;
+    DefaultTableModel model=new DefaultTableModel();
     List<NhanVien> nvList = new ArrayList<>();
     List<ChucVu> cvList= new ArrayList<>();
     nvBUS bus = new nvBUS();
+    cvBUS bus1=new cvBUS();
     public QLNV_Frame() {
         initComponents();
         disenabled();
         tableModel = (DefaultTableModel) jTable1.getModel();
+        //model= (DefaultTableModel) jTable2.getModel();
         showNv();
         getCb_Box();
+        //showCV();
     }
     
     private void showNv(){
@@ -47,7 +51,17 @@ public class QLNV_Frame extends javax.swing.JFrame {
         });
         
     }
-    private void showCv(){
+    private void showCV(){
+        cvList=cvDAO.getListCV();
+        model.setRowCount(0);
+        cvList.forEach((cv)->{
+            model.addRow(new Object[]{
+                cv.getMaChucVu(), cv.getChucVu(), cv.getLuong()
+            });
+        });
+        
+        
+        
     }
     
       public void showTableNV() {
@@ -73,9 +87,9 @@ public class QLNV_Frame extends javax.swing.JFrame {
     }
      private void getCb_Box(){
          if (bus.list == null) {
-            cvBUS.loadCbb();
+            bus1.loadCbb();
         }
-        for (String s : cvBUS.list) {
+        for (String s : bus1.list) {
             cbb_chucVu.addItem(s);
         }
      }
@@ -93,7 +107,21 @@ public class QLNV_Frame extends javax.swing.JFrame {
         cbb_gioiTinh.setEnabled(false);
         jDateChooser1.setEnabled(false);
     }
-   
+   public void showTableCV() {
+        Vector header = new Vector();
+        header.add("Mã chức vụ");
+        header.add("Chức vụ");
+        header.add("Lương");
+        if (model.getRowCount() == 0) {
+            model = new DefaultTableModel(header, 0);
+        }
+        for (ChucVu cv : bus1.dscv) {
+            model.addRow(new Object[]{
+                cv.getMaChucVu(), cv.getChucVu(), cv.getLuong()
+            });
+        }
+        jTable2.setModel(model);
+    }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -142,6 +170,7 @@ public class QLNV_Frame extends javax.swing.JFrame {
         btn_save = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTable2 = new javax.swing.JTable();
+        taiBtn = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
@@ -233,6 +262,11 @@ public class QLNV_Frame extends javax.swing.JFrame {
         btn_tailai.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         btn_tailai.setText("Tải lại");
         btn_tailai.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        btn_tailai.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_tailaiActionPerformed(evt);
+            }
+        });
 
         btn_them.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         btn_them.setText("Thêm");
@@ -408,7 +442,7 @@ public class QLNV_Frame extends javax.swing.JFrame {
                     .addComponent(txt_search, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(cbb_search, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 388, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 390, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -431,6 +465,11 @@ public class QLNV_Frame extends javax.swing.JFrame {
 
         btn_tailai_chucvu.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         btn_tailai_chucvu.setText("Tải lại");
+        btn_tailai_chucvu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_tailai_chucvuActionPerformed(evt);
+            }
+        });
 
         btn_themCV.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         btn_themCV.setText("Thêm");
@@ -483,7 +522,20 @@ public class QLNV_Frame extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        jTable2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTable2MouseClicked(evt);
+            }
+        });
         jScrollPane2.setViewportView(jTable2);
+
+        taiBtn.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
+        taiBtn.setText("Đọc dữ liệu");
+        taiBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                taiBtnActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -508,15 +560,17 @@ public class QLNV_Frame extends javax.swing.JFrame {
                         .addComponent(txt_tenChucvu, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(183, 183, 183)
+                        .addComponent(jLabel13))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(8, 8, 8)
                         .addComponent(btn_xoaCV)
                         .addGap(66, 66, 66)
-                        .addComponent(btn_save))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(183, 183, 183)
-                        .addComponent(jLabel13)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txt_luongChucvu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(btn_save)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txt_luongChucvu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(taiBtn))
                 .addContainerGap(159, Short.MAX_VALUE))
             .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING)
         );
@@ -540,7 +594,8 @@ public class QLNV_Frame extends javax.swing.JFrame {
                     .addComponent(btn_themCV)
                     .addComponent(btn_suaCV)
                     .addComponent(btn_xoaCV)
-                    .addComponent(btn_save))
+                    .addComponent(btn_save)
+                    .addComponent(taiBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -728,7 +783,7 @@ public class QLNV_Frame extends javax.swing.JFrame {
         cv.setChucVu(txt_tenChucvu.getText());
         cv.setLuong(Float.parseFloat(txt_luongChucvu.getText()));
         model.setValueAt(cv.getLuong(), i, 2);
-        cvBUS.sua(cv);
+        bus1.sua(cv);
         JOptionPane.showMessageDialog(rootPane, "Đã cập nhật");
     }//GEN-LAST:event_btn_suaCVActionPerformed
 
@@ -736,19 +791,66 @@ public class QLNV_Frame extends javax.swing.JFrame {
         // TODO add your handling code here:
         int selectIndext = jTable2.getSelectedRow();
          if(selectIndext >= 0){
-            ChucVu tk =  cvList.get(selectIndext);
+            ChucVu tk =  bus1.dscv.get(selectIndext);
             int option = JOptionPane.showConfirmDialog(this, "Bạn có muốn xóa?");
             if(option == 0){
                 //SinhVien.delete(std.getId());
-               cvBUS.xoa(tk);
-                showNv();
+               bus1.xoa(tk);
+               bus1.dscv.remove(tk);
+               model.removeRow(selectIndext);
+               jTable2.setModel(model);
             }
         }
     }//GEN-LAST:event_btn_xoaCVActionPerformed
 
     private void btn_saveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_saveActionPerformed
         // TODO add your handling code here:
+        ChucVu cv = new ChucVu();
+        if (!batLoi.Catch(txt_maChucvu.getText()) && !batLoi.Catch(txt_tenChucvu.getText()) && !batLoi.Catch(txt_luongChucvu.getText())) {
+            if (!cvBUS.checkPrimaryKey(txt_maChucvu.getText())) {
+                cv.setMaChucVu(txt_maChucvu.getText());
+                cv.setChucVu(txt_tenChucvu.getText());
+                cv.setLuong(Float.parseFloat(txt_luongChucvu.getText()));
+                bus1.add(cv);
+                JOptionPane.showMessageDialog(rootPane, "Đã thêm");
+            } else {
+                JOptionPane.showMessageDialog(rootPane, "Dữ liệu nhập vào không hợp lệ, do bị trùng khóa chính");
+            }
+        } else {
+            JOptionPane.showMessageDialog(rootPane, "Bạn chưa nhập đủ dữ liệu, vui lòng nhập lại");
+        }
     }//GEN-LAST:event_btn_saveActionPerformed
+
+    private void btn_tailai_chucvuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_tailai_chucvuActionPerformed
+        // TODO add your handling code here:
+        model = (DefaultTableModel) jTable2.getModel();
+        model.setRowCount(0);
+        showTableCV();
+    }//GEN-LAST:event_btn_tailai_chucvuActionPerformed
+
+    private void btn_tailaiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_tailaiActionPerformed
+        // TODO add your handling code here:
+        tableModel = (DefaultTableModel) jTable1.getModel();
+        tableModel.setRowCount(0);
+        showNv();
+    }//GEN-LAST:event_btn_tailaiActionPerformed
+
+    private void jTable2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable2MouseClicked
+        // TODO add your handling code here:
+        int i = jTable2.getSelectedRow();
+        ChucVu cv = bus1.dscv.get(i);
+        txt_maChucvu.setText(cv.getMaChucVu());
+        txt_tenChucvu.setText(cv.getChucVu());
+        txt_luongChucvu.setText(cv.getLuong().toString());
+    }//GEN-LAST:event_jTable2MouseClicked
+
+    private void taiBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_taiBtnActionPerformed
+        // TODO add your handling code here:
+        if(bus1.dscv==null){
+            bus1.doc();
+        }
+        showTableCV();
+    }//GEN-LAST:event_taiBtnActionPerformed
 
     /**
      * @param args the command line arguments
@@ -823,6 +925,7 @@ public class QLNV_Frame extends javax.swing.JFrame {
     private javax.swing.JTabbedPane jTabbedPane4;
     private javax.swing.JTable jTable1;
     private javax.swing.JTable jTable2;
+    private javax.swing.JButton taiBtn;
     private javax.swing.JTextField txt_diaChi;
     private javax.swing.JTextField txt_hoTen;
     private javax.swing.JTextField txt_luong;
