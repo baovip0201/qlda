@@ -9,11 +9,11 @@ package DTO;
  *
  * @author vukieuanh
  */
-public class Sach {
+public class LoaiSach {
     private String maLoaiSach;
     private String tenLoaiSach;
 
-    public Sach() {
+    public LoaiSach() {
     }
 
     public String getMaLoaiSach() {
