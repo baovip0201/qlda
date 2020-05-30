@@ -161,15 +161,17 @@
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" attributes="0">
                           <EmptySpace type="separate" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="btn_taiLai" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="btn_them" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="btn_xoa" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="btn_luu" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="btn_sua" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="102" alignment="1" attributes="0">
                                   <Component id="btn_timKiem" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace min="-2" pref="19" max="-2" attributes="0"/>
+                              </Group>
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="btn_taiLai" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="btn_them" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="btn_xoa" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="btn_luu" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="btn_sua" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                       </Group>
@@ -204,9 +206,6 @@
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Times New Roman" size="18" style="1"/>
-            </Property>
-            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="2" name="D:\Java\QuanLyBanHang\img\arrow-back-icon.png"/>
             </Property>
             <Property name="text" type="java.lang.String" value="H&#x1ec7; th&#x1ed1;ng"/>
           </Properties>
@@ -297,9 +296,6 @@
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Times New Roman" size="18" style="1"/>
             </Property>
-            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="2" name="D:\Java\QuanLyBanHang\img\reload-icon.png"/>
-            </Property>
             <Property name="text" type="java.lang.String" value="T&#x1ea3;i l&#x1ea1;i"/>
           </Properties>
         </Component>
@@ -307,9 +303,6 @@
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Times New Roman" size="18" style="1"/>
-            </Property>
-            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="2" name="D:\Java\QuanLyBanHang\img\Sign-Add-icon.png"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Th&#xea;m"/>
           </Properties>
@@ -322,9 +315,6 @@
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Times New Roman" size="18" style="1"/>
             </Property>
-            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="2" name="D:\Java\QuanLyBanHang\img\Repair-icon.png"/>
-            </Property>
             <Property name="text" type="java.lang.String" value="S&#x1eed;a"/>
           </Properties>
           <Events>
@@ -336,9 +326,6 @@
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Times New Roman" size="18" style="1"/>
             </Property>
-            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="2" name="D:\Java\QuanLyBanHang\img\Trash-icon.png"/>
-            </Property>
             <Property name="text" type="java.lang.String" value="X&#xf3;a"/>
           </Properties>
           <Events>
@@ -349,9 +336,6 @@
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Times New Roman" size="18" style="1"/>
-            </Property>
-            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="2" name="D:\Java\QuanLyBanHang\img\save.png"/>
             </Property>
             <Property name="text" type="java.lang.String" value="L&#x1b0;u"/>
           </Properties>

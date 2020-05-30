@@ -105,7 +105,6 @@ public class QLTK_Frame extends javax.swing.JFrame {
         jLabel1.setText("Quản lý tài khoản");
 
         jButton1.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
-        jButton1.setIcon(new javax.swing.ImageIcon("D:\\Java\\QuanLyBanHang\\img\\arrow-back-icon.png")); // NOI18N
         jButton1.setText("Hệ thống");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -143,11 +142,9 @@ public class QLTK_Frame extends javax.swing.JFrame {
         date_ngayTao.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
 
         btn_taiLai.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
-        btn_taiLai.setIcon(new javax.swing.ImageIcon("D:\\Java\\QuanLyBanHang\\img\\reload-icon.png")); // NOI18N
         btn_taiLai.setText("Tải lại");
 
         btn_them.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
-        btn_them.setIcon(new javax.swing.ImageIcon("D:\\Java\\QuanLyBanHang\\img\\Sign-Add-icon.png")); // NOI18N
         btn_them.setText("Thêm");
         btn_them.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -156,7 +153,6 @@ public class QLTK_Frame extends javax.swing.JFrame {
         });
 
         btn_sua.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
-        btn_sua.setIcon(new javax.swing.ImageIcon("D:\\Java\\QuanLyBanHang\\img\\Repair-icon.png")); // NOI18N
         btn_sua.setText("Sửa");
         btn_sua.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -165,7 +161,6 @@ public class QLTK_Frame extends javax.swing.JFrame {
         });
 
         btn_xoa.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
-        btn_xoa.setIcon(new javax.swing.ImageIcon("D:\\Java\\QuanLyBanHang\\img\\Trash-icon.png")); // NOI18N
         btn_xoa.setText("Xóa");
         btn_xoa.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -174,7 +169,6 @@ public class QLTK_Frame extends javax.swing.JFrame {
         });
 
         btn_luu.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
-        btn_luu.setIcon(new javax.swing.ImageIcon("D:\\Java\\QuanLyBanHang\\img\\save.png")); // NOI18N
         btn_luu.setText("Lưu");
         btn_luu.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -302,15 +296,16 @@ public class QLTK_Frame extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(18, 18, 18)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(btn_taiLai)
-                            .addComponent(btn_them)
-                            .addComponent(btn_xoa)
-                            .addComponent(btn_luu)
-                            .addComponent(btn_sua)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                                 .addComponent(btn_timKiem)
-                                .addGap(19, 19, 19))))
+                                .addGap(19, 19, 19))
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(btn_taiLai)
+                                .addComponent(btn_them)
+                                .addComponent(btn_xoa)
+                                .addComponent(btn_luu)
+                                .addComponent(btn_sua))))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(26, 26, 26)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)

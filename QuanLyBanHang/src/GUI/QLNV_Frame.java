@@ -23,7 +23,9 @@ import javax.swing.JOptionPane;
  */
 public class QLNV_Frame extends javax.swing.JFrame {
     DefaultTableModel tableModel;
+    DefaultTableModel model;
     List<NhanVien> nvList = new ArrayList<>();
+    List<ChucVu> cvList= new ArrayList<>();
     nvBUS bus = new nvBUS();
     public QLNV_Frame() {
         initComponents();
@@ -132,10 +134,10 @@ public class QLNV_Frame extends javax.swing.JFrame {
         txt_tenChucvu = new javax.swing.JTextField();
         txt_luongChucvu = new javax.swing.JTextField();
         btn_tailai_chucvu = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
-        jButton6 = new javax.swing.JButton();
+        btn_themCV = new javax.swing.JButton();
+        btn_suaCV = new javax.swing.JButton();
+        btn_xoaCV = new javax.swing.JButton();
+        btn_save = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTable2 = new javax.swing.JTable();
         jPanel3 = new javax.swing.JPanel();
@@ -227,12 +229,10 @@ public class QLNV_Frame extends javax.swing.JFrame {
         txt_luong.setFont(new java.awt.Font("Times New Roman", 0, 12)); // NOI18N
 
         btn_tailai.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        btn_tailai.setIcon(new javax.swing.ImageIcon("D:\\Java\\QuanLyBanHang\\img\\reload-icon.png")); // NOI18N
         btn_tailai.setText("Tải lại");
         btn_tailai.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
 
         btn_them.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
-        btn_them.setIcon(new javax.swing.ImageIcon("D:\\Java\\QuanLyBanHang\\img\\Sign-Add-icon.png")); // NOI18N
         btn_them.setText("Thêm");
         btn_them.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         btn_them.addActionListener(new java.awt.event.ActionListener() {
@@ -242,7 +242,6 @@ public class QLNV_Frame extends javax.swing.JFrame {
         });
 
         btn_sua.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
-        btn_sua.setIcon(new javax.swing.ImageIcon("D:\\Java\\QuanLyBanHang\\img\\Repair-icon.png")); // NOI18N
         btn_sua.setText("Sửa");
         btn_sua.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         btn_sua.addActionListener(new java.awt.event.ActionListener() {
@@ -252,7 +251,6 @@ public class QLNV_Frame extends javax.swing.JFrame {
         });
 
         btn_xoa.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
-        btn_xoa.setIcon(new javax.swing.ImageIcon("D:\\Java\\QuanLyBanHang\\img\\Trash-icon.png")); // NOI18N
         btn_xoa.setText("Xóa");
         btn_xoa.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         btn_xoa.addActionListener(new java.awt.event.ActionListener() {
@@ -262,7 +260,6 @@ public class QLNV_Frame extends javax.swing.JFrame {
         });
 
         btn_luu.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
-        btn_luu.setIcon(new javax.swing.ImageIcon("D:\\Java\\QuanLyBanHang\\img\\save.png")); // NOI18N
         btn_luu.setText("Lưu");
         btn_luu.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         btn_luu.addActionListener(new java.awt.event.ActionListener() {
@@ -272,7 +269,6 @@ public class QLNV_Frame extends javax.swing.JFrame {
         });
 
         btn_In.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
-        btn_In.setIcon(new javax.swing.ImageIcon("D:\\Java\\QuanLyBanHang\\img\\print.png")); // NOI18N
         btn_In.setText("In danh sách");
         btn_In.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
 
@@ -432,24 +428,34 @@ public class QLNV_Frame extends javax.swing.JFrame {
         txt_luongChucvu.setFont(new java.awt.Font("Times New Roman", 0, 12)); // NOI18N
 
         btn_tailai_chucvu.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
-        btn_tailai_chucvu.setIcon(new javax.swing.ImageIcon("D:\\Java\\QuanLyBanHang\\img\\reload-icon.png")); // NOI18N
         btn_tailai_chucvu.setText("Tải lại");
 
-        jButton3.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
-        jButton3.setIcon(new javax.swing.ImageIcon("D:\\Java\\QuanLyBanHang\\img\\Sign-Add-icon.png")); // NOI18N
-        jButton3.setText("Thêm");
+        btn_themCV.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
+        btn_themCV.setText("Thêm");
+        btn_themCV.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_themCVActionPerformed(evt);
+            }
+        });
 
-        jButton4.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
-        jButton4.setIcon(new javax.swing.ImageIcon("D:\\Java\\QuanLyBanHang\\img\\Repair-icon.png")); // NOI18N
-        jButton4.setText("Sửa");
+        btn_suaCV.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
+        btn_suaCV.setText("Sửa");
+        btn_suaCV.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_suaCVActionPerformed(evt);
+            }
+        });
 
-        jButton5.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
-        jButton5.setIcon(new javax.swing.ImageIcon("D:\\Java\\QuanLyBanHang\\img\\Trash-icon.png")); // NOI18N
-        jButton5.setText("Xóa");
+        btn_xoaCV.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
+        btn_xoaCV.setText("Xóa");
+        btn_xoaCV.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_xoaCVActionPerformed(evt);
+            }
+        });
 
-        jButton6.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
-        jButton6.setIcon(new javax.swing.ImageIcon("D:\\Java\\QuanLyBanHang\\img\\print.png")); // NOI18N
-        jButton6.setText("Lưu");
+        btn_save.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
+        btn_save.setText("Lưu");
 
         jTable2.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -482,9 +488,9 @@ public class QLNV_Frame extends javax.swing.JFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
                         .addComponent(btn_tailai_chucvu)
                         .addGap(60, 60, 60)
-                        .addComponent(jButton3)
+                        .addComponent(btn_themCV)
                         .addGap(61, 61, 61)
-                        .addComponent(jButton4))
+                        .addComponent(btn_suaCV))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel11)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -496,9 +502,9 @@ public class QLNV_Frame extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(8, 8, 8)
-                        .addComponent(jButton5)
+                        .addComponent(btn_xoaCV)
                         .addGap(66, 66, 66)
-                        .addComponent(jButton6))
+                        .addComponent(btn_save))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(183, 183, 183)
                         .addComponent(jLabel13)
@@ -524,10 +530,10 @@ public class QLNV_Frame extends javax.swing.JFrame {
                 .addGap(36, 36, 36)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btn_tailai_chucvu)
-                    .addComponent(jButton3)
-                    .addComponent(jButton4)
-                    .addComponent(jButton5)
-                    .addComponent(jButton6))
+                    .addComponent(btn_themCV)
+                    .addComponent(btn_suaCV)
+                    .addComponent(btn_xoaCV)
+                    .addComponent(btn_save))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -539,7 +545,6 @@ public class QLNV_Frame extends javax.swing.JFrame {
         jLabel1.setText("Quản lý nhân viên");
 
         jButton1.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
-        jButton1.setIcon(new javax.swing.ImageIcon("D:\\Java\\QuanLyBanHang\\img\\arrow-back-icon.png")); // NOI18N
         jButton1.setText("Hệ thống");
         jButton1.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -701,6 +706,39 @@ public class QLNV_Frame extends javax.swing.JFrame {
         txt_search.setText("");
     }//GEN-LAST:event_txt_searchMouseClicked
 
+    private void btn_themCVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_themCVActionPerformed
+        // TODO add your handling code here:
+        txt_maChucvu.setEnabled(true);
+        txt_tenChucvu.setEnabled(true);
+        txt_luongChucvu.setEnabled(true);
+    }//GEN-LAST:event_btn_themCVActionPerformed
+
+    private void btn_suaCVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_suaCVActionPerformed
+        // TODO add your handling code here:
+        int i = jTable2.getSelectedRow();
+        ChucVu cv = new ChucVu();
+        cv.setMaChucVu(txt_maChucvu.getText());
+        cv.setChucVu(txt_tenChucvu.getText());
+        cv.setLuong(Float.parseFloat(txt_luongChucvu.getText()));
+        model.setValueAt(cv.getLuong(), i, 2);
+        cvBUS.sua(cv);
+        JOptionPane.showMessageDialog(rootPane, "Đã cập nhật");
+    }//GEN-LAST:event_btn_suaCVActionPerformed
+
+    private void btn_xoaCVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_xoaCVActionPerformed
+        // TODO add your handling code here:
+        int selectIndext = jTable2.getSelectedRow();
+         if(selectIndext >= 0){
+            ChucVu tk =  cvList.get(selectIndext);
+            int option = JOptionPane.showConfirmDialog(this, "Bạn có muốn xóa?");
+            if(option == 0){
+                //SinhVien.delete(std.getId());
+               cvBUS.xoa(tk);
+                showNv();
+            }
+        }
+    }//GEN-LAST:event_btn_xoaCVActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -739,19 +777,19 @@ public class QLNV_Frame extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_In;
     private javax.swing.JButton btn_luu;
+    private javax.swing.JButton btn_save;
     private javax.swing.JButton btn_sua;
+    private javax.swing.JButton btn_suaCV;
     private javax.swing.JButton btn_tailai;
     private javax.swing.JButton btn_tailai_chucvu;
     private javax.swing.JButton btn_them;
+    private javax.swing.JButton btn_themCV;
     private javax.swing.JButton btn_xoa;
+    private javax.swing.JButton btn_xoaCV;
     private javax.swing.JComboBox<String> cbb_chucVu;
     private javax.swing.JComboBox<String> cbb_gioiTinh;
     private javax.swing.JComboBox<String> cbb_search;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
-    private javax.swing.JButton jButton6;
     private com.toedter.calendar.JDateChooser jDateChooser1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
