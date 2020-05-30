@@ -14,6 +14,7 @@ import DAO.nvDAO;
 import BUS.batLoi;
 import BUS.cvBUS;
 import DAO.cvDAO;
+import DB.Help;
 import DTO.ChucVu;
 import java.util.Vector;
 import javax.swing.JOptionPane;
@@ -307,6 +308,11 @@ public class QLNV_Frame extends javax.swing.JFrame {
         btn_In.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         btn_In.setText("In danh sách");
         btn_In.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        btn_In.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_InActionPerformed(evt);
+            }
+        });
 
         txt_search.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
         txt_search.setText("Tìm kiếm...");
@@ -851,6 +857,33 @@ public class QLNV_Frame extends javax.swing.JFrame {
         }
         showTableCV();
     }//GEN-LAST:event_taiBtnActionPerformed
+
+    private void btn_InActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_InActionPerformed
+        // TODO add your handling code here:
+        tableModel = (DefaultTableModel) jTable1.getModel();
+        int k = 0;
+        int n = tableModel.getRowCount();
+        int m = tableModel.getColumnCount();
+        String a[][] = new String[n][m];
+        for(int i=0;i<n;i++)
+        {
+            for(int j=0;j<m;j++)
+               try{ 
+              a[i][j] = tableModel.getValueAt(i, j).toString();
+               }
+               catch(Exception e){
+                   k=1;
+               };
+            
+        }
+        if(k!=1){
+        Help pol = new Help();
+        pol.writeFileExcel("DSNHANVIEN", a);
+        JOptionPane.showMessageDialog(rootPane, "Đã xuất ra excel");}
+        else{
+            JOptionPane.showMessageDialog(rootPane, "Dữ liệu rỗng");
+        }
+    }//GEN-LAST:event_btn_InActionPerformed
 
     /**
      * @param args the command line arguments
