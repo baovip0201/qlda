@@ -47,6 +47,8 @@ public class QLNV_Frame extends javax.swing.JFrame {
         });
         
     }
+    private void showCv(){
+    }
     
       public void showTableNV() {
         Vector header = new Vector();
@@ -456,6 +458,11 @@ public class QLNV_Frame extends javax.swing.JFrame {
 
         btn_save.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         btn_save.setText("Lưu");
+        btn_save.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_saveActionPerformed(evt);
+            }
+        });
 
         jTable2.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -738,6 +745,10 @@ public class QLNV_Frame extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_btn_xoaCVActionPerformed
+
+    private void btn_saveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_saveActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btn_saveActionPerformed
 
     /**
      * @param args the command line arguments
