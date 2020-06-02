@@ -7,8 +7,11 @@ package GUI;
 
 import BUS.batLoi;
 import BUS.loaisachBUS;
+import BUS.nxbBUS;
 import DAO.loaisachDAO;
+import DAO.nxbDAO;
 import DTO.LoaiSach;
+import DTO.NhaXuatBan;
 import java.util.ArrayList;
 import java.util.Vector;
 import javax.swing.JOptionPane;
@@ -22,8 +25,10 @@ public class QLSach_Frame extends javax.swing.JFrame {
     DefaultTableModel tableModel;
     DefaultTableModel model=new DefaultTableModel();
     ArrayList<LoaiSach> lsList = new ArrayList<>();
+    ArrayList<NhaXuatBan> nxbList = new ArrayList<>();
     
     loaisachBUS lsBUS = new loaisachBUS();
+    nxbBUS nxbBUS = new nxbBUS();
     /**
      * Creates new form QLSach
      */
@@ -37,7 +42,7 @@ public class QLSach_Frame extends javax.swing.JFrame {
         
     }
 
-//    Loai sach -----------------------------------------------------------------------------------------
+//Loai sach -----------------------------------------------------------------------------------------
     void showLS(){
         lsList = loaisachDAO.getListLS();
         tableModel.setRowCount(0);
@@ -73,6 +78,47 @@ public class QLSach_Frame extends javax.swing.JFrame {
     }
     //--------------------------------------------------------------------------------------------------------
     
+    // Nha Xuat Ban ------------------------------------------------------------------------------------------
+    void ShowNXB(){
+        nxbList = nxbDAO.getListNXB();
+        tableModel.setRowCount(0);
+        nxbList.forEach((nxb) -> {model.addRow(new Object[]{
+            nxb.getMaNXB(),nxb.getTenNXB(),nxb.getDiaChi(),nxb.getEmail(),nxb.getSoDienThoai()
+        });
+        });
+    }
+            
+    void showTableNXB(){
+        Vector header = new Vector();
+        header.add("Mã Nhà Xuất Bản");
+        header.add("Tên Nhà Xuất Bản");
+        header.add("Địa Chỉ");
+        header.add("Email");
+        header.add("Số Điện Thoại");
+        if (model.getRowCount() == 0) {
+            model = new DefaultTableModel(header, 0);
+        }
+        for (NhaXuatBan nxb: nxbBUS.dsnxb){
+            Vector row = new Vector();
+            row.add(nxb.getMaNXB());
+            row.add(nxb.getTenNXB());
+            row.add(nxb.getDiaChi());
+            row.add(nxb.getEmail());
+            row.add(nxb.getSoDienThoai());
+            model.addRow(row);
+        }
+        tbnxb.setModel(model);
+    } 
+            
+    private void get_CBB_NXB(){
+        //if
+        
+        for(String s : nxbBUS.listOf_maNXB)
+            cbb_nhaXuatBan.addItem(s);
+        
+    }        
+            
+    //-----------------------------------------------------------------------------------------------        
      private void disenabled(){
          txt_maLoai_cnls.setEnabled(false);
          txt_tenLoai_cnls.setEnabled(false);
@@ -177,7 +223,7 @@ public class QLSach_Frame extends javax.swing.JFrame {
                 .addComponent(jButton1)
                 .addGap(375, 375, 375)
                 .addComponent(jLabel1)
-                .addContainerGap(467, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -443,6 +489,11 @@ public class QLSach_Frame extends javax.swing.JFrame {
 
         btn_xoa_cnls.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         btn_xoa_cnls.setText("Xóa");
+        btn_xoa_cnls.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_xoa_cnlsActionPerformed(evt);
+            }
+        });
 
         btn_luu_cnls.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         btn_luu_cnls.setText("Lưu");
@@ -581,12 +632,27 @@ public class QLSach_Frame extends javax.swing.JFrame {
 
         btn_sua_cnnxb.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         btn_sua_cnnxb.setText("Sửa");
+        btn_sua_cnnxb.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_sua_cnnxbActionPerformed(evt);
+            }
+        });
 
         btn_xoa_cnnxb.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         btn_xoa_cnnxb.setText("Xóa");
+        btn_xoa_cnnxb.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_xoa_cnnxbActionPerformed(evt);
+            }
+        });
 
         btn_luu_cnnxb.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         btn_luu_cnnxb.setText("Lưu");
+        btn_luu_cnnxb.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_luu_cnnxbActionPerformed(evt);
+            }
+        });
 
         tbnxb.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
         tbnxb.setModel(new javax.swing.table.DefaultTableModel(
@@ -606,6 +672,11 @@ public class QLSach_Frame extends javax.swing.JFrame {
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
+            }
+        });
+        tbnxb.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tbnxbMouseClicked(evt);
             }
         });
         jScrollPane3.setViewportView(tbnxb);
@@ -694,7 +765,7 @@ public class QLSach_Frame extends javax.swing.JFrame {
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1132, Short.MAX_VALUE)
+                .addComponent(jTabbedPane1)
                 .addGap(33, 33, 33))
         );
         layout.setVerticalGroup(
@@ -737,7 +808,7 @@ public class QLSach_Frame extends javax.swing.JFrame {
         // TODO add your handling code here:
         model = (DefaultTableModel) tbnxb.getModel();
         model.setRowCount(0);
-        //Thieu showTable
+        showTableNXB();
     }//GEN-LAST:event_btn_taitai_cnnxbActionPerformed
 
     private void btn_them_cnlsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_them_cnlsActionPerformed
@@ -749,11 +820,11 @@ public class QLSach_Frame extends javax.swing.JFrame {
     private void btn_them_cnnxbActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_them_cnnxbActionPerformed
         // TODO add your handling code here:
         txt_maNxb_cnnxb.setEnabled(true);
-         txt_tenNxb_cnnxb.setEnabled(true);
-         txt_sdt_cnnxb.setEnabled(true);
-         txt_diaChi_cnnxb.setEnabled(true);
-         txt_sdt_cnnxb.setEnabled(true);
-         txt_mail_cnnxb.setEnabled(true);
+        txt_tenNxb_cnnxb.setEnabled(true);
+        txt_sdt_cnnxb.setEnabled(true);
+        txt_diaChi_cnnxb.setEnabled(true);
+        txt_sdt_cnnxb.setEnabled(true);
+        txt_mail_cnnxb.setEnabled(true);
     }//GEN-LAST:event_btn_them_cnnxbActionPerformed
 
     private void btn_sua_cnlsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_sua_cnlsActionPerformed
@@ -790,6 +861,85 @@ public class QLSach_Frame extends javax.swing.JFrame {
         txt_maLoai_cnls.setText(ls.getMaLoaiSach());
         txt_tenLoai_cnls.setText(ls.getTenLoaiSach());
     }//GEN-LAST:event_tblsMouseClicked
+
+    private void btn_sua_cnnxbActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_sua_cnnxbActionPerformed
+        // TODO add your handling code here:
+        int i = tbnxb.getSelectedRow();
+        NhaXuatBan nxb = new NhaXuatBan();
+        nxb.setMaNXB(txt_maNxb_cnnxb.getText());
+        nxb.setTenNXB(txt_tenNxb_cnnxb.getText());
+        nxb.setDiaChi(txt_diaChi_cnnxb.getText());
+        nxb.setEmail(txt_mail_cnnxb.getText());
+        nxb.setSoDienThoai(txt_sdt_cnnxb.getText());
+        
+        tableModel.setValueAt(nxb.getMaNXB(), i, 1);
+        tableModel.setValueAt(nxb.getTenNXB(), i, 2);
+        tableModel.setValueAt(nxb.getDiaChi(), i, 3);
+        tableModel.setValueAt(nxb.getEmail(), i, 4);
+        tableModel.setValueAt(nxb.getSoDienThoai(), i, 5);
+        
+        nxbBUS.sua(nxb);
+        JOptionPane.showMessageDialog(rootPane, "Đã cập nhật");
+    }//GEN-LAST:event_btn_sua_cnnxbActionPerformed
+
+    private void tbnxbMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbnxbMouseClicked
+        // TODO add your handling code here:
+        int i = tbnxb.getSelectedRow();
+        NhaXuatBan nxb = nxbBUS.dsnxb.get(i);
+        txt_maNxb_cnnxb.setText(nxb.getMaNXB());
+        txt_tenNxb_cnnxb.setText(nxb.getTenNXB());
+        txt_diaChi_cnnxb.setText(nxb.getDiaChi());
+        txt_mail_cnnxb.setText(nxb.getEmail());
+        txt_sdt_cnnxb.setText(nxb.getSoDienThoai());
+    }//GEN-LAST:event_tbnxbMouseClicked
+
+    private void btn_xoa_cnnxbActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_xoa_cnnxbActionPerformed
+        // TODO add your handling code here:
+        int SelectIndex = tbnxb.getSelectedRow();
+        if (SelectIndex >= 0) {
+            NhaXuatBan nxb = nxbList.get(SelectIndex);
+            int option = JOptionPane.showConfirmDialog(this, "Bạn có muốn xóa không?");
+            if (option == 0) {
+                nxbBUS.xoa(nxb);
+                ShowNXB();
+            }
+        }
+    }//GEN-LAST:event_btn_xoa_cnnxbActionPerformed
+
+    private void btn_xoa_cnlsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_xoa_cnlsActionPerformed
+        // TODO add your handling code here:
+        int SelectIndex = tbls.getSelectedRow();
+        if(SelectIndex >= 0){
+            LoaiSach ls = lsList.get(SelectIndex);
+            int option = JOptionPane.showConfirmDialog(this, "Bạn có muốn xóa không?");
+            if(option == 0){
+                lsBUS.xoa(ls);
+                showLS();
+            }
+        }
+    }//GEN-LAST:event_btn_xoa_cnlsActionPerformed
+
+    private void btn_luu_cnnxbActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_luu_cnnxbActionPerformed
+        // TODO add your handling code here:
+        NhaXuatBan nxb = new NhaXuatBan();
+        if (!batLoi.Catch(txt_maNxb_cnnxb.getText()) && !batLoi.Catch(txt_tenNxb_cnnxb) && !batLoi.Catch(txt_diaChi_cnnxb)
+                && !batLoi.Catch(txt_mail_cnnxb) && !batLoi.Catch(txt_sdt_cnnxb)) {
+            if (!nxbBUS.checkPrimaryKey(txt_maNxb_cnnxb.getText())) {
+                nxb.setMaNXB(txt_maNxb_cnnxb.getText());
+                nxb.setTenNXB(txt_tenNxb_cnnxb.getText());
+                nxb.setDiaChi(txt_diaChi_cnnxb.getText());
+                nxb.setEmail(txt_mail_cnnxb.getText());
+                nxb.setSoDienThoai(txt_sdt_cnnxb.getText());
+
+                nxbBUS.add(nxb);
+            } else {
+                JOptionPane.showMessageDialog(rootPane, "Đã thêm");
+            }
+        } else {
+            JOptionPane.showMessageDialog(rootPane, "Bạn chưa nhập đủ dữ liệu, vui lòng nhập lại");
+        }
+            
+    }//GEN-LAST:event_btn_luu_cnnxbActionPerformed
 
     /**
      * @param args the command line arguments

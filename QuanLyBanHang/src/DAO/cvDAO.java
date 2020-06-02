@@ -54,6 +54,8 @@ public class cvDAO {
             JOptionPane.showMessageDialog(null, "Không thể xóa khi có ít nhất 1 nhân viên đảm nhiệm chức vụ đó");
         }
     }
+    
+    
     public static ArrayList getListCV(){
         ArrayList<ChucVu> dscv=new ArrayList<>();
         String sql="select * from ChucVu";

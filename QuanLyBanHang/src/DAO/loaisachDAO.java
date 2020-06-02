@@ -101,7 +101,7 @@ public class loaisachDAO {
         }
         return ListOfLS;
 }
-    public boolean testPrimaryKey(String txt){
+    public static boolean testPrimaryKey(String txt){
         String sql = "select from capnhatloaisach where maLoaiSach ='"+txt+"'";
         try {
             ps=ConnectDatabase.connection.prepareStatement(sql);
