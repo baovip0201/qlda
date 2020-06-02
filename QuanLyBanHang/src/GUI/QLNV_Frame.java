@@ -16,6 +16,7 @@ import BUS.cvBUS;
 import DAO.cvDAO;
 import DB.Help;
 import DTO.ChucVu;
+import java.sql.Date;
 import java.util.Vector;
 import javax.swing.JOptionPane;
 
@@ -673,7 +674,7 @@ public class QLNV_Frame extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void btn_luuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_luuActionPerformed
-         NhanVien nv = new NhanVien();
+        NhanVien nv=new NhanVien();
         if (!batLoi.Catch(txt_maNv.getText()) && !batLoi.Catch(txt_hoTen.getText()) && !batLoi.Catch(txt_diaChi.getText()) && !batLoi.Catch(txt_sdt.getText()) && !batLoi.Catch(txt_mail.getText()) && !batLoi.Catch(txt_luong.getText())) {
             if (!bus.checkPrimaryKey(txt_maNv.getText())) {
                 nv.setMaNv(txt_maNv.getText());
@@ -688,6 +689,7 @@ public class QLNV_Frame extends javax.swing.JFrame {
                 bus.them(nv);
                 JOptionPane.showMessageDialog(rootPane, "Đã thêm");
                 jTable1.setModel(tableModel);
+
             } else {
                 JOptionPane.showMessageDialog(rootPane, "Dữ liệu nhập vào không hợp lệ, do bị trùng khóa chính");
             }
@@ -811,14 +813,22 @@ public class QLNV_Frame extends javax.swing.JFrame {
 
     private void btn_saveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_saveActionPerformed
         // TODO add your handling code here:
-        ChucVu cv = new ChucVu();
+        //ChucVu cv = new ChucVu();
         if (!batLoi.Catch(txt_maChucvu.getText()) && !batLoi.Catch(txt_tenChucvu.getText()) && !batLoi.Catch(txt_luongChucvu.getText())) {
             if (!cvBUS.checkPrimaryKey(txt_maChucvu.getText())) {
-                cv.setMaChucVu(txt_maChucvu.getText());
+                /*cv.setMaChucVu(txt_maChucvu.getText());
                 cv.setChucVu(txt_tenChucvu.getText());
                 cv.setLuong(Float.parseFloat(txt_luongChucvu.getText()));
                 bus1.add(cv);
+                JOptionPane.showMessageDialog(rootPane, "Đã thêm");*/
+                
+                String maCV=txt_maChucvu.getText();
+                String CV=txt_tenChucvu.getText();
+                Float luong=Float.parseFloat(txt_luongChucvu.getText());
+                ChucVu cv=new ChucVu(maCV,CV,luong);
+                bus1.add(cv);
                 JOptionPane.showMessageDialog(rootPane, "Đã thêm");
+                //showCV();
             } else {
                 JOptionPane.showMessageDialog(rootPane, "Dữ liệu nhập vào không hợp lệ, do bị trùng khóa chính");
             }
@@ -858,6 +868,7 @@ public class QLNV_Frame extends javax.swing.JFrame {
         showTableCV();
     }//GEN-LAST:event_taiBtnActionPerformed
 
+    @SuppressWarnings("empty-statement")
     private void btn_InActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_InActionPerformed
         // TODO add your handling code here:
         tableModel = (DefaultTableModel) jTable1.getModel();

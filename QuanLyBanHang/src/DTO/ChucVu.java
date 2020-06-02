@@ -19,6 +19,11 @@ public class ChucVu {
     public ChucVu(String maChucVu){
         this.maChucVu=maChucVu;
     }
+    public ChucVu(String maChucVu, String chucVu, Float luong){
+        this.maChucVu=maChucVu;
+        this.chucVu=chucVu;
+        this.luong=luong;
+    }
     public String getMaChucVu() {
         return maChucVu;
     }
