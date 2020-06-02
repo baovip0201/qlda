@@ -5,11 +5,13 @@
  */
 package GUI;
 
+import BUS.batLoi;
 import BUS.loaisachBUS;
 import DAO.loaisachDAO;
 import DTO.LoaiSach;
 import java.util.ArrayList;
 import java.util.Vector;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -28,14 +30,23 @@ public class QLSach_Frame extends javax.swing.JFrame {
     public QLSach_Frame() {
         initComponents();
         setDefaultCloseOperation(EXIT_ON_CLOSE);
+        disenabled();
+        tableModel = (DefaultTableModel) jTable1.getModel();
+        
+        
+        
     }
 
+//    Loai sach -----------------------------------------------------------------------------------------
     void showLS(){
-        loaisachDAO data = new loaisachDAO();
-        lsList = data.getListLS();
+        lsList = loaisachDAO.getListLS();
         tableModel.setRowCount(0);
-        lsList.forEach(ls)->(new Object)
+        lsList.forEach((ls) -> {model.addRow(new Object[]{
+            ls.getMaLoaiSach(),ls.getTenLoaiSach()
+        });
+        });
     }
+    
     void showTableLS(){
         Vector header = new Vector();
         header.add("Mã Loại Sách");
@@ -52,6 +63,26 @@ public class QLSach_Frame extends javax.swing.JFrame {
         tbls.setModel(model);
         
     }
+    
+    private void get_CBB_LS(){
+        //if
+        
+        for(String s : lsBUS.ListOfLS)
+            cbb_loaiSach.addItem(s);
+        
+    }
+    //--------------------------------------------------------------------------------------------------------
+    
+     private void disenabled(){
+         txt_maLoai_cnls.setEnabled(false);
+         txt_tenLoai_cnls.setEnabled(false);
+         txt_maNxb_cnnxb.setEnabled(false);
+         txt_tenNxb_cnnxb.setEnabled(false);
+         txt_sdt_cnnxb.setEnabled(false);
+         txt_diaChi_cnnxb.setEnabled(false);
+         txt_sdt_cnnxb.setEnabled(false);
+         txt_mail_cnnxb.setEnabled(false);
+     }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -404,12 +435,22 @@ public class QLSach_Frame extends javax.swing.JFrame {
 
         btn_sua_cnls.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         btn_sua_cnls.setText("Sửa");
+        btn_sua_cnls.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_sua_cnlsActionPerformed(evt);
+            }
+        });
 
         btn_xoa_cnls.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         btn_xoa_cnls.setText("Xóa");
 
         btn_luu_cnls.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         btn_luu_cnls.setText("Lưu");
+        btn_luu_cnls.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_luu_cnlsActionPerformed(evt);
+            }
+        });
 
         tbls.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
         tbls.setModel(new javax.swing.table.DefaultTableModel(
@@ -429,6 +470,11 @@ public class QLSach_Frame extends javax.swing.JFrame {
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
+            }
+        });
+        tbls.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblsMouseClicked(evt);
             }
         });
         jScrollPane2.setViewportView(tbls);
@@ -527,6 +573,11 @@ public class QLSach_Frame extends javax.swing.JFrame {
 
         btn_them_cnnxb.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         btn_them_cnnxb.setText("Thêm");
+        btn_them_cnnxb.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_them_cnnxbActionPerformed(evt);
+            }
+        });
 
         btn_sua_cnnxb.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         btn_sua_cnnxb.setText("Sửa");
@@ -691,8 +742,54 @@ public class QLSach_Frame extends javax.swing.JFrame {
 
     private void btn_them_cnlsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_them_cnlsActionPerformed
         // TODO add your handling code here:
-        
+        txt_maLoai_cnls.setEnabled(true);
+        txt_tenSach.setEnabled(true);
     }//GEN-LAST:event_btn_them_cnlsActionPerformed
+
+    private void btn_them_cnnxbActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_them_cnnxbActionPerformed
+        // TODO add your handling code here:
+        txt_maNxb_cnnxb.setEnabled(true);
+         txt_tenNxb_cnnxb.setEnabled(true);
+         txt_sdt_cnnxb.setEnabled(true);
+         txt_diaChi_cnnxb.setEnabled(true);
+         txt_sdt_cnnxb.setEnabled(true);
+         txt_mail_cnnxb.setEnabled(true);
+    }//GEN-LAST:event_btn_them_cnnxbActionPerformed
+
+    private void btn_sua_cnlsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_sua_cnlsActionPerformed
+        // TODO add your handling code here:
+        int i = tbls.getSelectedRow();
+        LoaiSach ls = new LoaiSach();
+        ls.setMaLoaiSach(txt_maLoai_cnls.getText());
+        ls.setTenLoaiSach(txt_tenSach.getText());
+        model.setValueAt(ls.getTenLoaiSach(), i, 1);
+        lsBUS.sua(ls);
+        JOptionPane.showMessageDialog(rootPane, "Đã cập nhật");
+    }//GEN-LAST:event_btn_sua_cnlsActionPerformed
+
+    private void btn_luu_cnlsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_luu_cnlsActionPerformed
+        // TODO add your handling code here:
+        LoaiSach ls = new LoaiSach();
+        if(!batLoi.Catch(txt_maLoai_cnls.getText()) && !batLoi.Catch(txt_tenLoai_cnls)){
+            if(!loaisachBUS.checkPrimaryKey(txt_maLoai_cnls.getText())){
+                ls.setMaLoaiSach(txt_maLoai_cnls.getText());
+                ls.setTenLoaiSach(txt_tenLoai_cnls.getText());
+                lsBUS.them(ls);
+            } else{
+             JOptionPane.showMessageDialog(rootPane, "Đã thêm");
+            }
+        }else {
+            JOptionPane.showMessageDialog(rootPane, "Bạn chưa nhập đủ dữ liệu, vui lòng nhập lại");
+        }
+    }//GEN-LAST:event_btn_luu_cnlsActionPerformed
+
+    private void tblsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblsMouseClicked
+        // TODO add your handling code here:
+        int i = tbls.getSelectedRow();
+        LoaiSach ls = lsBUS.dsls.get(i);
+        txt_maLoai_cnls.setText(ls.getMaLoaiSach());
+        txt_tenLoai_cnls.setText(ls.getTenLoaiSach());
+    }//GEN-LAST:event_tblsMouseClicked
 
     /**
      * @param args the command line arguments
