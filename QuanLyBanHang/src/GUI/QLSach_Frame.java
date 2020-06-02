@@ -5,19 +5,130 @@
  */
 package GUI;
 
+import BUS.batLoi;
+import BUS.loaisachBUS;
+import BUS.nxbBUS;
+import DAO.loaisachDAO;
+import DAO.nxbDAO;
+import DTO.LoaiSach;
+import DTO.NhaXuatBan;
+import java.util.ArrayList;
+import java.util.Vector;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author Thanh Phuc
  */
 public class QLSach_Frame extends javax.swing.JFrame {
-
+    DefaultTableModel tableModel;
+    DefaultTableModel model=new DefaultTableModel();
+    ArrayList<LoaiSach> lsList = new ArrayList<>();
+    ArrayList<NhaXuatBan> nxbList = new ArrayList<>();
+    
+    loaisachBUS lsBUS = new loaisachBUS();
+    nxbBUS nxbBUS = new nxbBUS();
     /**
      * Creates new form QLSach
      */
     public QLSach_Frame() {
         initComponents();
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
+        disenabled();
+        tableModel = (DefaultTableModel) jTable1.getModel();
+        
+        
+        
     }
 
+//Loai sach -----------------------------------------------------------------------------------------
+    void showLS(){
+        lsList = loaisachDAO.getListLS();
+        tableModel.setRowCount(0);
+        lsList.forEach((ls) -> {model.addRow(new Object[]{
+            ls.getMaLoaiSach(),ls.getTenLoaiSach()
+        });
+        });
+    }
+    
+    void showTableLS(){
+        Vector header = new Vector();
+        header.add("Mã Loại Sách");
+        header.add("Tên Loại Sách");
+        if (model.getRowCount() == 0) {
+            model = new DefaultTableModel(header, 0);
+        }
+        for (LoaiSach ls : lsBUS.dsls){
+            Vector row = new Vector();
+            row.add(ls.getMaLoaiSach());
+            row.add(ls.getTenLoaiSach());
+            model.addRow(row);
+        }
+        tbls.setModel(model);
+        
+    }
+    
+    private void get_CBB_LS(){
+        //if
+        
+        for(String s : lsBUS.ListOfLS)
+            cbb_loaiSach.addItem(s);
+        
+    }
+    //--------------------------------------------------------------------------------------------------------
+    
+    // Nha Xuat Ban ------------------------------------------------------------------------------------------
+    void ShowNXB(){
+        nxbList = nxbDAO.getListNXB();
+        tableModel.setRowCount(0);
+        nxbList.forEach((nxb) -> {model.addRow(new Object[]{
+            nxb.getMaNXB(),nxb.getTenNXB(),nxb.getDiaChi(),nxb.getEmail(),nxb.getSoDienThoai()
+        });
+        });
+    }
+            
+    void showTableNXB(){
+        Vector header = new Vector();
+        header.add("Mã Nhà Xuất Bản");
+        header.add("Tên Nhà Xuất Bản");
+        header.add("Địa Chỉ");
+        header.add("Email");
+        header.add("Số Điện Thoại");
+        if (model.getRowCount() == 0) {
+            model = new DefaultTableModel(header, 0);
+        }
+        for (NhaXuatBan nxb: nxbBUS.dsnxb){
+            Vector row = new Vector();
+            row.add(nxb.getMaNXB());
+            row.add(nxb.getTenNXB());
+            row.add(nxb.getDiaChi());
+            row.add(nxb.getEmail());
+            row.add(nxb.getSoDienThoai());
+            model.addRow(row);
+        }
+        tbnxb.setModel(model);
+    } 
+            
+    private void get_CBB_NXB(){
+        //if
+        
+        for(String s : nxbBUS.listOf_maNXB)
+            cbb_nhaXuatBan.addItem(s);
+        
+    }        
+            
+    //-----------------------------------------------------------------------------------------------        
+     private void disenabled(){
+         txt_maLoai_cnls.setEnabled(false);
+         txt_tenLoai_cnls.setEnabled(false);
+         txt_maNxb_cnnxb.setEnabled(false);
+         txt_tenNxb_cnnxb.setEnabled(false);
+         txt_sdt_cnnxb.setEnabled(false);
+         txt_diaChi_cnnxb.setEnabled(false);
+         txt_sdt_cnnxb.setEnabled(false);
+         txt_mail_cnnxb.setEnabled(false);
+     }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -70,7 +181,7 @@ public class QLSach_Frame extends javax.swing.JFrame {
         btn_xoa_cnls = new javax.swing.JButton();
         btn_luu_cnls = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
+        tbls = new javax.swing.JTable();
         jPanel4 = new javax.swing.JPanel();
         jLabel10 = new javax.swing.JLabel();
         txt_maNxb_cnnxb = new javax.swing.JTextField();
@@ -88,7 +199,7 @@ public class QLSach_Frame extends javax.swing.JFrame {
         btn_xoa_cnnxb = new javax.swing.JButton();
         btn_luu_cnnxb = new javax.swing.JButton();
         jScrollPane3 = new javax.swing.JScrollPane();
-        jTable3 = new javax.swing.JTable();
+        tbnxb = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -96,7 +207,6 @@ public class QLSach_Frame extends javax.swing.JFrame {
         jLabel1.setText("Quản lý sách");
 
         jButton1.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
-        jButton1.setIcon(new javax.swing.ImageIcon("D:\\Java\\QuanLyBanHang\\img\\arrow-back-icon.png")); // NOI18N
         jButton1.setText("Hệ thống");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -164,23 +274,18 @@ public class QLSach_Frame extends javax.swing.JFrame {
         cbb_nhaXuatBan.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
 
         btn_taiLai_tts.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
-        btn_taiLai_tts.setIcon(new javax.swing.ImageIcon("D:\\Java\\QuanLyBanHang\\img\\reload-icon.png")); // NOI18N
         btn_taiLai_tts.setText("Tải lại");
 
         btn_them_tts.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
-        btn_them_tts.setIcon(new javax.swing.ImageIcon("D:\\Java\\QuanLyBanHang\\img\\Sign-Add-icon.png")); // NOI18N
         btn_them_tts.setText("Thêm");
 
         btn_sua_tts.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
-        btn_sua_tts.setIcon(new javax.swing.ImageIcon("D:\\Java\\QuanLyBanHang\\img\\Repair-icon.png")); // NOI18N
         btn_sua_tts.setText("Sửa");
 
         btn_xoa_tts.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
-        btn_xoa_tts.setIcon(new javax.swing.ImageIcon("D:\\Java\\QuanLyBanHang\\img\\Trash-icon.png")); // NOI18N
         btn_xoa_tts.setText("Xóa");
 
         btn_luu_tts.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
-        btn_luu_tts.setIcon(new javax.swing.ImageIcon("D:\\Java\\QuanLyBanHang\\img\\save.png")); // NOI18N
         btn_luu_tts.setText("Lưu");
 
         btn_sapXep_tts.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
@@ -227,7 +332,6 @@ public class QLSach_Frame extends javax.swing.JFrame {
         );
 
         btn_in_tts.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
-        btn_in_tts.setIcon(new javax.swing.ImageIcon("D:\\Java\\QuanLyBanHang\\img\\save.png")); // NOI18N
         btn_in_tts.setText("In danh sách");
 
         jTable1.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
@@ -298,7 +402,7 @@ public class QLSach_Frame extends javax.swing.JFrame {
                         .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(btn_in_tts)))
-                .addContainerGap(24, Short.MAX_VALUE))
+                .addContainerGap(23, Short.MAX_VALUE))
             .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING)
         );
 
@@ -360,27 +464,47 @@ public class QLSach_Frame extends javax.swing.JFrame {
         txt_tenLoai_cnls.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
 
         btn_taiLai_cnls.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
-        btn_taiLai_cnls.setIcon(new javax.swing.ImageIcon("D:\\Java\\QuanLyBanHang\\img\\reload-icon.png")); // NOI18N
         btn_taiLai_cnls.setText("Tải lại");
+        btn_taiLai_cnls.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_taiLai_cnlsActionPerformed(evt);
+            }
+        });
 
         btn_them_cnls.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
-        btn_them_cnls.setIcon(new javax.swing.ImageIcon("D:\\Java\\QuanLyBanHang\\img\\Sign-Add-icon.png")); // NOI18N
         btn_them_cnls.setText("Thêm");
+        btn_them_cnls.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_them_cnlsActionPerformed(evt);
+            }
+        });
 
         btn_sua_cnls.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
-        btn_sua_cnls.setIcon(new javax.swing.ImageIcon("D:\\Java\\QuanLyBanHang\\img\\Repair-icon.png")); // NOI18N
         btn_sua_cnls.setText("Sửa");
+        btn_sua_cnls.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_sua_cnlsActionPerformed(evt);
+            }
+        });
 
         btn_xoa_cnls.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
-        btn_xoa_cnls.setIcon(new javax.swing.ImageIcon("D:\\Java\\QuanLyBanHang\\img\\Trash-icon.png")); // NOI18N
         btn_xoa_cnls.setText("Xóa");
+        btn_xoa_cnls.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_xoa_cnlsActionPerformed(evt);
+            }
+        });
 
         btn_luu_cnls.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
-        btn_luu_cnls.setIcon(new javax.swing.ImageIcon("D:\\Java\\QuanLyBanHang\\img\\save.png")); // NOI18N
         btn_luu_cnls.setText("Lưu");
+        btn_luu_cnls.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_luu_cnlsActionPerformed(evt);
+            }
+        });
 
-        jTable2.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+        tbls.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        tbls.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null},
                 {null, null},
@@ -399,7 +523,12 @@ public class QLSach_Frame extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane2.setViewportView(jTable2);
+        tbls.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblsMouseClicked(evt);
+            }
+        });
+        jScrollPane2.setViewportView(tbls);
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -425,7 +554,7 @@ public class QLSach_Frame extends javax.swing.JFrame {
                         .addComponent(txt_tenLoai_cnls, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(0, 40, Short.MAX_VALUE)
+                        .addGap(0, 102, Short.MAX_VALUE)
                         .addComponent(btn_sua_cnls)
                         .addGap(119, 119, 119)
                         .addComponent(btn_xoa_cnls)
@@ -486,27 +615,47 @@ public class QLSach_Frame extends javax.swing.JFrame {
         txt_mail_cnnxb.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
 
         btn_taitai_cnnxb.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
-        btn_taitai_cnnxb.setIcon(new javax.swing.ImageIcon("D:\\Java\\QuanLyBanHang\\img\\reload-icon.png")); // NOI18N
         btn_taitai_cnnxb.setText("Tải lại");
+        btn_taitai_cnnxb.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_taitai_cnnxbActionPerformed(evt);
+            }
+        });
 
         btn_them_cnnxb.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
-        btn_them_cnnxb.setIcon(new javax.swing.ImageIcon("D:\\Java\\QuanLyBanHang\\img\\Sign-Add-icon.png")); // NOI18N
         btn_them_cnnxb.setText("Thêm");
+        btn_them_cnnxb.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_them_cnnxbActionPerformed(evt);
+            }
+        });
 
         btn_sua_cnnxb.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
-        btn_sua_cnnxb.setIcon(new javax.swing.ImageIcon("D:\\Java\\QuanLyBanHang\\img\\Repair-icon.png")); // NOI18N
         btn_sua_cnnxb.setText("Sửa");
+        btn_sua_cnnxb.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_sua_cnnxbActionPerformed(evt);
+            }
+        });
 
         btn_xoa_cnnxb.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
-        btn_xoa_cnnxb.setIcon(new javax.swing.ImageIcon("D:\\Java\\QuanLyBanHang\\img\\Trash-icon.png")); // NOI18N
         btn_xoa_cnnxb.setText("Xóa");
+        btn_xoa_cnnxb.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_xoa_cnnxbActionPerformed(evt);
+            }
+        });
 
         btn_luu_cnnxb.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
-        btn_luu_cnnxb.setIcon(new javax.swing.ImageIcon("D:\\Java\\QuanLyBanHang\\img\\save.png")); // NOI18N
         btn_luu_cnnxb.setText("Lưu");
+        btn_luu_cnnxb.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_luu_cnnxbActionPerformed(evt);
+            }
+        });
 
-        jTable3.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
-        jTable3.setModel(new javax.swing.table.DefaultTableModel(
+        tbnxb.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        tbnxb.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null},
                 {null, null, null, null, null},
@@ -525,7 +674,12 @@ public class QLSach_Frame extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane3.setViewportView(jTable3);
+        tbnxb.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tbnxbMouseClicked(evt);
+            }
+        });
+        jScrollPane3.setViewportView(tbnxb);
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -567,7 +721,7 @@ public class QLSach_Frame extends javax.swing.JFrame {
                         .addContainerGap())
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addComponent(btn_xoa_cnnxb)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 99, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btn_luu_cnnxb)
                         .addGap(103, 103, 103))))
             .addComponent(jScrollPane3, javax.swing.GroupLayout.Alignment.TRAILING)
@@ -609,7 +763,10 @@ public class QLSach_Frame extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jTabbedPane1)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jTabbedPane1)
+                .addGap(33, 33, 33))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -639,6 +796,150 @@ public class QLSach_Frame extends javax.swing.JFrame {
         admin.setVisible(true);
         dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void btn_taiLai_cnlsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_taiLai_cnlsActionPerformed
+        // TODO add your handling code here:
+        model = (DefaultTableModel) tbls.getModel();
+        model.setRowCount(0);
+        showTableLS();
+    }//GEN-LAST:event_btn_taiLai_cnlsActionPerformed
+
+    private void btn_taitai_cnnxbActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_taitai_cnnxbActionPerformed
+        // TODO add your handling code here:
+        model = (DefaultTableModel) tbnxb.getModel();
+        model.setRowCount(0);
+        showTableNXB();
+    }//GEN-LAST:event_btn_taitai_cnnxbActionPerformed
+
+    private void btn_them_cnlsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_them_cnlsActionPerformed
+        // TODO add your handling code here:
+        txt_maLoai_cnls.setEnabled(true);
+        txt_tenSach.setEnabled(true);
+    }//GEN-LAST:event_btn_them_cnlsActionPerformed
+
+    private void btn_them_cnnxbActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_them_cnnxbActionPerformed
+        // TODO add your handling code here:
+        txt_maNxb_cnnxb.setEnabled(true);
+        txt_tenNxb_cnnxb.setEnabled(true);
+        txt_sdt_cnnxb.setEnabled(true);
+        txt_diaChi_cnnxb.setEnabled(true);
+        txt_sdt_cnnxb.setEnabled(true);
+        txt_mail_cnnxb.setEnabled(true);
+    }//GEN-LAST:event_btn_them_cnnxbActionPerformed
+
+    private void btn_sua_cnlsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_sua_cnlsActionPerformed
+        // TODO add your handling code here:
+        int i = tbls.getSelectedRow();
+        LoaiSach ls = new LoaiSach();
+        ls.setMaLoaiSach(txt_maLoai_cnls.getText());
+        ls.setTenLoaiSach(txt_tenSach.getText());
+        model.setValueAt(ls.getTenLoaiSach(), i, 1);
+        lsBUS.sua(ls);
+        JOptionPane.showMessageDialog(rootPane, "Đã cập nhật");
+    }//GEN-LAST:event_btn_sua_cnlsActionPerformed
+
+    private void btn_luu_cnlsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_luu_cnlsActionPerformed
+        // TODO add your handling code here:
+        LoaiSach ls = new LoaiSach();
+        if(!batLoi.Catch(txt_maLoai_cnls.getText()) && !batLoi.Catch(txt_tenLoai_cnls)){
+            if(!loaisachBUS.checkPrimaryKey(txt_maLoai_cnls.getText())){
+                ls.setMaLoaiSach(txt_maLoai_cnls.getText());
+                ls.setTenLoaiSach(txt_tenLoai_cnls.getText());
+                lsBUS.them(ls);
+            } else{
+             JOptionPane.showMessageDialog(rootPane, "Đã thêm");
+            }
+        }else {
+            JOptionPane.showMessageDialog(rootPane, "Bạn chưa nhập đủ dữ liệu, vui lòng nhập lại");
+        }
+    }//GEN-LAST:event_btn_luu_cnlsActionPerformed
+
+    private void tblsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblsMouseClicked
+        // TODO add your handling code here:
+        int i = tbls.getSelectedRow();
+        LoaiSach ls = lsBUS.dsls.get(i);
+        txt_maLoai_cnls.setText(ls.getMaLoaiSach());
+        txt_tenLoai_cnls.setText(ls.getTenLoaiSach());
+    }//GEN-LAST:event_tblsMouseClicked
+
+    private void btn_sua_cnnxbActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_sua_cnnxbActionPerformed
+        // TODO add your handling code here:
+        int i = tbnxb.getSelectedRow();
+        NhaXuatBan nxb = new NhaXuatBan();
+        nxb.setMaNXB(txt_maNxb_cnnxb.getText());
+        nxb.setTenNXB(txt_tenNxb_cnnxb.getText());
+        nxb.setDiaChi(txt_diaChi_cnnxb.getText());
+        nxb.setEmail(txt_mail_cnnxb.getText());
+        nxb.setSoDienThoai(txt_sdt_cnnxb.getText());
+        
+        tableModel.setValueAt(nxb.getMaNXB(), i, 1);
+        tableModel.setValueAt(nxb.getTenNXB(), i, 2);
+        tableModel.setValueAt(nxb.getDiaChi(), i, 3);
+        tableModel.setValueAt(nxb.getEmail(), i, 4);
+        tableModel.setValueAt(nxb.getSoDienThoai(), i, 5);
+        
+        nxbBUS.sua(nxb);
+        JOptionPane.showMessageDialog(rootPane, "Đã cập nhật");
+    }//GEN-LAST:event_btn_sua_cnnxbActionPerformed
+
+    private void tbnxbMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbnxbMouseClicked
+        // TODO add your handling code here:
+        int i = tbnxb.getSelectedRow();
+        NhaXuatBan nxb = nxbBUS.dsnxb.get(i);
+        txt_maNxb_cnnxb.setText(nxb.getMaNXB());
+        txt_tenNxb_cnnxb.setText(nxb.getTenNXB());
+        txt_diaChi_cnnxb.setText(nxb.getDiaChi());
+        txt_mail_cnnxb.setText(nxb.getEmail());
+        txt_sdt_cnnxb.setText(nxb.getSoDienThoai());
+    }//GEN-LAST:event_tbnxbMouseClicked
+
+    private void btn_xoa_cnnxbActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_xoa_cnnxbActionPerformed
+        // TODO add your handling code here:
+        int SelectIndex = tbnxb.getSelectedRow();
+        if (SelectIndex >= 0) {
+            NhaXuatBan nxb = nxbList.get(SelectIndex);
+            int option = JOptionPane.showConfirmDialog(this, "Bạn có muốn xóa không?");
+            if (option == 0) {
+                nxbBUS.xoa(nxb);
+                ShowNXB();
+            }
+        }
+    }//GEN-LAST:event_btn_xoa_cnnxbActionPerformed
+
+    private void btn_xoa_cnlsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_xoa_cnlsActionPerformed
+        // TODO add your handling code here:
+        int SelectIndex = tbls.getSelectedRow();
+        if(SelectIndex >= 0){
+            LoaiSach ls = lsList.get(SelectIndex);
+            int option = JOptionPane.showConfirmDialog(this, "Bạn có muốn xóa không?");
+            if(option == 0){
+                lsBUS.xoa(ls);
+                showLS();
+            }
+        }
+    }//GEN-LAST:event_btn_xoa_cnlsActionPerformed
+
+    private void btn_luu_cnnxbActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_luu_cnnxbActionPerformed
+        // TODO add your handling code here:
+        NhaXuatBan nxb = new NhaXuatBan();
+        if (!batLoi.Catch(txt_maNxb_cnnxb.getText()) && !batLoi.Catch(txt_tenNxb_cnnxb) && !batLoi.Catch(txt_diaChi_cnnxb)
+                && !batLoi.Catch(txt_mail_cnnxb) && !batLoi.Catch(txt_sdt_cnnxb)) {
+            if (!nxbBUS.checkPrimaryKey(txt_maNxb_cnnxb.getText())) {
+                nxb.setMaNXB(txt_maNxb_cnnxb.getText());
+                nxb.setTenNXB(txt_tenNxb_cnnxb.getText());
+                nxb.setDiaChi(txt_diaChi_cnnxb.getText());
+                nxb.setEmail(txt_mail_cnnxb.getText());
+                nxb.setSoDienThoai(txt_sdt_cnnxb.getText());
+
+                nxbBUS.add(nxb);
+            } else {
+                JOptionPane.showMessageDialog(rootPane, "Đã thêm");
+            }
+        } else {
+            JOptionPane.showMessageDialog(rootPane, "Bạn chưa nhập đủ dữ liệu, vui lòng nhập lại");
+        }
+            
+    }//GEN-LAST:event_btn_luu_cnnxbActionPerformed
 
     /**
      * @param args the command line arguments
@@ -722,11 +1023,11 @@ public class QLSach_Frame extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTable jTable2;
-    private javax.swing.JTable jTable3;
     private javax.swing.JLabel lb_hinhanh;
     private javax.swing.JRadioButton rbtn_gia_tts;
     private javax.swing.JRadioButton rbtn_tensach_tts;
+    private javax.swing.JTable tbls;
+    private javax.swing.JTable tbnxb;
     private javax.swing.JTextField txt_diaChi_cnnxb;
     private javax.swing.JTextField txt_fileSach;
     private javax.swing.JTextField txt_gia;

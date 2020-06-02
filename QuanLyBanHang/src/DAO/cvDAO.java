@@ -22,6 +22,7 @@ public class cvDAO {
     public static Connection conn=ConnectDatabase.getConnection();
     public static PreparedStatement ps=null;
     public static ResultSet rs=null;
+    
     public static void them(ChucVu cv){
         String sql="insert into ChucVu(maChucVu,chucVu,luong) values(?,?,?)";
         try {
@@ -53,6 +54,8 @@ public class cvDAO {
             JOptionPane.showMessageDialog(null, "Không thể xóa khi có ít nhất 1 nhân viên đảm nhiệm chức vụ đó");
         }
     }
+    
+    
     public static ArrayList getListCV(){
         ArrayList<ChucVu> dscv=new ArrayList<>();
         String sql="select * from ChucVu";

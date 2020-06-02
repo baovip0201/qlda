@@ -31,9 +31,7 @@ public class ThongKeDoanhThu_Frame extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        date_batDau = new com.toedter.calendar.JDateChooser();
         jLabel3 = new javax.swing.JLabel();
-        date_ketThuc = new com.toedter.calendar.JDateChooser();
         btn_taiLai = new javax.swing.JButton();
         btn_thongKe = new javax.swing.JButton();
         btn_inThongKe = new javax.swing.JButton();
@@ -43,7 +41,6 @@ public class ThongKeDoanhThu_Frame extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jButton1.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
-        jButton1.setIcon(new javax.swing.ImageIcon("D:\\Java\\QuanLyBanHang\\img\\arrow-back-icon.png")); // NOI18N
         jButton1.setText("Hệ thống");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -57,25 +54,16 @@ public class ThongKeDoanhThu_Frame extends javax.swing.JFrame {
         jLabel2.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
         jLabel2.setText("Thống kê từ ngày:");
 
-        date_batDau.setDateFormatString("MMM dd, yyyy");
-        date_batDau.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
-
         jLabel3.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
         jLabel3.setText("Đến ngày:");
 
-        date_ketThuc.setDateFormatString("MMM dd, yyyy");
-        date_ketThuc.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
-
         btn_taiLai.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
-        btn_taiLai.setIcon(new javax.swing.ImageIcon("D:\\Java\\QuanLyBanHang\\img\\reload-icon.png")); // NOI18N
         btn_taiLai.setText("Tải lại");
 
         btn_thongKe.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
-        btn_thongKe.setIcon(new javax.swing.ImageIcon("D:\\Java\\QuanLyBanHang\\img\\blue-chart-icon.png")); // NOI18N
         btn_thongKe.setText("Thống kê");
 
         btn_inThongKe.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
-        btn_inThongKe.setIcon(new javax.swing.ImageIcon("D:\\Java\\QuanLyBanHang\\img\\print.png")); // NOI18N
         btn_inThongKe.setText("In thống kê");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -92,13 +80,9 @@ public class ThongKeDoanhThu_Frame extends javax.swing.JFrame {
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(date_batDau, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGap(164, 164, 164)
                         .addComponent(jLabel3)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(date_ketThuc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(74, 74, 74)
+                        .addGap(228, 228, 228)
                         .addComponent(btn_taiLai)
                         .addGap(63, 63, 63)
                         .addComponent(btn_thongKe)
@@ -106,9 +90,6 @@ public class ThongKeDoanhThu_Frame extends javax.swing.JFrame {
                         .addComponent(btn_inThongKe)
                         .addGap(33, 33, 33))))
         );
-
-        jPanel1Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {date_batDau, date_ketThuc});
-
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
@@ -116,22 +97,13 @@ public class ThongKeDoanhThu_Frame extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
                     .addComponent(jLabel1))
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(btn_taiLai)
-                                .addComponent(btn_thongKe)
-                                .addComponent(btn_inThongKe)
-                                .addComponent(jLabel2)
-                                .addComponent(jLabel3)))
-                        .addGroup(jPanel1Layout.createSequentialGroup()
-                            .addGap(35, 35, 35)
-                            .addComponent(date_batDau, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(32, 32, 32)
-                        .addComponent(date_ketThuc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(20, 20, 20)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btn_taiLai)
+                    .addComponent(btn_thongKe)
+                    .addComponent(btn_inThongKe)
+                    .addComponent(jLabel2)
+                    .addComponent(jLabel3))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -220,8 +192,6 @@ public class ThongKeDoanhThu_Frame extends javax.swing.JFrame {
     private javax.swing.JButton btn_inThongKe;
     private javax.swing.JButton btn_taiLai;
     private javax.swing.JButton btn_thongKe;
-    private com.toedter.calendar.JDateChooser date_batDau;
-    private com.toedter.calendar.JDateChooser date_ketThuc;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
