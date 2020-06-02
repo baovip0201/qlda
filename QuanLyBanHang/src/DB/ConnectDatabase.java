@@ -18,15 +18,15 @@ import java.util.logging.Logger;
  * @author Thanh Phuc
  */
 public class ConnectDatabase {
-     public static Connection connection;
-    public Statement stm=null;
+    public static Connection connection;
+    public Statement stm = null;
     public ResultSet rs;
-    private static String url="";
-    private static String host="localhost";
-    private static String userName="root";
-    private static String password="";
-    private static String database="qlbansach";
-    
+    private static String url = "";
+    private static String host = "localhost";
+    private static String userName = "root";
+    private static String password = "";
+    private static String database = "qlbansach";
+
     public ConnectDatabase(String host,String userName, String password,String database){
         this.url=url;
         this.userName=userName;

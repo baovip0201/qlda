@@ -3,13 +3,14 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/Github/qlda/QuanLyBanHang/src/BUS/nvBUS.java</file>
-            <file>file:/D:/Github/qlda/QuanLyBanHang/src/DAO/nvDAO.java</file>
-            <file>file:/D:/Github/qlda/QuanLyBanHang/src/DB/Help.java</file>
-            <file>file:/D:/Github/qlda/QuanLyBanHang/src/BUS/cvBUS.java</file>
-            <file>file:/D:/Github/qlda/QuanLyBanHang/src/GUI/QLNV_Frame.java</file>
-            <file>file:/D:/Github/qlda/QuanLyBanHang/src/DAO/cvDAO.java</file>
-            <file>file:/D:/Github/qlda/QuanLyBanHang/src/DTO/ChucVu.java</file>
+            <file>file:/C:/GITHUB/qlda/QuanLyBanHang/src/DTO/NhanVien.java</file>
+            <file>file:/C:/GITHUB/qlda/QuanLyBanHang/src/DTO/LoaiSach.java</file>
+            <file>file:/C:/GITHUB/qlda/QuanLyBanHang/src/GUI/QLSach_Frame.java</file>
+            <file>file:/C:/GITHUB/qlda/QuanLyBanHang/src/BUS/batLoi.java</file>
+            <file>file:/C:/GITHUB/qlda/QuanLyBanHang/src/DTO/NhaXuatBan.java</file>
+            <file>file:/C:/GITHUB/qlda/QuanLyBanHang/src/DTO/ChucVu.java</file>
+            <file>file:/C:/GITHUB/qlda/QuanLyBanHang/src/DTO/ThongTinSach.java</file>
+            <file>file:/C:/GITHUB/qlda/QuanLyBanHang/src/DB/Help.java</file>
         </group>
     </open-files>
 </project-private>

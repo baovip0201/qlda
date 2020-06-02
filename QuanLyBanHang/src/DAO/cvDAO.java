@@ -22,6 +22,7 @@ public class cvDAO {
     public static Connection conn=ConnectDatabase.getConnection();
     public static PreparedStatement ps=null;
     public static ResultSet rs=null;
+    
     public static void them(ChucVu cv){
         String sql="insert into ChucVu(maChucVu,chucVu,luong) values(?,?,?)";
         try {
