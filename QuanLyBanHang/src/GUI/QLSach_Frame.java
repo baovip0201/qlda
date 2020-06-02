@@ -5,16 +5,25 @@
  */
 package GUI;
 
+import BUS.SachBUS;
 import BUS.batLoi;
 import BUS.loaisachBUS;
 import BUS.nxbBUS;
 import DAO.loaisachDAO;
 import DAO.nxbDAO;
+import DAO.sachDAO;
+import DB.Help;
 import DTO.LoaiSach;
 import DTO.NhaXuatBan;
+import DTO.Sach;
+import java.awt.Image;
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Vector;
+import javax.swing.ImageIcon;
+import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -26,9 +35,13 @@ public class QLSach_Frame extends javax.swing.JFrame {
     DefaultTableModel model=new DefaultTableModel();
     ArrayList<LoaiSach> lsList = new ArrayList<>();
     ArrayList<NhaXuatBan> nxbList = new ArrayList<>();
+    ArrayList<Sach> sList = new ArrayList<>();
     
     loaisachBUS lsBUS = new loaisachBUS();
     nxbBUS nxbBUS = new nxbBUS();
+    SachBUS sBUS = new SachBUS();
+    
+    String pathImg;
     /**
      * Creates new form QLSach
      */
@@ -37,13 +50,13 @@ public class QLSach_Frame extends javax.swing.JFrame {
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         disenabled();
         tableModel = (DefaultTableModel) jTable1.getModel();
-        
-        
+        get_CBB_LS();
+        get_CBB_NXB();
         
     }
 
 //Loai sach -----------------------------------------------------------------------------------------
-    void showLS(){
+    private void showLS(){
         lsList = loaisachDAO.getListLS();
         tableModel.setRowCount(0);
         lsList.forEach((ls) -> {model.addRow(new Object[]{
@@ -52,7 +65,7 @@ public class QLSach_Frame extends javax.swing.JFrame {
         });
     }
     
-    void showTableLS(){
+    private void showTableLS(){
         Vector header = new Vector();
         header.add("Mã Loại Sách");
         header.add("Tên Loại Sách");
@@ -70,7 +83,9 @@ public class QLSach_Frame extends javax.swing.JFrame {
     }
     
     private void get_CBB_LS(){
-        //if
+        if(sBUS.listOfLS == null){
+            lsBUS.loadCBB();
+        }
         
         for(String s : lsBUS.ListOfLS)
             cbb_loaiSach.addItem(s);
@@ -79,7 +94,7 @@ public class QLSach_Frame extends javax.swing.JFrame {
     //--------------------------------------------------------------------------------------------------------
     
     // Nha Xuat Ban ------------------------------------------------------------------------------------------
-    void ShowNXB(){
+    private void ShowNXB(){
         nxbList = nxbDAO.getListNXB();
         tableModel.setRowCount(0);
         nxbList.forEach((nxb) -> {model.addRow(new Object[]{
@@ -111,14 +126,51 @@ public class QLSach_Frame extends javax.swing.JFrame {
     } 
             
     private void get_CBB_NXB(){
-        //if
-        
+        if(sBUS.listOf_maNXB == null){
+            nxbBUS.loadCbb();
+        }
         for(String s : nxbBUS.listOf_maNXB)
             cbb_nhaXuatBan.addItem(s);
         
     }        
             
-    //-----------------------------------------------------------------------------------------------        
+    //-----------------------------------------------------------------------------------------------     
+    
+    // Sach ----------------------------------------------------------------------------------------
+    private void showSach(){
+        sList = sachDAO.getListSach();
+        tableModel.setRowCount(0);
+        sList.forEach((s) -> { model.addRow(new Object[]{
+            s.getMaSach(),s.getTenSach(),s.getMaLoaiSach(),s.getMaNXB(),s.getSoLuong(),s.getGiaTien(),s.getFileAnh()
+        });
+        });
+    }
+    
+    private void showTableSach(){
+        Vector header = new Vector();
+        header.add("Mã sách");
+        header.add("Tên sách");
+        header.add("Loại sách");
+        header.add("Số lượng");
+        header.add("Giá");
+        header.add("Nhà xuất bản");
+        if (model.getRowCount() == 0) {
+            model = new DefaultTableModel(header, 0);
+        }
+        for(Sach s : sBUS.dss){
+           Vector row = new Vector();
+           row.add(s.getMaSach());
+           row.add(s.getTenSach());
+           row.add(s.getMaLoaiSach());
+           row.add(s.getMaNXB());
+           row.add(s.getSoLuong());
+           row.add(s.getGiaTien());
+           row.add(s.getFileAnh());
+           model.addRow(row);
+        }
+        jTable1.setModel(model);
+    }
+    //-----------------------------------------------------------------------------------------------
      private void disenabled(){
          txt_maLoai_cnls.setEnabled(false);
          txt_tenLoai_cnls.setEnabled(false);
@@ -128,6 +180,13 @@ public class QLSach_Frame extends javax.swing.JFrame {
          txt_diaChi_cnnxb.setEnabled(false);
          txt_sdt_cnnxb.setEnabled(false);
          txt_mail_cnnxb.setEnabled(false);
+         txt_fileSach.setEnabled(false);
+         txt_maSach.setEnabled(false);
+         txt_tenSach.setEnabled(false);
+         txt_soLuong.setEnabled(false);
+         txt_gia.setEnabled(false);
+         cbb_loaiSach.setEnabled(false);
+         cbb_nhaXuatBan.setEnabled(false);
      }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -240,6 +299,11 @@ public class QLSach_Frame extends javax.swing.JFrame {
 
         btn_capNhatAnh.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
         btn_capNhatAnh.setText("Cập nhật ảnh...");
+        btn_capNhatAnh.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_capNhatAnhActionPerformed(evt);
+            }
+        });
 
         jLabel2.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
         jLabel2.setText("Loại sách:");
@@ -275,15 +339,30 @@ public class QLSach_Frame extends javax.swing.JFrame {
 
         btn_taiLai_tts.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         btn_taiLai_tts.setText("Tải lại");
+        btn_taiLai_tts.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_taiLai_ttsActionPerformed(evt);
+            }
+        });
 
         btn_them_tts.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         btn_them_tts.setText("Thêm");
+        btn_them_tts.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_them_ttsActionPerformed(evt);
+            }
+        });
 
         btn_sua_tts.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         btn_sua_tts.setText("Sửa");
 
         btn_xoa_tts.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         btn_xoa_tts.setText("Xóa");
+        btn_xoa_tts.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_xoa_ttsActionPerformed(evt);
+            }
+        });
 
         btn_luu_tts.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         btn_luu_tts.setText("Lưu");
@@ -333,6 +412,11 @@ public class QLSach_Frame extends javax.swing.JFrame {
 
         btn_in_tts.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         btn_in_tts.setText("In danh sách");
+        btn_in_tts.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_in_ttsActionPerformed(evt);
+            }
+        });
 
         jTable1.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
@@ -940,6 +1024,93 @@ public class QLSach_Frame extends javax.swing.JFrame {
         }
             
     }//GEN-LAST:event_btn_luu_cnnxbActionPerformed
+
+    public ImageIcon sizeOfImage(String pathImage, byte[] img) {
+        ImageIcon myImage = null;
+        if (pathImage != null) {
+            myImage = new ImageIcon(pathImage);
+        } else {
+            myImage = new ImageIcon(img);
+        }
+        Image  img1 = myImage.getImage();
+        Image img2 = img1.getScaledInstance(lb_hinhanh.getWidth(), lb_hinhanh.getHeight(),
+                Image.SCALE_SMOOTH);
+        ImageIcon image = new ImageIcon(img2);
+        return image;
+    }
+    private void btn_capNhatAnhActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_capNhatAnhActionPerformed
+        // TODO add your handling code here:
+        JFileChooser file = new JFileChooser();
+        FileNameExtensionFilter filter = new FileNameExtensionFilter("jpg", "png");
+        file.addChoosableFileFilter(filter);
+        int result = file.showSaveDialog(null);
+        if (result == JFileChooser.APPROVE_OPTION) {
+            File selectedFile = file.getSelectedFile();
+            String path = selectedFile.getAbsolutePath();
+            lb_hinhanh.setIcon(sizeOfImage(path, null));
+            pathImg = path;
+        } else {
+            JOptionPane.showMessageDialog(null, "No picture chosen");
+        }
+    }//GEN-LAST:event_btn_capNhatAnhActionPerformed
+
+    private void btn_them_ttsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_them_ttsActionPerformed
+        // TODO add your handling code here:
+        cbb_loaiSach.setEnabled(true);
+        txt_fileSach.setEnabled(true);
+        txt_maSach.setEnabled(true);
+        txt_tenSach.setEnabled(true);
+        txt_soLuong.setEnabled(true);
+        txt_gia.setEnabled(true);
+        cbb_nhaXuatBan.setEnabled(true);
+    }//GEN-LAST:event_btn_them_ttsActionPerformed
+
+    private void btn_taiLai_ttsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_taiLai_ttsActionPerformed
+        // TODO add your handling code here:
+        tableModel = (DefaultTableModel) jTable1.getModel();
+        tableModel.setRowCount(0);
+        showSach();
+    }//GEN-LAST:event_btn_taiLai_ttsActionPerformed
+
+    private void btn_in_ttsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_in_ttsActionPerformed
+        // TODO add your handling code here:
+        tableModel = (DefaultTableModel) jTable1.getModel();
+        int k = 0;
+        int n = tableModel.getRowCount();
+        int m = tableModel.getColumnCount();
+        String a[][] = new String[n][m];
+        for(int i=0;i<n;i++)
+        {
+            for(int j=0;j<m;j++)
+               try{ 
+              a[i][j] = tableModel.getValueAt(i, j).toString();
+               }
+               catch(Exception e){
+                   k=1;
+               };
+            
+        }
+        if(k!=1){
+        Help pol = new Help();
+        pol.writeFileExcel("DSSACH", a);
+        JOptionPane.showMessageDialog(rootPane, "Đã xuất ra excel");}
+        else{
+            JOptionPane.showMessageDialog(rootPane, "Dữ liệu rỗng");
+        }
+    }//GEN-LAST:event_btn_in_ttsActionPerformed
+
+    private void btn_xoa_ttsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_xoa_ttsActionPerformed
+        // TODO add your handling code here:
+        int selectIndex = jTable1.getSelectedRow();
+        if(selectIndex >= 0){
+            Sach s = sList.get(selectIndex);
+            int option = JOptionPane.showConfirmDialog(this, "Bạn có muốn xóa chứ?");
+            if(option == 0){
+                sBUS.xoa(s);
+                showSach();
+            }
+        }
+    }//GEN-LAST:event_btn_xoa_ttsActionPerformed
 
     /**
      * @param args the command line arguments

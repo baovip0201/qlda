@@ -47,4 +47,6 @@ public class loaisachBUS {
     public static boolean checkPrimaryKey(String txt){
         return loaisachDAO.testPrimaryKey(txt);
     }
+    
+    
 }
