@@ -5,46 +5,38 @@
  */
 package BUS;
 
-import DAO.loaisachDAO;
+import DAO.LoaiSachDAO;
 import DTO.LoaiSach;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
- * @author vukieuanh
+ * @author Thanh Phuc
  */
-public class loaisachBUS {
-    public ArrayList<LoaiSach> dsls ;
-    public ArrayList<String> ListOfLS;
-    public loaisachBUS() {
+public class LoaiSachBUS {
+     LoaiSachDAO data = new LoaiSachDAO();
+    List<LoaiSach> listLS = new ArrayList<>();
+    public List<LoaiSach> getList(){
+         if(listLS==null) listLS=new ArrayList<>();
+         listLS = data.getList();
+         return listLS;
     }
     
-    public void doc(){
-        if(dsls == null) dsls = new ArrayList<>();
-            dsls = loaisachDAO.getListLS();
+    public void insert(LoaiSach sach){
+        data.insert(sach);
+        listLS.add(sach);
     }
     
-    public void them(LoaiSach ls){
-        loaisachDAO.them(ls);
-        dsls.add(ls);
+    public boolean testPrimaryKey(String txt){
+         return data.testPrimaryKey(txt);
     }
     
-    public void xoa (LoaiSach ls){
-        loaisachDAO.xoa(ls);
-        dsls.remove(ls);
+    public void delete(String ls){
+        data.delete(ls);
     }
     
-    public void sua (LoaiSach ls){
-        loaisachDAO.sua(ls);
-        
-    }
-    
-    public void loadCBB(){
-        if(ListOfLS == null) ListOfLS = new ArrayList<>();
-            ListOfLS = loaisachDAO.getListCBB();
-    }
-    
-    public static boolean checkPrimaryKey(String txt){
-        return loaisachDAO.testPrimaryKey(txt);
+    public void update(LoaiSach ls){
+        data.update(ls);
     }
 }

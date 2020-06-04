@@ -5,7 +5,10 @@
  */
 package BUS;
 
+import DAO.loaisachDAO;
 import DAO.nxbDAO;
+import DAO.sachDAO;
+import DTO.LoaiSach;
 import DTO.NhaXuatBan;
 import java.util.ArrayList;
 
@@ -43,4 +46,6 @@ public class nxbBUS {
     public static boolean checkPrimaryKey(String txt){
         return nxbDAO.testPrimaryKey(txt);
     }
+    
+    
 }

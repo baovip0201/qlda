@@ -5,6 +5,8 @@
  */
 package BUS;
 
+import javax.swing.JTextField;
+
 /**
  *
  * @author MSI
@@ -16,4 +18,8 @@ public class batLoi {
         }
         return false;
 }
+
+    public static boolean Catch(JTextField txt_tenLoai_cnls) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }

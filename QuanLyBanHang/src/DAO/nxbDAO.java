@@ -35,6 +35,7 @@ public class nxbDAO {
             ps.setString(3, nxb.getDiaChi());
             ps.setString(4, nxb.getEmail());
             ps.setString(5, nxb.getSoDienThoai());
+            ps.executeUpdate();
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Lỗi");
         }

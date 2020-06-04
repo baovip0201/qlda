@@ -7,7 +7,7 @@ package DAO;
 
 import DB.ConnectDatabase;
 import DTO.LoaiSach;
-import java.sql.Connection;
+import java.awt.Component;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -19,99 +19,78 @@ import javax.swing.JOptionPane;
 
 /**
  *
- * @author vukieuanh
+ * @author Thanh Phuc
  */
-public class loaisachDAO {
-    public static Connection conn=ConnectDatabase.getConnection();
-    public static PreparedStatement ps=null;
-    public static ResultSet rs=null;
+public class LoaiSachDAO {
+    private static ConnectDatabase connect = new ConnectDatabase("localhost", "root", "", "qlbansach");
+    private PreparedStatement ps = null;
+    private ResultSet rs= null;
+                Component cmpnt;
+
+    public List<LoaiSach> getList(){
+        List<LoaiSach> listLS = new ArrayList<>();
+        ConnectDatabase.getConnection();        
+        try {
+            String sql = "select * from capnhatloaisach";
+            rs = connect.executeSQL(sql);
+            while(rs.next()){
+                LoaiSach sach = new LoaiSach(rs.getString("maLoaiSach"),
+                        rs.getString("tenLoaiSach"));
+                listLS.add(sach);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(sachDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return listLS;
+    }
     
-    public static void them(LoaiSach ls){
+    public void insert(LoaiSach ls){
         ConnectDatabase.getConnection();
-        String sql = "INSERT INTO capnhatloaisach(maLoaiSach,tenLoaiSach)"
-                + "VALUES (?,?)";
-        
-        try {
-            ps = conn.prepareStatement(sql);
-            ps.setString(1, ls.getMaLoaiSach());
-            ps.setString(2, ls.getTenLoaiSach());
-            ps.executeUpdate();
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Lỗi ghi thông tin!!");
-        }
-    }
-    
-    public static void xoa (LoaiSach ls){
-        
-        String sql = "DELETE FROM capnhatloaisach WHERE maLoaiSach='"+ls.getMaLoaiSach()+"'";
-        try {
-            ps = conn.prepareStatement(sql);
-            ps.executeUpdate();
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Lỗi xóa thông tin!");
-        }
-    }
-    
-    public static void sua(LoaiSach ls){
-        
-        String sql = "UPDATE capnhatloaisach SET maLoaiSach = '"
-                +ls.getMaLoaiSach()+"', tenLoaiSach = '"+ls.getTenLoaiSach()+"'";
-        
-        try {
-            ps= conn.prepareStatement(sql);
-            ps.executeUpdate();
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Lỗi sửa thông tin!");
-        }
-    }
-    
-    //Đọc danh sách loại sách
-    public static ArrayList getListLS(){
-        ArrayList<LoaiSach> dsls = new ArrayList<>();
-        String sql = "SELECT* FROM capnhatloaisach";
+        String sql = "insert into capnhatloaisach(maLoaiSach, tenLoaiSach) "+
+                "values(?,?)";
         try {
             ps = ConnectDatabase.connection.prepareStatement(sql);
-            rs = ps.executeQuery();
-            while(rs.next()){
-                LoaiSach ls = new LoaiSach();
-                ls.setMaLoaiSach(rs.getString("maLoaiSach"));
-                ls.setTenLoaiSach(rs.getString("tenLoaiSach"));
-                dsls.add(ls);
-            }
+            ps.setString(1, ls.getMaLoaiSach());
+            ps.setString(2, ls.getTenLoaiSach());            
+            ps.executeUpdate();
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Lỗi đọc thông tin!");
+            Logger.getLogger(sachDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-        return dsls;
     }
     
-    //Combo box cho ten loai sach
-    public static ArrayList getListCBB(){
-        ArrayList<String> ListOfLS = new ArrayList<>();
-        String sql = "SELECT tenLoaiSach from capnhatloaisach";
-        
-        try {
-            ps = conn.prepareStatement(sql);
-            rs = ps.executeQuery();
-            while(rs.next()){
-                ListOfLS.add(rs.getString("tenLoaiSach"));
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(loaisachDAO.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return ListOfLS;
-}
-    public static boolean testPrimaryKey(String txt){
-        String sql = "select from capnhatloaisach where maLoaiSach ='"+txt+"'";
+    public boolean testPrimaryKey(String txt){
+        String sql="Select * from capnhatloaisach where maLoaiSach='"+txt+"'";
         try {
             ps=ConnectDatabase.connection.prepareStatement(sql);
-            rs = ps.executeQuery();
+            rs=ps.executeQuery();
             while(rs.next()){
                 return true;
             }
-        } catch (SQLException ex) {
-            
+        } catch (SQLException e) {
         }
         return false;
+    }
+    
+    public void update(LoaiSach ls){
+        ConnectDatabase.getConnection();
+        String sql="update capnhatloaisach set tenLoaiSach= '"+ls.getTenLoaiSach()+"' where maLoaiSach= '"+ls.getMaLoaiSach()+"'";
+        try {
+            ps = ConnectDatabase.connection.prepareStatement(sql);
+            int i= ps.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(LoaiSachDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    public void delete(String ls){
+        ConnectDatabase.getConnection();
+        String sql = "delete from capnhatloaisach where maLoaiSach= ?";
+        try {
+            ps =ConnectDatabase.connection.prepareCall(sql);
+            ps.setString(1, ls);
+            ps.execute();
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(cmpnt, "Không thể xóa vì loại sách tồn tại trong sách");
+        }
     }
 }

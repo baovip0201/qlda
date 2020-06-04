@@ -51,8 +51,9 @@ public class nvBUS{
     public boolean checkPrimaryKey(String txt){
         return data.testPrimaryKey(txt);
     }
-    public List<ChucVu> fill_cbb(){
-         List<ChucVu> list=new ArrayList<>();       
+    
+    public List<ChucVu> fill_cbb() {
+        List<ChucVu> list = new ArrayList<>();
         list = data.fill_cbb();
         return list;
     }
