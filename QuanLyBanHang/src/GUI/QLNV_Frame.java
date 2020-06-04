@@ -24,12 +24,13 @@ import javax.swing.JOptionPane;
  * @author Thanh Phuc
  */
 public class QLNV_Frame extends javax.swing.JFrame {
+
     DefaultTableModel tableModel;
-    DefaultTableModel model=new DefaultTableModel();
+    DefaultTableModel model = new DefaultTableModel();
     List<NhanVien> nvList = new ArrayList<>();
-    List<ChucVu> cvList= new ArrayList<>();
+    List<ChucVu> cvList = new ArrayList<>();
     nvBUS bus = new nvBUS();
-    cvBUS bus1=new cvBUS();
+    cvBUS bus1 = new cvBUS();
     
     public QLNV_Frame() {
         initComponents();
@@ -41,32 +42,31 @@ public class QLNV_Frame extends javax.swing.JFrame {
         //showCV();
     }
     
-    private void showNv(){
+    private void showNv() {
         //nvBUS.docDSNV();
         nvDAO data = new nvDAO();
-        nvList=data.getListNV();
+        nvList = data.getListNV();
         tableModel.setRowCount(0);
-        nvList.forEach((nhanvien)->{
-        tableModel.addRow(new Object[] {nhanvien.getMaNv(),
-        nhanvien.getHoTen(),nhanvien.getMaCv(),nhanvien.getDob(),nhanvien.getGender(),
-        nhanvien.getDiaChi(),nhanvien.getSdt(),nhanvien.getEmail(),nhanvien.getLuong()});
+        nvList.forEach((nhanvien) -> {
+            tableModel.addRow(new Object[]{nhanvien.getMaNv(),
+                nhanvien.getHoTen(), nhanvien.getMaCv(), nhanvien.getDob(), nhanvien.getGender(),
+                nhanvien.getDiaChi(), nhanvien.getSdt(), nhanvien.getEmail(), nhanvien.getLuong()});
         });
         
     }
-    private void showCV(){
-        cvList=cvDAO.getListCV();
+
+    private void showCV() {
+        cvList = cvDAO.getListCV();
         model.setRowCount(0);
-        cvList.forEach((cv)->{
+        cvList.forEach((cv) -> {
             model.addRow(new Object[]{
                 cv.getMaChucVu(), cv.getChucVu(), cv.getLuong()
             });
         });
         
-        
-        
     }
     
-      public void showTableNV() {
+    public void showTableNV() {
         Vector header = new Vector();
         header.add("Mã nhân viên");
         header.add("Mã chức vụ");
@@ -87,15 +87,17 @@ public class QLNV_Frame extends javax.swing.JFrame {
         }
         jTable1.setModel(tableModel);
     }
-     private void getCb_Box(){
-         if (bus.list == null) {
+
+    private void getCb_Box() {
+        if (bus.list == null) {
             bus1.loadCbb();
         }
         for (String s : bus1.list) {
             cbb_chucVu.addItem(s);
         }
-     }
-    private void disenabled(){
+    }
+
+    private void disenabled() {
         txt_diaChi.setEnabled(false);
         txt_hoTen.setEnabled(false);
         txt_luong.setEnabled(false);
@@ -109,7 +111,8 @@ public class QLNV_Frame extends javax.swing.JFrame {
         cbb_gioiTinh.setEnabled(false);
         jDateChooser1.setEnabled(false);
     }
-   public void showTableCV() {
+
+    public void showTableCV() {
         Vector header = new Vector();
         header.add("Mã chức vụ");
         header.add("Chức vụ");
@@ -124,6 +127,7 @@ public class QLNV_Frame extends javax.swing.JFrame {
         }
         jTable2.setModel(model);
     }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -158,6 +162,7 @@ public class QLNV_Frame extends javax.swing.JFrame {
         txt_search = new javax.swing.JTextField();
         cbb_search = new javax.swing.JComboBox<>();
         jDateChooser1 = new com.toedter.calendar.JDateChooser();
+        jButton2 = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jLabel11 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
@@ -331,6 +336,14 @@ public class QLNV_Frame extends javax.swing.JFrame {
         jDateChooser1.setDateFormatString("MMM dd, yyyy");
         jDateChooser1.setFont(new java.awt.Font("Times New Roman", 0, 12)); // NOI18N
 
+        jButton2.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
+        jButton2.setText("In báo cáo");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -388,9 +401,12 @@ public class QLNV_Frame extends javax.swing.JFrame {
                                 .addGap(57, 57, 57)
                                 .addComponent(txt_mail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jLabel10)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txt_luong, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addComponent(jLabel10)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(txt_luong, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(jButton2)))))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(btn_xoa)
                         .addGap(50, 50, 50)
@@ -443,7 +459,8 @@ public class QLNV_Frame extends javax.swing.JFrame {
                     .addComponent(btn_sua)
                     .addComponent(btn_xoa)
                     .addComponent(btn_luu)
-                    .addComponent(btn_In))
+                    .addComponent(btn_In)
+                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(3, 3, 3)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txt_search, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -576,9 +593,12 @@ public class QLNV_Frame extends javax.swing.JFrame {
                         .addComponent(btn_save)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txt_luongChucvu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(taiBtn))
-                .addContainerGap(159, Short.MAX_VALUE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(taiBtn)
+                        .addContainerGap(172, Short.MAX_VALUE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(txt_luongChucvu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(41, 159, Short.MAX_VALUE))))
             .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING)
         );
 
@@ -603,7 +623,7 @@ public class QLNV_Frame extends javax.swing.JFrame {
                     .addComponent(btn_xoaCV)
                     .addComponent(btn_save)
                     .addComponent(taiBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 8, Short.MAX_VALUE)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -674,14 +694,14 @@ public class QLNV_Frame extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void btn_luuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_luuActionPerformed
-        NhanVien nv=new NhanVien();
+        NhanVien nv = new NhanVien();
         if (!batLoi.Catch(txt_maNv.getText()) && !batLoi.Catch(txt_hoTen.getText()) && !batLoi.Catch(txt_diaChi.getText()) && !batLoi.Catch(txt_sdt.getText()) && !batLoi.Catch(txt_mail.getText()) && !batLoi.Catch(txt_luong.getText())) {
             if (!bus.checkPrimaryKey(txt_maNv.getText())) {
                 nv.setMaNv(txt_maNv.getText());
                 nv.setMaCv(cbb_chucVu.getSelectedItem().toString());
                 nv.setHoTen(txt_hoTen.getText());
-                nv.setGender(cbb_gioiTinh.getSelectedItem().toString());               
-                nv.setDob(new java.sql.Date(jDateChooser1.getDate().getTime())); 
+                nv.setGender(cbb_gioiTinh.getSelectedItem().toString());                
+                nv.setDob(new java.sql.Date(jDateChooser1.getDate().getTime()));                
                 nv.setDiaChi(txt_diaChi.getText());
                 nv.setSdt(txt_sdt.getText());
                 nv.setEmail(txt_mail.getText());
@@ -689,7 +709,7 @@ public class QLNV_Frame extends javax.swing.JFrame {
                 bus.them(nv);
                 JOptionPane.showMessageDialog(rootPane, "Đã thêm");
                 jTable1.setModel(tableModel);
-
+                
             } else {
                 JOptionPane.showMessageDialog(rootPane, "Dữ liệu nhập vào không hợp lệ, do bị trùng khóa chính");
             }
@@ -719,7 +739,7 @@ public class QLNV_Frame extends javax.swing.JFrame {
         nv.setMaCv(cbb_chucVu.getSelectedItem().toString());
         nv.setHoTen(txt_hoTen.getText());
         nv.setGender(cbb_gioiTinh.getSelectedItem().toString());
-        nv.setDob(new java.sql.Date(jDateChooser1.getDate().getTime())); 
+        nv.setDob(new java.sql.Date(jDateChooser1.getDate().getTime()));        
         nv.setDiaChi(txt_diaChi.getText());
         nv.setSdt(txt_sdt.getText());
         nv.setEmail(txt_mail.getText());
@@ -739,12 +759,12 @@ public class QLNV_Frame extends javax.swing.JFrame {
 
     private void btn_xoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_xoaActionPerformed
         int selectIndext = jTable1.getSelectedRow();
-         if(selectIndext >= 0){
-            NhanVien tk =  nvList.get(selectIndext);
+        if (selectIndext >= 0) {
+            NhanVien tk = nvList.get(selectIndext);
             int option = JOptionPane.showConfirmDialog(this, "Bạn có muốn xóa?");
-            if(option == 0){
+            if (option == 0) {
                 //SinhVien.delete(std.getId());
-               bus.xoa(tk.getMaNv());
+                bus.xoa(tk.getMaNv());
                 showNv();
             }
         }
@@ -798,15 +818,15 @@ public class QLNV_Frame extends javax.swing.JFrame {
     private void btn_xoaCVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_xoaCVActionPerformed
         // TODO add your handling code here:
         int selectIndext = jTable2.getSelectedRow();
-         if(selectIndext >= 0){
-            ChucVu tk =  bus1.dscv.get(selectIndext);
+        if (selectIndext >= 0) {
+            ChucVu tk = bus1.dscv.get(selectIndext);
             int option = JOptionPane.showConfirmDialog(this, "Bạn có muốn xóa?");
-            if(option == 0){
+            if (option == 0) {
                 //SinhVien.delete(std.getId());
-               bus1.xoa(tk);
-               bus1.dscv.remove(tk);
-               model.removeRow(selectIndext);
-               jTable2.setModel(model);
+                bus1.xoa(tk);
+                bus1.dscv.remove(tk);
+                model.removeRow(selectIndext);
+                jTable2.setModel(model);
             }
         }
     }//GEN-LAST:event_btn_xoaCVActionPerformed
@@ -822,10 +842,10 @@ public class QLNV_Frame extends javax.swing.JFrame {
                 bus1.add(cv);
                 JOptionPane.showMessageDialog(rootPane, "Đã thêm");*/
                 
-                String maCV=txt_maChucvu.getText();
-                String CV=txt_tenChucvu.getText();
-                Float luong=Float.parseFloat(txt_luongChucvu.getText());
-                ChucVu cv=new ChucVu(maCV,CV,luong);
+                String maCV = txt_maChucvu.getText();
+                String CV = txt_tenChucvu.getText();
+                Float luong = Float.parseFloat(txt_luongChucvu.getText());
+                ChucVu cv = new ChucVu(maCV, CV, luong);
                 bus1.add(cv);
                 JOptionPane.showMessageDialog(rootPane, "Đã thêm");
                 //showCV();
@@ -862,12 +882,12 @@ public class QLNV_Frame extends javax.swing.JFrame {
 
     private void taiBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_taiBtnActionPerformed
         // TODO add your handling code here:
-        if(bus1.dscv==null){
+        if (bus1.dscv == null) {
             bus1.doc();
         }
         showTableCV();
     }//GEN-LAST:event_taiBtnActionPerformed
-
+    
     @SuppressWarnings("empty-statement")
     private void btn_InActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_InActionPerformed
         // TODO add your handling code here:
@@ -876,25 +896,29 @@ public class QLNV_Frame extends javax.swing.JFrame {
         int n = tableModel.getRowCount();
         int m = tableModel.getColumnCount();
         String a[][] = new String[n][m];
-        for(int i=0;i<n;i++)
-        {
-            for(int j=0;j<m;j++)
-               try{ 
-              a[i][j] = tableModel.getValueAt(i, j).toString();
-               }
-               catch(Exception e){
-                   k=1;
-               };
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < m; j++) {
+                try {                    
+                    a[i][j] = tableModel.getValueAt(i, j).toString();
+                } catch (Exception e) {
+                    k = 1;
+                }
+            };
             
         }
-        if(k!=1){
-        Help pol = new Help();
-        pol.writeFileExcel("DSNHANVIEN", a);
-        JOptionPane.showMessageDialog(rootPane, "Đã xuất ra excel");}
-        else{
+        if (k != 1) {
+            Help pol = new Help();
+            pol.writeFileExcel("DSNHANVIEN", a);
+            JOptionPane.showMessageDialog(rootPane, "Đã xuất ra excel");
+        } else {
             JOptionPane.showMessageDialog(rootPane, "Dữ liệu rỗng");
         }
     }//GEN-LAST:event_btn_InActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        bus.report();
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -947,6 +971,7 @@ public class QLNV_Frame extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> cbb_gioiTinh;
     private javax.swing.JComboBox<String> cbb_search;
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private com.toedter.calendar.JDateChooser jDateChooser1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;

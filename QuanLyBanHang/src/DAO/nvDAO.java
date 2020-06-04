@@ -14,6 +14,15 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import DTO.ChucVu;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperCompileManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.engine.design.JRDesignQuery;
+import net.sf.jasperreports.engine.design.JasperDesign;
+import net.sf.jasperreports.engine.xml.JRXmlLoader;
+import net.sf.jasperreports.view.JasperViewer;
 
 
 /**
@@ -177,5 +186,20 @@ public class nvDAO {
         }
         return cvList;
     }
+    public void report(){
+        String sql="select * from ThongTinNhanVien";
+        try {
+            JasperDesign jdesign=JRXmlLoader.load("D:\\Github\\qlda\\QuanLyBanHang\\src\\Report\\report1.jrxml");
+            JRDesignQuery updateQuery=new JRDesignQuery();
+            updateQuery.setText(sql);
         
+            jdesign.setQuery(updateQuery);
+        
+            JasperReport jReport=JasperCompileManager.compileReport(jdesign);
+            JasperPrint jPrint=JasperFillManager.fillReport(jReport,null,ConnectDatabase.getConnection());
+            JasperViewer.viewReport(jPrint);
+        } catch (JRException e) {
+            JOptionPane.showMessageDialog(null, "Lỗi");
+        }
+    }
 }   

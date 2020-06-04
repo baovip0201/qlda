@@ -56,4 +56,7 @@ public class nvBUS{
         list = data.fill_cbb();
         return list;
     }
+    public void report(){
+        data.report();
+    }
 }

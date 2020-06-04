@@ -6,12 +6,10 @@
             <file>file:/D:/Github/qlda/QuanLyBanHang/src/BUS/nvBUS.java</file>
             <file>file:/D:/Github/qlda/QuanLyBanHang/src/DAO/nvDAO.java</file>
             <file>file:/D:/Github/qlda/QuanLyBanHang/src/BUS/cvBUS.java</file>
-            <file>file:/D:/Github/qlda/QuanLyBanHang/src/GUI/QLSach_Frame.java</file>
+            <file>file:/D:/Github/qlda/QuanLyBanHang/src/DB/ConnectDatabase.java</file>
             <file>file:/D:/Github/qlda/QuanLyBanHang/src/GUI/QLNV_Frame.java</file>
             <file>file:/D:/Github/qlda/QuanLyBanHang/src/DAO/cvDAO.java</file>
             <file>file:/D:/Github/qlda/QuanLyBanHang/src/DTO/ChucVu.java</file>
-            <file>file:/D:/Github/qlda/QuanLyBanHang/src/GUI/ThongKeDoanhThu_Frame.java</file>
-            <file>file:/D:/Github/qlda/QuanLyBanHang/src/GUI/QLTK_Frame.java</file>
         </group>
     </open-files>
 </project-private>

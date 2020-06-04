@@ -13,6 +13,15 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperCompileManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.engine.design.JRDesignQuery;
+import net.sf.jasperreports.engine.design.JasperDesign;
+import net.sf.jasperreports.engine.xml.JRXmlLoader;
+import net.sf.jasperreports.view.JasperViewer;
 
 /**
  *
@@ -98,5 +107,22 @@ public class cvDAO {
         } catch (SQLException e) {
         }
         return false;
+    }
+    public static ArrayList sortByLuong(){
+        ArrayList<ChucVu> list=new ArrayList();
+        String sql="select * from ChucVu order by luong";
+        try {
+            ps=conn.prepareStatement(sql);
+            rs=ps.executeQuery();
+            while(rs.next()){
+                ChucVu cv=new ChucVu();
+                cv.setMaChucVu(rs.getString("maChucVu"));
+                cv.setChucVu(rs.getString("chucVu"));
+                cv.setLuong(rs.getFloat("luong"));
+                list.add(cv);
+            }
+        } catch (SQLException e) {
+        }
+        return list;
     }
 }
