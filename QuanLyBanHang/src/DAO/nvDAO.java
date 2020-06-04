@@ -24,6 +24,7 @@ public class nvDAO {
     private static ConnectDatabase connect = new ConnectDatabase("localhost", "root", "", "qlbansach");
     private static PreparedStatement ps=null;
     private static ResultSet rs=null;
+    
     public void them(NhanVien nv){
         ConnectDatabase.getConnection();
         String sql="insert into thongtinnhanvien(maNV, maChucVu, hoTen, gioiTinh, ngaySinh, diaChi, soDienthoai, Email, luong)"+
