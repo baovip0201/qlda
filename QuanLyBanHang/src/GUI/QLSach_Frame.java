@@ -4,26 +4,25 @@
  * and open the template in the editor.
  */
 package GUI;
-
 import BUS.SachBUS;
+import BUS.NXB_BUS;
+import BUS.LoaiSachBUS;
 import BUS.batLoi;
-import BUS.loaisachBUS;
-import BUS.nxbBUS;
-import DAO.loaisachDAO;
-import DAO.nxbDAO;
-import DAO.sachDAO;
-import DB.Help;
-import DTO.LoaiSach;
-import DTO.NhaXuatBan;
 import DTO.Sach;
-import java.awt.Image;
+import DTO.LoaiSach;
+import DTO.NXB;
+import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Vector;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.imageio.ImageIO;
+import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
-import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -31,163 +30,126 @@ import javax.swing.table.DefaultTableModel;
  * @author Thanh Phuc
  */
 public class QLSach_Frame extends javax.swing.JFrame {
-    DefaultTableModel tableModel;
-    DefaultTableModel model=new DefaultTableModel();
-    ArrayList<LoaiSach> lsList = new ArrayList<>();
-    ArrayList<NhaXuatBan> nxbList = new ArrayList<>();
-    ArrayList<Sach> sList = new ArrayList<>();
-    
-    loaisachBUS lsBUS = new loaisachBUS();
-    nxbBUS nxbBUS = new nxbBUS();
-    SachBUS sBUS = new SachBUS();
-    
-    String pathImg;
-    /**
-     * Creates new form QLSach
-     */
+    DefaultTableModel tablemodel_sach;
+    DefaultTableModel tablemodel_loaisach;
+    DefaultTableModel tablemodel_nxb;
+    List<Sach> listSach = new ArrayList<>();
+    List<LoaiSach> listLS = new ArrayList<>();
+    List<NXB> listNxb = new ArrayList<>();
+    SachBUS busSach = new SachBUS();
+    LoaiSachBUS busLS = new LoaiSachBUS();
+    NXB_BUS busNxb = new NXB_BUS();
     public QLSach_Frame() {
         initComponents();
-        setDefaultCloseOperation(EXIT_ON_CLOSE);
-        disenabled();
-        tableModel = (DefaultTableModel) jTable1.getModel();
-        get_CBB_LS();
-        get_CBB_NXB();
-        
+        tablemodel_sach = (DefaultTableModel) jTable1.getModel();
+        tablemodel_loaisach = (DefaultTableModel) jTable2.getModel();
+        tablemodel_nxb = (DefaultTableModel) jTable3.getModel();
+        disenable();
+        showSach();
+        showNXB();
+        showLoaiSach();
+        getCb_Box();
+        jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+            @Override
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tbList1_MouseClicked(evt);
+                
+            }
+        });
+       jTable2.addMouseListener(new java.awt.event.MouseAdapter() {
+            @Override
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+               
+                tbList2_MouseClicked(evt);
+            }
+        });
+       jTable3.addMouseListener(new java.awt.event.MouseAdapter() {
+            @Override
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+               
+                tbList3_MouseClicked(evt);
+            }
+        });
+
+
+    }
+    private void disenable(){
+        txt_maSach.setEnabled(false);
+        txt_fileSach.setEnabled(false);
+    }
+    private void showSach(){
+        listSach = busSach.getList();
+        tablemodel_sach.setRowCount(0);
+        listSach.forEach(sach -> {
+        tablemodel_sach.addRow(new Object[] {sach.getMaSach(), sach.getTenSach(), sach.getMaLoaiSach(),
+         sach.getSoLuong(), sach.getGiaTien(),sach.getMaNXB(), sach.getFileAnh()});
+        });
+    }
+    private void showLoaiSach(){
+        listLS = busLS.getList();
+        tablemodel_loaisach.setRowCount(0);
+        listLS.forEach(LS -> {
+        tablemodel_loaisach.addRow(new Object[] {LS.getMaLoaiSach(), LS.getTenLoaiSach()});
+        });
+    }
+    private void showNXB(){
+        listNxb = busNxb.getList();
+        tablemodel_nxb.setRowCount(0);
+        listNxb.forEach(nxb -> {
+        tablemodel_nxb.addRow(new Object[] {nxb.getMaNXB(), nxb.getTenNXB(), nxb.getDiaChi(),
+         nxb.getEmail(), nxb.getSdt()});
+        });
+    }
+     private void getCb_Box(){              
+        listNxb = busSach.fill_cbb_nxb();
+        for(NXB item: listNxb){
+            cbb_nhaXuatBan.addItem(item.getMaNXB());
+        }
+        listLS = busSach.fill_cbb_ls();
+        for(LoaiSach item2: listLS){
+            cbb_loaiSach.addItem(item2.getMaLoaiSach());
+        }
+     }
+     
+     private void tbList3_MouseClicked(java.awt.event.MouseEvent evt) {                                        
+         int Row = jTable3.getSelectedRow();
+           txt_maNxb_cnnxb.setText(jTable3.getModel().getValueAt(Row, 0).toString());
+           txt_tenNxb_cnnxb.setText(jTable3.getModel().getValueAt(Row, 1).toString());
+           txt_diaChi_cnnxb.setText(jTable3.getModel().getValueAt(Row, 2).toString());
+           txt_sdt_cnnxb.setText(jTable3.getModel().getValueAt(Row, 3).toString());
+           txt_mail_cnnxb.setText(jTable3.getModel().getValueAt(Row, 4).toString());
+    }
+     
+     private void tbList1_MouseClicked(java.awt.event.MouseEvent evt) {                                        
+         int Row = jTable1.getSelectedRow();
+           txt_maSach.setText(jTable1.getModel().getValueAt(Row, 0).toString());
+           txt_tenSach.setText(jTable1.getModel().getValueAt(Row, 1).toString());
+           cbb_loaiSach.setSelectedItem(jTable1.getModel().getValueAt(Row, 2).toString());
+           txt_soLuong.setText(jTable1.getModel().getValueAt(Row, 3).toString());
+           txt_gia.setText(jTable1.getModel().getValueAt(Row, 4).toString());
+           cbb_nhaXuatBan.setSelectedItem(jTable1.getModel().getValueAt(Row, 5).toString());
+           txt_fileSach.setText(jTable1.getModel().getValueAt(Row, 6).toString());
+           File file = new File(txt_fileSach.getText());
+            //lay duong dan luu vao csdl
+            String pathFile = file.getAbsolutePath();
+            //String pathFile2 = file.getAbsolutePath().replace("//", "--");
+            BufferedImage b;
+            txt_fileSach.setText(pathFile);
+            try {
+                b=ImageIO.read(file);
+                lb_hinhanh.setIcon(new ImageIcon(b));
+            } catch (IOException ex) {
+                Logger.getLogger(QLSach_Frame.class.getName()).log(Level.SEVERE, null, ex);
+            }            
+
+    }
+     
+     private void tbList2_MouseClicked(java.awt.event.MouseEvent evt) {                                        
+         int Row = jTable2.getSelectedRow();
+           txt_maLoai_cnls.setText(jTable2.getModel().getValueAt(Row, 0).toString());
+           txt_tenLoai_cnls.setText(jTable2.getModel().getValueAt(Row, 1).toString());           
     }
 
-//Loai sach -----------------------------------------------------------------------------------------
-    private void showLS(){
-        lsList = loaisachDAO.getListLS();
-        tableModel.setRowCount(0);
-        lsList.forEach((ls) -> {model.addRow(new Object[]{
-            ls.getMaLoaiSach(),ls.getTenLoaiSach()
-        });
-        });
-    }
-    
-    private void showTableLS(){
-        Vector header = new Vector();
-        header.add("Mã Loại Sách");
-        header.add("Tên Loại Sách");
-        if (model.getRowCount() == 0) {
-            model = new DefaultTableModel(header, 0);
-        }
-        for (LoaiSach ls : lsBUS.dsls){
-            Vector row = new Vector();
-            row.add(ls.getMaLoaiSach());
-            row.add(ls.getTenLoaiSach());
-            model.addRow(row);
-        }
-        tbls.setModel(model);
-        
-    }
-    
-    private void get_CBB_LS(){
-        if(sBUS.listOfLS == null){
-            lsBUS.loadCBB();
-        }
-        
-        for(String s : lsBUS.ListOfLS)
-            cbb_loaiSach.addItem(s);
-        
-    }
-    //--------------------------------------------------------------------------------------------------------
-    
-    // Nha Xuat Ban ------------------------------------------------------------------------------------------
-    private void ShowNXB(){
-        nxbList = nxbDAO.getListNXB();
-        tableModel.setRowCount(0);
-        nxbList.forEach((nxb) -> {model.addRow(new Object[]{
-            nxb.getMaNXB(),nxb.getTenNXB(),nxb.getDiaChi(),nxb.getEmail(),nxb.getSoDienThoai()
-        });
-        });
-    }
-            
-    void showTableNXB(){
-        Vector header = new Vector();
-        header.add("Mã Nhà Xuất Bản");
-        header.add("Tên Nhà Xuất Bản");
-        header.add("Địa Chỉ");
-        header.add("Email");
-        header.add("Số Điện Thoại");
-        if (model.getRowCount() == 0) {
-            model = new DefaultTableModel(header, 0);
-        }
-        for (NhaXuatBan nxb: nxbBUS.dsnxb){
-            Vector row = new Vector();
-            row.add(nxb.getMaNXB());
-            row.add(nxb.getTenNXB());
-            row.add(nxb.getDiaChi());
-            row.add(nxb.getEmail());
-            row.add(nxb.getSoDienThoai());
-            model.addRow(row);
-        }
-        tbnxb.setModel(model);
-    } 
-            
-    private void get_CBB_NXB(){
-        if(sBUS.listOf_maNXB == null){
-            nxbBUS.loadCbb();
-        }
-        for(String s : nxbBUS.listOf_maNXB)
-            cbb_nhaXuatBan.addItem(s);
-        
-    }        
-            
-    //-----------------------------------------------------------------------------------------------     
-    
-    // Sach ----------------------------------------------------------------------------------------
-    private void showSach(){
-        sList = sachDAO.getListSach();
-        tableModel.setRowCount(0);
-        sList.forEach((s) -> { model.addRow(new Object[]{
-            s.getMaSach(),s.getTenSach(),s.getMaLoaiSach(),s.getMaNXB(),s.getSoLuong(),s.getGiaTien(),s.getFileAnh()
-        });
-        });
-    }
-    
-    private void showTableSach(){
-        Vector header = new Vector();
-        header.add("Mã sách");
-        header.add("Tên sách");
-        header.add("Loại sách");
-        header.add("Số lượng");
-        header.add("Giá");
-        header.add("Nhà xuất bản");
-        if (model.getRowCount() == 0) {
-            model = new DefaultTableModel(header, 0);
-        }
-        for(Sach s : sBUS.dss){
-           Vector row = new Vector();
-           row.add(s.getMaSach());
-           row.add(s.getTenSach());
-           row.add(s.getMaLoaiSach());
-           row.add(s.getMaNXB());
-           row.add(s.getSoLuong());
-           row.add(s.getGiaTien());
-           row.add(s.getFileAnh());
-           model.addRow(row);
-        }
-        jTable1.setModel(model);
-    }
-    //-----------------------------------------------------------------------------------------------
-     private void disenabled(){
-         txt_maLoai_cnls.setEnabled(false);
-         txt_tenLoai_cnls.setEnabled(false);
-         txt_maNxb_cnnxb.setEnabled(false);
-         txt_tenNxb_cnnxb.setEnabled(false);
-         txt_sdt_cnnxb.setEnabled(false);
-         txt_diaChi_cnnxb.setEnabled(false);
-         txt_sdt_cnnxb.setEnabled(false);
-         txt_mail_cnnxb.setEnabled(false);
-         txt_fileSach.setEnabled(false);
-         txt_maSach.setEnabled(false);
-         txt_tenSach.setEnabled(false);
-         txt_soLuong.setEnabled(false);
-         txt_gia.setEnabled(false);
-         cbb_loaiSach.setEnabled(false);
-         cbb_nhaXuatBan.setEnabled(false);
-     }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -240,7 +202,7 @@ public class QLSach_Frame extends javax.swing.JFrame {
         btn_xoa_cnls = new javax.swing.JButton();
         btn_luu_cnls = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
-        tbls = new javax.swing.JTable();
+        jTable2 = new javax.swing.JTable();
         jPanel4 = new javax.swing.JPanel();
         jLabel10 = new javax.swing.JLabel();
         txt_maNxb_cnnxb = new javax.swing.JTextField();
@@ -258,7 +220,7 @@ public class QLSach_Frame extends javax.swing.JFrame {
         btn_xoa_cnnxb = new javax.swing.JButton();
         btn_luu_cnnxb = new javax.swing.JButton();
         jScrollPane3 = new javax.swing.JScrollPane();
-        tbnxb = new javax.swing.JTable();
+        jTable3 = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -266,6 +228,7 @@ public class QLSach_Frame extends javax.swing.JFrame {
         jLabel1.setText("Quản lý sách");
 
         jButton1.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
+        jButton1.setIcon(new javax.swing.ImageIcon("D:\\Java\\QuanLyBanHang\\img\\arrow-back-icon.png")); // NOI18N
         jButton1.setText("Hệ thống");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -295,8 +258,6 @@ public class QLSach_Frame extends javax.swing.JFrame {
 
         jTabbedPane1.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
 
-        lb_hinhanh.setText("Ảnh");
-
         btn_capNhatAnh.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
         btn_capNhatAnh.setText("Cập nhật ảnh...");
         btn_capNhatAnh.addActionListener(new java.awt.event.ActionListener() {
@@ -308,7 +269,9 @@ public class QLSach_Frame extends javax.swing.JFrame {
         jLabel2.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
         jLabel2.setText("Loại sách:");
 
-        txt_fileSach.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        txt_fileSach.setFont(new java.awt.Font("Times New Roman", 0, 5)); // NOI18N
+        txt_fileSach.setFocusable(false);
+        txt_fileSach.setHighlighter(null);
 
         cbb_loaiSach.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
 
@@ -338,14 +301,11 @@ public class QLSach_Frame extends javax.swing.JFrame {
         cbb_nhaXuatBan.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
 
         btn_taiLai_tts.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
+        btn_taiLai_tts.setIcon(new javax.swing.ImageIcon("D:\\Java\\QuanLyBanHang\\img\\reload-icon.png")); // NOI18N
         btn_taiLai_tts.setText("Tải lại");
-        btn_taiLai_tts.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_taiLai_ttsActionPerformed(evt);
-            }
-        });
 
         btn_them_tts.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
+        btn_them_tts.setIcon(new javax.swing.ImageIcon("D:\\Java\\QuanLyBanHang\\img\\Sign-Add-icon.png")); // NOI18N
         btn_them_tts.setText("Thêm");
         btn_them_tts.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -354,9 +314,16 @@ public class QLSach_Frame extends javax.swing.JFrame {
         });
 
         btn_sua_tts.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
+        btn_sua_tts.setIcon(new javax.swing.ImageIcon("D:\\Java\\QuanLyBanHang\\img\\Repair-icon.png")); // NOI18N
         btn_sua_tts.setText("Sửa");
+        btn_sua_tts.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_sua_ttsActionPerformed(evt);
+            }
+        });
 
         btn_xoa_tts.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
+        btn_xoa_tts.setIcon(new javax.swing.ImageIcon("D:\\Java\\QuanLyBanHang\\img\\Trash-icon.png")); // NOI18N
         btn_xoa_tts.setText("Xóa");
         btn_xoa_tts.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -365,7 +332,13 @@ public class QLSach_Frame extends javax.swing.JFrame {
         });
 
         btn_luu_tts.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
+        btn_luu_tts.setIcon(new javax.swing.ImageIcon("D:\\Java\\QuanLyBanHang\\img\\save.png")); // NOI18N
         btn_luu_tts.setText("Lưu");
+        btn_luu_tts.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_luu_ttsActionPerformed(evt);
+            }
+        });
 
         btn_sapXep_tts.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         btn_sapXep_tts.setText("Sắp xếp");
@@ -411,12 +384,8 @@ public class QLSach_Frame extends javax.swing.JFrame {
         );
 
         btn_in_tts.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
+        btn_in_tts.setIcon(new javax.swing.ImageIcon("D:\\Java\\QuanLyBanHang\\img\\save.png")); // NOI18N
         btn_in_tts.setText("In danh sách");
-        btn_in_tts.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_in_ttsActionPerformed(evt);
-            }
-        });
 
         jTable1.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
@@ -440,6 +409,21 @@ public class QLSach_Frame extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(btn_taiLai_tts)
+                        .addGap(18, 18, 18)
+                        .addComponent(btn_them_tts)
+                        .addGap(18, 18, 18)
+                        .addComponent(btn_sua_tts)
+                        .addGap(18, 18, 18)
+                        .addComponent(btn_xoa_tts)
+                        .addGap(18, 18, 18)
+                        .addComponent(btn_luu_tts)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btn_in_tts)
+                        .addContainerGap(24, Short.MAX_VALUE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(lb_hinhanh, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -457,65 +441,58 @@ public class QLSach_Frame extends javax.swing.JFrame {
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(txt_maSach)
                             .addComponent(txt_tenSach))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addGap(18, 18, 18)
-                                .addComponent(jLabel5))
+                                .addComponent(jLabel6)
+                                .addGap(58, 58, 58)
+                                .addComponent(txt_gia, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addGap(27, 27, 27)
-                                .addComponent(jLabel6)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(txt_soLuong)
-                            .addComponent(txt_gia))
-                        .addGap(70, 70, 70)
+                                .addComponent(jLabel5)
+                                .addGap(18, 18, 18)
+                                .addComponent(txt_soLuong)))
+                        .addGap(37, 37, 37)
                         .addComponent(jLabel7)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(cbb_nhaXuatBan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(btn_taiLai_tts)
-                        .addGap(18, 18, 18)
-                        .addComponent(btn_them_tts)
-                        .addGap(18, 18, 18)
-                        .addComponent(btn_sua_tts)
-                        .addGap(18, 18, 18)
-                        .addComponent(btn_xoa_tts)
-                        .addGap(18, 18, 18)
-                        .addComponent(btn_luu_tts)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(btn_in_tts)))
-                .addContainerGap(23, Short.MAX_VALUE))
+                        .addComponent(cbb_nhaXuatBan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(139, 139, 139))))
             .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING)
         );
 
-        jPanel2Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {cbb_loaiSach, cbb_nhaXuatBan, txt_fileSach, txt_maSach, txt_soLuong});
+        jPanel2Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {cbb_loaiSach, cbb_nhaXuatBan, txt_maSach, txt_soLuong, txt_tenSach});
 
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(22, 22, 22)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(btn_capNhatAnh)
-                            .addComponent(txt_fileSach, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel3)
-                            .addComponent(txt_maSach, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel5)
-                            .addComponent(txt_soLuong, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel7)
-                            .addComponent(cbb_nhaXuatBan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addGap(22, 22, 22)
                                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jLabel2)
-                                    .addComponent(cbb_loaiSach, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel4)
-                                    .addComponent(txt_tenSach, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel6)
-                                    .addComponent(txt_gia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(btn_capNhatAnh)
+                                    .addComponent(jLabel3)
+                                    .addComponent(txt_maSach, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel5)
+                                    .addComponent(txt_soLuong, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel7)
+                                    .addComponent(cbb_nhaXuatBan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(txt_fileSach, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(jLabel2)
+                                        .addComponent(cbb_loaiSach, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(jLabel4)
+                                        .addComponent(txt_tenSach, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(jPanel2Layout.createSequentialGroup()
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                            .addComponent(txt_gia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(jLabel6))))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel2Layout.createSequentialGroup()
@@ -548,14 +525,11 @@ public class QLSach_Frame extends javax.swing.JFrame {
         txt_tenLoai_cnls.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
 
         btn_taiLai_cnls.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
+        btn_taiLai_cnls.setIcon(new javax.swing.ImageIcon("D:\\Java\\QuanLyBanHang\\img\\reload-icon.png")); // NOI18N
         btn_taiLai_cnls.setText("Tải lại");
-        btn_taiLai_cnls.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_taiLai_cnlsActionPerformed(evt);
-            }
-        });
 
         btn_them_cnls.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
+        btn_them_cnls.setIcon(new javax.swing.ImageIcon("D:\\Java\\QuanLyBanHang\\img\\Sign-Add-icon.png")); // NOI18N
         btn_them_cnls.setText("Thêm");
         btn_them_cnls.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -564,6 +538,7 @@ public class QLSach_Frame extends javax.swing.JFrame {
         });
 
         btn_sua_cnls.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
+        btn_sua_cnls.setIcon(new javax.swing.ImageIcon("D:\\Java\\QuanLyBanHang\\img\\Repair-icon.png")); // NOI18N
         btn_sua_cnls.setText("Sửa");
         btn_sua_cnls.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -572,6 +547,7 @@ public class QLSach_Frame extends javax.swing.JFrame {
         });
 
         btn_xoa_cnls.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
+        btn_xoa_cnls.setIcon(new javax.swing.ImageIcon("D:\\Java\\QuanLyBanHang\\img\\Trash-icon.png")); // NOI18N
         btn_xoa_cnls.setText("Xóa");
         btn_xoa_cnls.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -580,6 +556,7 @@ public class QLSach_Frame extends javax.swing.JFrame {
         });
 
         btn_luu_cnls.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
+        btn_luu_cnls.setIcon(new javax.swing.ImageIcon("D:\\Java\\QuanLyBanHang\\img\\save.png")); // NOI18N
         btn_luu_cnls.setText("Lưu");
         btn_luu_cnls.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -587,8 +564,8 @@ public class QLSach_Frame extends javax.swing.JFrame {
             }
         });
 
-        tbls.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
-        tbls.setModel(new javax.swing.table.DefaultTableModel(
+        jTable2.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        jTable2.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null},
                 {null, null},
@@ -607,12 +584,7 @@ public class QLSach_Frame extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        tbls.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tblsMouseClicked(evt);
-            }
-        });
-        jScrollPane2.setViewportView(tbls);
+        jScrollPane2.setViewportView(jTable2);
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -638,7 +610,7 @@ public class QLSach_Frame extends javax.swing.JFrame {
                         .addComponent(txt_tenLoai_cnls, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(0, 102, Short.MAX_VALUE)
+                        .addGap(0, 40, Short.MAX_VALUE)
                         .addComponent(btn_sua_cnls)
                         .addGap(119, 119, 119)
                         .addComponent(btn_xoa_cnls)
@@ -699,22 +671,15 @@ public class QLSach_Frame extends javax.swing.JFrame {
         txt_mail_cnnxb.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
 
         btn_taitai_cnnxb.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
+        btn_taitai_cnnxb.setIcon(new javax.swing.ImageIcon("D:\\Java\\QuanLyBanHang\\img\\reload-icon.png")); // NOI18N
         btn_taitai_cnnxb.setText("Tải lại");
-        btn_taitai_cnnxb.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_taitai_cnnxbActionPerformed(evt);
-            }
-        });
 
         btn_them_cnnxb.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
+        btn_them_cnnxb.setIcon(new javax.swing.ImageIcon("D:\\Java\\QuanLyBanHang\\img\\Sign-Add-icon.png")); // NOI18N
         btn_them_cnnxb.setText("Thêm");
-        btn_them_cnnxb.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_them_cnnxbActionPerformed(evt);
-            }
-        });
 
         btn_sua_cnnxb.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
+        btn_sua_cnnxb.setIcon(new javax.swing.ImageIcon("D:\\Java\\QuanLyBanHang\\img\\Repair-icon.png")); // NOI18N
         btn_sua_cnnxb.setText("Sửa");
         btn_sua_cnnxb.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -723,6 +688,7 @@ public class QLSach_Frame extends javax.swing.JFrame {
         });
 
         btn_xoa_cnnxb.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
+        btn_xoa_cnnxb.setIcon(new javax.swing.ImageIcon("D:\\Java\\QuanLyBanHang\\img\\Trash-icon.png")); // NOI18N
         btn_xoa_cnnxb.setText("Xóa");
         btn_xoa_cnnxb.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -731,6 +697,7 @@ public class QLSach_Frame extends javax.swing.JFrame {
         });
 
         btn_luu_cnnxb.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
+        btn_luu_cnnxb.setIcon(new javax.swing.ImageIcon("D:\\Java\\QuanLyBanHang\\img\\save.png")); // NOI18N
         btn_luu_cnnxb.setText("Lưu");
         btn_luu_cnnxb.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -738,8 +705,8 @@ public class QLSach_Frame extends javax.swing.JFrame {
             }
         });
 
-        tbnxb.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
-        tbnxb.setModel(new javax.swing.table.DefaultTableModel(
+        jTable3.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        jTable3.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null},
                 {null, null, null, null, null},
@@ -758,12 +725,7 @@ public class QLSach_Frame extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        tbnxb.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tbnxbMouseClicked(evt);
-            }
-        });
-        jScrollPane3.setViewportView(tbnxb);
+        jScrollPane3.setViewportView(jTable3);
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -805,7 +767,7 @@ public class QLSach_Frame extends javax.swing.JFrame {
                         .addContainerGap())
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addComponent(btn_xoa_cnnxb)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 99, Short.MAX_VALUE)
                         .addComponent(btn_luu_cnnxb)
                         .addGap(103, 103, 103))))
             .addComponent(jScrollPane3, javax.swing.GroupLayout.Alignment.TRAILING)
@@ -847,10 +809,7 @@ public class QLSach_Frame extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jTabbedPane1)
-                .addGap(33, 33, 33))
+            .addComponent(jTabbedPane1)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -881,232 +840,182 @@ public class QLSach_Frame extends javax.swing.JFrame {
         dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void btn_taiLai_cnlsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_taiLai_cnlsActionPerformed
-        // TODO add your handling code here:
-        model = (DefaultTableModel) tbls.getModel();
-        model.setRowCount(0);
-        showTableLS();
-    }//GEN-LAST:event_btn_taiLai_cnlsActionPerformed
-
-    private void btn_taitai_cnnxbActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_taitai_cnnxbActionPerformed
-        // TODO add your handling code here:
-        model = (DefaultTableModel) tbnxb.getModel();
-        model.setRowCount(0);
-        showTableNXB();
-    }//GEN-LAST:event_btn_taitai_cnnxbActionPerformed
+    private void btn_them_ttsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_them_ttsActionPerformed
+        txt_maSach.setEnabled(true);
+    }//GEN-LAST:event_btn_them_ttsActionPerformed
 
     private void btn_them_cnlsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_them_cnlsActionPerformed
-        // TODO add your handling code here:
-        txt_maLoai_cnls.setEnabled(true);
-        txt_tenSach.setEnabled(true);
+        
     }//GEN-LAST:event_btn_them_cnlsActionPerformed
 
-    private void btn_them_cnnxbActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_them_cnnxbActionPerformed
-        // TODO add your handling code here:
-        txt_maNxb_cnnxb.setEnabled(true);
-        txt_tenNxb_cnnxb.setEnabled(true);
-        txt_sdt_cnnxb.setEnabled(true);
-        txt_diaChi_cnnxb.setEnabled(true);
-        txt_sdt_cnnxb.setEnabled(true);
-        txt_mail_cnnxb.setEnabled(true);
-    }//GEN-LAST:event_btn_them_cnnxbActionPerformed
-
-    private void btn_sua_cnlsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_sua_cnlsActionPerformed
-        // TODO add your handling code here:
-        int i = tbls.getSelectedRow();
-        LoaiSach ls = new LoaiSach();
-        ls.setMaLoaiSach(txt_maLoai_cnls.getText());
-        ls.setTenLoaiSach(txt_tenSach.getText());
-        model.setValueAt(ls.getTenLoaiSach(), i, 1);
-        lsBUS.sua(ls);
-        JOptionPane.showMessageDialog(rootPane, "Đã cập nhật");
-    }//GEN-LAST:event_btn_sua_cnlsActionPerformed
-
     private void btn_luu_cnlsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_luu_cnlsActionPerformed
-        // TODO add your handling code here:
         LoaiSach ls = new LoaiSach();
         if(!batLoi.Catch(txt_maLoai_cnls.getText()) && !batLoi.Catch(txt_tenLoai_cnls.getText())){
-            if(!loaisachBUS.checkPrimaryKey(txt_maLoai_cnls.getText())){
+            if(!busLS.testPrimaryKey(txt_maLoai_cnls.getText())){
                 ls.setMaLoaiSach(txt_maLoai_cnls.getText());
                 ls.setTenLoaiSach(txt_tenLoai_cnls.getText());
-                lsBUS.them(ls);
-            } else{
-             JOptionPane.showMessageDialog(rootPane, "Đã thêm");
+                busLS.insert(ls);
+                JOptionPane.showMessageDialog(rootPane, "Đã thêm");
+                jTable2.setModel(tablemodel_loaisach);
+                showLoaiSach();
             }
-        }else {
-            JOptionPane.showMessageDialog(rootPane, "Bạn chưa nhập đủ dữ liệu, vui lòng nhập lại");
         }
     }//GEN-LAST:event_btn_luu_cnlsActionPerformed
 
-    private void tblsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblsMouseClicked
-        // TODO add your handling code here:
-        int i = tbls.getSelectedRow();
-        LoaiSach ls = lsBUS.dsls.get(i);
-        txt_maLoai_cnls.setText(ls.getMaLoaiSach());
-        txt_tenLoai_cnls.setText(ls.getTenLoaiSach());
-    }//GEN-LAST:event_tblsMouseClicked
+    private void btn_luu_cnnxbActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_luu_cnnxbActionPerformed
+        NXB nxb = new NXB();
+        if (!batLoi.Catch(txt_maNxb_cnnxb.getText()) && !batLoi.Catch(txt_tenNxb_cnnxb.getText()) && !batLoi.Catch(txt_diaChi_cnnxb.getText()) && !batLoi.Catch(txt_mail_cnnxb.getText()) && !batLoi.Catch(txt_sdt_cnnxb.getText())) {
+            if (!busNxb.testPrimaryKey(txt_maNxb_cnnxb.getText())) {
+                nxb.setMaNXB(txt_maNxb_cnnxb.getText());
+                nxb.setTenNXB(txt_tenNxb_cnnxb.getText());
+                nxb.setDiaChi(txt_diaChi_cnnxb.getText());
+                nxb.setEmail(txt_maNxb_cnnxb.getText());               
+                nxb.setSdt(txt_sdt_cnnxb.getText());                 
+                busNxb.insert(nxb);
+                JOptionPane.showMessageDialog(rootPane, "Đã thêm");
+                jTable3.setModel(tablemodel_nxb);
+                showNXB();
+            } else {
+                JOptionPane.showMessageDialog(rootPane, "Dữ liệu nhập vào không hợp lệ, do bị trùng khóa chính");
+            }
+        } else {
+            JOptionPane.showMessageDialog(rootPane, "Bạn chưa nhập đủ dữ liệu, vui lòng nhập lại");
+        }
+    }//GEN-LAST:event_btn_luu_cnnxbActionPerformed
+
+    private void btn_capNhatAnhActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_capNhatAnhActionPerformed
+        JFileChooser fileChooser = new JFileChooser();
+        fileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
+        int returnValue = fileChooser.showOpenDialog(this);
+        if(returnValue == JFileChooser.APPROVE_OPTION){
+            File file = fileChooser.getSelectedFile();
+            //lay duong dan luu vao csdl
+            String pathFile = file.getAbsolutePath();
+            //String pathFile2 = file.getAbsolutePath().replace("//", "--");
+            BufferedImage b;
+            txt_fileSach.setText(pathFile);
+            try {
+                b=ImageIO.read(file);
+                lb_hinhanh.setIcon(new ImageIcon(b));
+            } catch (IOException ex) {
+                Logger.getLogger(QLSach_Frame.class.getName()).log(Level.SEVERE, null, ex);
+            }            
+        }
+        
+    }//GEN-LAST:event_btn_capNhatAnhActionPerformed
+
+    private void btn_luu_ttsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_luu_ttsActionPerformed
+        Sach sach = new Sach();
+        if (!batLoi.Catch(txt_maSach.getText()) && !batLoi.Catch(txt_fileSach.getText()) && !batLoi.Catch(txt_soLuong.getText()) && !batLoi.Catch(txt_tenSach.getText()) && !batLoi.Catch(txt_gia.getText())) {
+            if (!busSach.testPrimaryKey(txt_maSach.getText())) {
+                sach.setMaSach(txt_maSach.getText());
+                sach.setTenSach(txt_tenSach.getText());
+                sach.setFileAnh(txt_fileSach.getText());
+                sach.setGiaTien(Double.parseDouble(txt_gia.getText()));               
+                sach.setMaLoaiSach(cbb_loaiSach.getSelectedItem().toString());  
+                sach.setMaNXB(cbb_nhaXuatBan.getSelectedItem().toString());
+                sach.setSoLuong(Integer.parseInt(txt_soLuong.getText()));
+                busSach.insert(sach);
+                JOptionPane.showMessageDialog(rootPane, "Đã thêm");
+                jTable1.setModel(tablemodel_sach);
+                showSach();
+            } else {
+                JOptionPane.showMessageDialog(rootPane, "Dữ liệu nhập vào không hợp lệ, do bị trùng khóa chính");
+            }
+        }
+    }//GEN-LAST:event_btn_luu_ttsActionPerformed
 
     private void btn_sua_cnnxbActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_sua_cnnxbActionPerformed
-        // TODO add your handling code here:
-        int i = tbnxb.getSelectedRow();
-        NhaXuatBan nxb = new NhaXuatBan();
+        int i = jTable3.getSelectedRow();
+        NXB nxb = new NXB();
         nxb.setMaNXB(txt_maNxb_cnnxb.getText());
         nxb.setTenNXB(txt_tenNxb_cnnxb.getText());
         nxb.setDiaChi(txt_diaChi_cnnxb.getText());
         nxb.setEmail(txt_mail_cnnxb.getText());
-        nxb.setSoDienThoai(txt_sdt_cnnxb.getText());
+        nxb.setSdt(txt_sdt_cnnxb.getText()); 
         
-        tableModel.setValueAt(nxb.getMaNXB(), i, 1);
-        tableModel.setValueAt(nxb.getTenNXB(), i, 2);
-        tableModel.setValueAt(nxb.getDiaChi(), i, 3);
-        tableModel.setValueAt(nxb.getEmail(), i, 4);
-        tableModel.setValueAt(nxb.getSoDienThoai(), i, 5);
+        tablemodel_nxb.setValueAt(nxb.getMaNXB(), i, 0);
+        tablemodel_nxb.setValueAt(nxb.getTenNXB(), i, 1);
+        tablemodel_nxb.setValueAt(nxb.getDiaChi(), i, 2);
+        tablemodel_nxb.setValueAt(nxb.getSdt(), i, 3);
+        tablemodel_nxb.setValueAt(nxb.getEmail(), i, 4);
         
-        nxbBUS.sua(nxb);
+        busNxb.update(nxb);
         JOptionPane.showMessageDialog(rootPane, "Đã cập nhật");
+        showNXB();
     }//GEN-LAST:event_btn_sua_cnnxbActionPerformed
 
-    private void tbnxbMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbnxbMouseClicked
-        // TODO add your handling code here:
-        int i = tbnxb.getSelectedRow();
-        NhaXuatBan nxb = nxbBUS.dsnxb.get(i);
-        txt_maNxb_cnnxb.setText(nxb.getMaNXB());
-        txt_tenNxb_cnnxb.setText(nxb.getTenNXB());
-        txt_diaChi_cnnxb.setText(nxb.getDiaChi());
-        txt_mail_cnnxb.setText(nxb.getEmail());
-        txt_sdt_cnnxb.setText(nxb.getSoDienThoai());
-    }//GEN-LAST:event_tbnxbMouseClicked
-
     private void btn_xoa_cnnxbActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_xoa_cnnxbActionPerformed
-        // TODO add your handling code here:
-        int SelectIndex = tbnxb.getSelectedRow();
-        if (SelectIndex >= 0) {
-            NhaXuatBan nxb = nxbList.get(SelectIndex);
-            int option = JOptionPane.showConfirmDialog(this, "Bạn có muốn xóa không?");
-            if (option == 0) {
-                nxbBUS.xoa(nxb);
-                ShowNXB();
+        int selectIndext = jTable3.getSelectedRow();
+         if(selectIndext >= 0){
+            NXB nxb =  listNxb.get(selectIndext);
+            int option = JOptionPane.showConfirmDialog(this, "Bạn có muốn xóa?");
+            if(option == 0){
+                //SinhVien.delete(std.getId());
+               busNxb.delete(nxb.getMaNXB());
+                showNXB();
             }
         }
     }//GEN-LAST:event_btn_xoa_cnnxbActionPerformed
 
+    private void btn_sua_cnlsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_sua_cnlsActionPerformed
+        int i = jTable2.getSelectedRow();
+        LoaiSach ls = new LoaiSach();
+        ls.setMaLoaiSach(txt_maLoai_cnls.getText());
+        ls.setTenLoaiSach(txt_tenLoai_cnls.getText());
+                
+        tablemodel_loaisach.setValueAt(ls.getMaLoaiSach(), i, 0);
+        tablemodel_loaisach.setValueAt(ls.getTenLoaiSach(), i, 1);
+        busLS.update(ls);
+        JOptionPane.showMessageDialog(rootPane, "Đã cập nhật");
+        showLoaiSach();
+    }//GEN-LAST:event_btn_sua_cnlsActionPerformed
+
     private void btn_xoa_cnlsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_xoa_cnlsActionPerformed
-        // TODO add your handling code here:
-        int SelectIndex = tbls.getSelectedRow();
-        if(SelectIndex >= 0){
-            LoaiSach ls = lsList.get(SelectIndex);
-            int option = JOptionPane.showConfirmDialog(this, "Bạn có muốn xóa không?");
+        int selectIndext = jTable2.getSelectedRow();
+         if(selectIndext >= 0){
+            LoaiSach ls =  listLS.get(selectIndext);
+            int option = JOptionPane.showConfirmDialog(this, "Bạn có muốn xóa?");
             if(option == 0){
-                lsBUS.xoa(ls);
-                showLS();
+                //SinhVien.delete(std.getId());
+               busLS.delete(ls.getMaLoaiSach());
+                showLoaiSach();
             }
         }
     }//GEN-LAST:event_btn_xoa_cnlsActionPerformed
 
-    private void btn_luu_cnnxbActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_luu_cnnxbActionPerformed
-        // TODO add your handling code here:
-        NhaXuatBan nxb = new NhaXuatBan();
-        if (!batLoi.Catch(txt_maNxb_cnnxb.getText()) && !batLoi.Catch(txt_tenNxb_cnnxb.getText()) && !batLoi.Catch(txt_diaChi_cnnxb.getText())
-                && !batLoi.Catch(txt_mail_cnnxb.getText()) && !batLoi.Catch(txt_sdt_cnnxb.getText())) {
-            if (!nxbBUS.checkPrimaryKey(txt_maNxb_cnnxb.getText())) {
-                nxb.setMaNXB(txt_maNxb_cnnxb.getText());
-                nxb.setTenNXB(txt_tenNxb_cnnxb.getText());
-                nxb.setDiaChi(txt_diaChi_cnnxb.getText());
-                nxb.setEmail(txt_mail_cnnxb.getText());
-                nxb.setSoDienThoai(txt_sdt_cnnxb.getText());
-
-                nxbBUS.add(nxb);
-            } else {
-                JOptionPane.showMessageDialog(rootPane, "Đã thêm");
-            }
-        } else {
-            JOptionPane.showMessageDialog(rootPane, "Bạn chưa nhập đủ dữ liệu, vui lòng nhập lại");
-        }
-            
-    }//GEN-LAST:event_btn_luu_cnnxbActionPerformed
-
-    public ImageIcon sizeOfImage(String pathImage, byte[] img) {
-        ImageIcon myImage = null;
-        if (pathImage != null) {
-            myImage = new ImageIcon(pathImage);
-        } else {
-            myImage = new ImageIcon(img);
-        }
-        Image  img1 = myImage.getImage();
-        Image img2 = img1.getScaledInstance(lb_hinhanh.getWidth(), lb_hinhanh.getHeight(),
-                Image.SCALE_SMOOTH);
-        ImageIcon image = new ImageIcon(img2);
-        return image;
-    }
-    private void btn_capNhatAnhActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_capNhatAnhActionPerformed
-        // TODO add your handling code here:
-        JFileChooser file = new JFileChooser();
-        FileNameExtensionFilter filter = new FileNameExtensionFilter("jpg", "png");
-        file.addChoosableFileFilter(filter);
-        int result = file.showSaveDialog(null);
-        if (result == JFileChooser.APPROVE_OPTION) {
-            File selectedFile = file.getSelectedFile();
-            String path = selectedFile.getAbsolutePath();
-            lb_hinhanh.setIcon(sizeOfImage(path, null));
-            pathImg = path;
-        } else {
-            JOptionPane.showMessageDialog(null, "No picture chosen");
-        }
-    }//GEN-LAST:event_btn_capNhatAnhActionPerformed
-
-    private void btn_them_ttsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_them_ttsActionPerformed
-        // TODO add your handling code here:
-        cbb_loaiSach.setEnabled(true);
-        txt_fileSach.setEnabled(true);
-        txt_maSach.setEnabled(true);
-        txt_tenSach.setEnabled(true);
-        txt_soLuong.setEnabled(true);
-        txt_gia.setEnabled(true);
-        cbb_nhaXuatBan.setEnabled(true);
-    }//GEN-LAST:event_btn_them_ttsActionPerformed
-
-    private void btn_taiLai_ttsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_taiLai_ttsActionPerformed
-        // TODO add your handling code here:
-        tableModel = (DefaultTableModel) jTable1.getModel();
-        tableModel.setRowCount(0);
+    private void btn_sua_ttsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_sua_ttsActionPerformed
+         int i = jTable1.getSelectedRow();
+        Sach sach = new Sach();
+        sach.setMaSach(txt_maSach.getText());
+        sach.setTenSach(txt_tenSach.getText());
+        sach.setMaLoaiSach(cbb_loaiSach.getSelectedItem().toString());
+        sach.setSoLuong(Integer.parseInt(txt_soLuong.getText()));
+        sach.setGiaTien(Double.parseDouble(txt_gia.getText())); 
+        sach.setMaNXB(cbb_nhaXuatBan.getSelectedItem().toString());
+        sach.setFileAnh(txt_fileSach.getText());
+        
+        tablemodel_sach.setValueAt(sach.getMaSach(), i, 0);
+        tablemodel_sach.setValueAt(sach.getTenSach(), i, 1);
+        tablemodel_sach.setValueAt(sach.getMaLoaiSach(), i, 2);
+        tablemodel_sach.setValueAt(sach.getSoLuong(), i, 3);
+        tablemodel_sach.setValueAt(sach.getGiaTien(), i, 4);
+        tablemodel_sach.setValueAt(sach.getMaNXB(), i, 5);
+        tablemodel_sach.setValueAt(sach.getFileAnh(), i, 6);
+        
+        busSach.update(sach);
+        JOptionPane.showMessageDialog(rootPane, "Đã cập nhật");
         showSach();
-    }//GEN-LAST:event_btn_taiLai_ttsActionPerformed
-
-    private void btn_in_ttsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_in_ttsActionPerformed
-        // TODO add your handling code here:
-        tableModel = (DefaultTableModel) jTable1.getModel();
-        int k = 0;
-        int n = tableModel.getRowCount();
-        int m = tableModel.getColumnCount();
-        String a[][] = new String[n][m];
-        for(int i=0;i<n;i++)
-        {
-            for(int j=0;j<m;j++)
-               try{ 
-              a[i][j] = tableModel.getValueAt(i, j).toString();
-               }
-               catch(Exception e){
-                   k=1;
-               };
-            
-        }
-        if(k!=1){
-        Help pol = new Help();
-        pol.writeFileExcel("DSSACH", a);
-        JOptionPane.showMessageDialog(rootPane, "Đã xuất ra excel");}
-        else{
-            JOptionPane.showMessageDialog(rootPane, "Dữ liệu rỗng");
-        }
-    }//GEN-LAST:event_btn_in_ttsActionPerformed
+    }//GEN-LAST:event_btn_sua_ttsActionPerformed
 
     private void btn_xoa_ttsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_xoa_ttsActionPerformed
-        // TODO add your handling code here:
-        int selectIndex = jTable1.getSelectedRow();
-        if(selectIndex >= 0){
-            Sach s = sList.get(selectIndex);
-            int option = JOptionPane.showConfirmDialog(this, "Bạn có muốn xóa chứ?");
+         int selectIndext = jTable1.getSelectedRow();
+         if(selectIndext >= 0){
+            Sach sach =  listSach.get(selectIndext);
+            int option = JOptionPane.showConfirmDialog(this, "Bạn có muốn xóa?");
             if(option == 0){
-                sBUS.xoa(s);
+                //SinhVien.delete(std.getId());
+               busSach.delete(sach.getMaSach());
                 showSach();
             }
         }
@@ -1194,11 +1103,11 @@ public class QLSach_Frame extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTable jTable1;
+    private javax.swing.JTable jTable2;
+    private javax.swing.JTable jTable3;
     private javax.swing.JLabel lb_hinhanh;
     private javax.swing.JRadioButton rbtn_gia_tts;
     private javax.swing.JRadioButton rbtn_tensach_tts;
-    private javax.swing.JTable tbls;
-    private javax.swing.JTable tbnxb;
     private javax.swing.JTextField txt_diaChi_cnnxb;
     private javax.swing.JTextField txt_fileSach;
     private javax.swing.JTextField txt_gia;
