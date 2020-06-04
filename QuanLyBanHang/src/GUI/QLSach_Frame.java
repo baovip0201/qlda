@@ -925,7 +925,7 @@ public class QLSach_Frame extends javax.swing.JFrame {
     private void btn_luu_cnlsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_luu_cnlsActionPerformed
         // TODO add your handling code here:
         LoaiSach ls = new LoaiSach();
-        if(!batLoi.Catch(txt_maLoai_cnls.getText()) && !batLoi.Catch(txt_tenLoai_cnls)){
+        if(!batLoi.Catch(txt_maLoai_cnls.getText()) && !batLoi.Catch(txt_tenLoai_cnls.getText())){
             if(!loaisachBUS.checkPrimaryKey(txt_maLoai_cnls.getText())){
                 ls.setMaLoaiSach(txt_maLoai_cnls.getText());
                 ls.setTenLoaiSach(txt_tenLoai_cnls.getText());
@@ -1006,8 +1006,8 @@ public class QLSach_Frame extends javax.swing.JFrame {
     private void btn_luu_cnnxbActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_luu_cnnxbActionPerformed
         // TODO add your handling code here:
         NhaXuatBan nxb = new NhaXuatBan();
-        if (!batLoi.Catch(txt_maNxb_cnnxb.getText()) && !batLoi.Catch(txt_tenNxb_cnnxb) && !batLoi.Catch(txt_diaChi_cnnxb)
-                && !batLoi.Catch(txt_mail_cnnxb) && !batLoi.Catch(txt_sdt_cnnxb)) {
+        if (!batLoi.Catch(txt_maNxb_cnnxb.getText()) && !batLoi.Catch(txt_tenNxb_cnnxb.getText()) && !batLoi.Catch(txt_diaChi_cnnxb.getText())
+                && !batLoi.Catch(txt_mail_cnnxb.getText()) && !batLoi.Catch(txt_sdt_cnnxb.getText())) {
             if (!nxbBUS.checkPrimaryKey(txt_maNxb_cnnxb.getText())) {
                 nxb.setMaNXB(txt_maNxb_cnnxb.getText());
                 nxb.setTenNXB(txt_tenNxb_cnnxb.getText());
