@@ -16,14 +16,14 @@ import java.util.List;
  */
 public class NXB_BUS {
      NXB_DAO data = new NXB_DAO();
-    List<NXB> listNxb = new ArrayList<>();
-    public List<NXB> getList(){
+    List<NhaXuatBan> listNxb = new ArrayList<>();
+    public List<NhaXuatBan> getList(){
          //if(listNxb==null) listNxb=new ArrayList<>();
          listNxb = data.getList();
          return listNxb;
     }
     
-    public void insert(NXB sach){
+    public void insert(NhaXuatBan sach){
         data.insert(sach);
         listNxb.add(sach);
     }
@@ -32,7 +32,7 @@ public class NXB_BUS {
          return data.testPrimaryKey(txt);
     }
     
-    public void update(NXB nxb){
+    public void update(NhaXuatBan nxb){
         data.update(nxb);
     }
     public void delete(String nxb){
