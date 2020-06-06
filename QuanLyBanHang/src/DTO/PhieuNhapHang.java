@@ -15,13 +15,13 @@ public class PhieuNhapHang {
     private String maNH;
     private String maNV;
     private String maNXB;
-    private int tinhTrang;
+    private String tinhTrang;
     private Float tongTien;
     private Date ngayNhap;
     public PhieuNhapHang(){
         
     }
-    public PhieuNhapHang(String maNH, String maNV, String maNXB, int tinhTrang, Float tongTien, Date ngayNhap){
+    public PhieuNhapHang(String maNH, String maNV, String maNXB, String tinhTrang, Float tongTien, Date ngayNhap){
         this.maNH=maNH;
         this.maNV=maNV;
         this.maNXB=maNXB;
@@ -54,11 +54,11 @@ public class PhieuNhapHang {
         this.maNXB = maNXB;
     }
 
-    public int getTinhTrang() {
+    public String getTinhTrang() {
         return tinhTrang;
     }
 
-    public void setTinhTrang(int tinhTrang) {
+    public void setTinhTrang(String tinhTrang) {
         this.tinhTrang = tinhTrang;
     }
 

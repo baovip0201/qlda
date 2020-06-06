@@ -40,8 +40,8 @@ public class cvBUS {
     public static boolean checkPrimaryKey(String txt){
         return cvDAO.testPrimaryKey(txt);
     }
-    /*public void sort(){
+    public void sort(){
         if(dscv==null)  dscv=new ArrayList<>();
         dscv=cvDAO.sortByLuong();
-    }*/
+    }
 }

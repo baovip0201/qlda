@@ -27,6 +27,7 @@ public class Admin_Frame extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jLabel2 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         btn_Qlnv = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
@@ -35,14 +36,13 @@ public class Admin_Frame extends javax.swing.JFrame {
         btn_qltk = new javax.swing.JButton();
         btn_dangxuat = new javax.swing.JButton();
         btn_thoat = new javax.swing.JButton();
-        jLabel2 = new javax.swing.JLabel();
+        btn_kho = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jPanel2.setLayout(null);
 
         btn_Qlnv.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
-        btn_Qlnv.setIcon(new javax.swing.ImageIcon("D:\\Java\\QuanLyBanHang\\img\\User-Group-icon.png")); // NOI18N
         btn_Qlnv.setText("Quản lí nhân viên");
         btn_Qlnv.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btn_Qlnv.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
@@ -52,7 +52,7 @@ public class Admin_Frame extends javax.swing.JFrame {
             }
         });
         jPanel2.add(btn_Qlnv);
-        btn_Qlnv.setBounds(20, 80, 180, 131);
+        btn_Qlnv.setBounds(20, 80, 180, 31);
 
         jLabel1.setFont(new java.awt.Font("Times New Roman", 1, 36)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 204, 0));
@@ -61,7 +61,6 @@ public class Admin_Frame extends javax.swing.JFrame {
         jLabel1.setBounds(60, 20, 580, 42);
 
         btn_thongke.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
-        btn_thongke.setIcon(new javax.swing.ImageIcon("D:\\Java\\QuanLyBanHang\\img\\Money-Graph-icon.png")); // NOI18N
         btn_thongke.setText("Thống kê doanh thu");
         btn_thongke.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btn_thongke.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
@@ -74,7 +73,6 @@ public class Admin_Frame extends javax.swing.JFrame {
         btn_thongke.setBounds(470, 80, 191, 130);
 
         btn_qlSach.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
-        btn_qlSach.setIcon(new javax.swing.ImageIcon("D:\\Java\\QuanLyBanHang\\img\\bookshelf-icon.png")); // NOI18N
         btn_qlSach.setText("Quản lý sách");
         btn_qlSach.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btn_qlSach.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
@@ -87,7 +85,6 @@ public class Admin_Frame extends javax.swing.JFrame {
         btn_qlSach.setBounds(23, 270, 180, 130);
 
         btn_qltk.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
-        btn_qltk.setIcon(new javax.swing.ImageIcon("D:\\Java\\QuanLyBanHang\\img\\home-icon.png")); // NOI18N
         btn_qltk.setText("Quản lý tài khoản");
         btn_qltk.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btn_qltk.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
@@ -100,7 +97,6 @@ public class Admin_Frame extends javax.swing.JFrame {
         btn_qltk.setBounds(250, 81, 173, 130);
 
         btn_dangxuat.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
-        btn_dangxuat.setIcon(new javax.swing.ImageIcon("D:\\Java\\QuanLyBanHang\\img\\Other-Power-Log-Off-Metro-icon.png")); // NOI18N
         btn_dangxuat.setText("Đăng xuất");
         btn_dangxuat.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btn_dangxuat.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
@@ -113,7 +109,6 @@ public class Admin_Frame extends javax.swing.JFrame {
         btn_dangxuat.setBounds(250, 270, 180, 130);
 
         btn_thoat.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
-        btn_thoat.setIcon(new javax.swing.ImageIcon("D:\\Java\\QuanLyBanHang\\img\\blue-cross-icon.png")); // NOI18N
         btn_thoat.setText("Thoát");
         btn_thoat.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btn_thoat.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
@@ -125,15 +120,23 @@ public class Admin_Frame extends javax.swing.JFrame {
         jPanel2.add(btn_thoat);
         btn_thoat.setBounds(480, 270, 180, 130);
 
-        jLabel2.setIcon(new javax.swing.ImageIcon("D:\\Java\\QuanLyBanHang\\img\\1 (1).gif")); // NOI18N
-        jPanel2.add(jLabel2);
-        jLabel2.setBounds(0, 0, 700, 480);
+        btn_kho.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
+        btn_kho.setText("Quản lí phiếu nhập");
+        btn_kho.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_khoActionPerformed(evt);
+            }
+        });
+        jPanel2.add(btn_kho);
+        btn_kho.setBounds(710, 80, 200, 130);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 700, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 967, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -177,6 +180,12 @@ public class Admin_Frame extends javax.swing.JFrame {
         System.exit(0);
     }//GEN-LAST:event_btn_thoatActionPerformed
 
+    private void btn_khoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_khoActionPerformed
+        QLKho_Frame kho=new QLKho_Frame();
+        kho.setVisible(true);
+        dispose();
+    }//GEN-LAST:event_btn_khoActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -215,6 +224,7 @@ public class Admin_Frame extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_Qlnv;
     private javax.swing.JButton btn_dangxuat;
+    private javax.swing.JButton btn_kho;
     private javax.swing.JButton btn_qlSach;
     private javax.swing.JButton btn_qltk;
     private javax.swing.JButton btn_thoat;

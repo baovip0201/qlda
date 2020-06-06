@@ -203,4 +203,17 @@ public class nvDAO {
             JOptionPane.showMessageDialog(null, "Lỗi");
         }
     }
+    public static ArrayList<String> getListMaNV(){
+        ArrayList<String> listNV=new ArrayList();
+        String sql="select maNV from ThongTinNhanVien";
+        try {
+            ps=ConnectDatabase.getConnection().prepareStatement(sql);
+            rs=ps.executeQuery();
+            while(rs.next()){
+                listNV.add(rs.getString("maNV"));
+            }
+        } catch (SQLException e) {
+        }
+        return listNV;
+    }
 }   
