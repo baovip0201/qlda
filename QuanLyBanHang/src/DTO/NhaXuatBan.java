@@ -19,6 +19,15 @@ public class NhaXuatBan {
     public NhaXuatBan() {
     }
 
+    public NhaXuatBan(String maNXB, String tenNXB, String diaChi, String Email, String soDienThoai) {
+        this.maNXB = maNXB;
+        this.tenNXB = tenNXB;
+        this.diaChi = diaChi;
+        this.Email = Email;
+        this.soDienThoai = soDienThoai;
+    }
+
+    
     public String getMaNXB() {
         return maNXB;
     }

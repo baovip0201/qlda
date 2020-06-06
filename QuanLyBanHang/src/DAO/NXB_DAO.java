@@ -6,7 +6,7 @@
 package DAO;
 
 import DB.ConnectDatabase;
-import DTO.NXB;
+import DTO.NhaXuatBan;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -24,14 +24,14 @@ public class NXB_DAO {
     private static ConnectDatabase connect = new ConnectDatabase("localhost", "root", "", "qlbansach");
     private PreparedStatement ps = null;
     private ResultSet rs= null;
-    public List<NXB> getList(){
-        List<NXB> listNxb = new ArrayList<>();
+    public List<NhaXuatBan> getList(){
+        List<NhaXuatBan> listNxb = new ArrayList<>();
         ConnectDatabase.getConnection();        
         try {
             String sql = "select * from capnhatnxb";
             rs = connect.executeSQL(sql);
             while(rs.next()){
-                NXB nxb = new NXB(rs.getString("maNXB"),
+                NhaXuatBan nxb = new NhaXuatBan(rs.getString("maNXB"),
                         rs.getString("tenNXB"),
                         rs.getString("diaChi"),
                         rs.getString("Email"),
@@ -44,7 +44,7 @@ public class NXB_DAO {
         return listNxb;
     }
     
-    public void insert(NXB nxb){
+    public void insert(NhaXuatBan nxb){
         ConnectDatabase.getConnection();
         String sql = "insert into capnhatnxb(maNXB, tenNXB, diaChi, Email, soDienThoai) "+
                 "values(?,?,?,?,?)";
@@ -54,7 +54,7 @@ public class NXB_DAO {
             ps.setString(2, nxb.getTenNXB());    
             ps.setString(3, nxb.getDiaChi());
             ps.setString(4, nxb.getEmail());
-            ps.setString(5, nxb.getSdt());
+            ps.setString(5, nxb.getSoDienThoai());
             ps.executeUpdate();
         } catch (SQLException ex) {
             Logger.getLogger(sachDAO.class.getName()).log(Level.SEVERE, null, ex);
@@ -74,9 +74,9 @@ public class NXB_DAO {
         return false;
     }
     
-    public void update(NXB nxb){
+    public void update(NhaXuatBan nxb){
         ConnectDatabase.getConnection();
-        String sql = "update capnhatnxb set tenNXB='"+nxb.getTenNXB()+"', diaChi='"+nxb.getDiaChi()+"', Email='"+nxb.getEmail()+"', soDienThoai='"+nxb.getSdt()+"'"
+        String sql = "update capnhatnxb set tenNXB='"+nxb.getTenNXB()+"', diaChi='"+nxb.getDiaChi()+"', Email='"+nxb.getEmail()+"', soDienThoai='"+nxb.getSoDienThoai()+"'"
                 +" where maNXB='"+nxb.getMaNXB()+"'";
         try {
             ps = ConnectDatabase.connection.prepareStatement(sql);

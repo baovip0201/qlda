@@ -15,12 +15,15 @@ import java.util.List;
  * @author Thanh Phuc
  */
 public class LoaiSachBUS {
-     LoaiSachDAO data = new LoaiSachDAO();
+    LoaiSachDAO data = new LoaiSachDAO();
     List<LoaiSach> listLS = new ArrayList<>();
-    public List<LoaiSach> getList(){
-         if(listLS==null) listLS=new ArrayList<>();
-         listLS = data.getList();
-         return listLS;
+
+    public List<LoaiSach> getList() {
+        if (listLS == null) {
+            listLS = new ArrayList<>();
+        }
+        listLS = data.getList();
+        return listLS;
     }
     
     public void insert(LoaiSach sach){
