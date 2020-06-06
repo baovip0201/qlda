@@ -170,9 +170,6 @@
             </Constraint>
           </Constraints>
         </Component>
-<<<<<<< HEAD
-        <Component class="javax.swing.JLabel" name="jLabel2">
-=======
         <Component class="javax.swing.JButton" name="btn_kho">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
@@ -183,7 +180,6 @@
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_khoActionPerformed"/>
           </Events>
->>>>>>> 86fed4738ecf742be1b678a0c13b51baef411d6a
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
               <AbsoluteConstraints x="710" y="80" width="200" height="130"/>
