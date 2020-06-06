@@ -27,6 +27,7 @@ public class Admin_Frame extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jLabel2 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         btn_Qlnv = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
@@ -35,7 +36,7 @@ public class Admin_Frame extends javax.swing.JFrame {
         btn_qltk = new javax.swing.JButton();
         btn_dangxuat = new javax.swing.JButton();
         btn_thoat = new javax.swing.JButton();
-        jLabel2 = new javax.swing.JLabel();
+        btn_kho = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -51,7 +52,11 @@ public class Admin_Frame extends javax.swing.JFrame {
             }
         });
         jPanel2.add(btn_Qlnv);
+<<<<<<< HEAD
         btn_Qlnv.setBounds(20, 80, 180, 140);
+=======
+        btn_Qlnv.setBounds(20, 80, 180, 31);
+>>>>>>> 86fed4738ecf742be1b678a0c13b51baef411d6a
 
         jLabel1.setFont(new java.awt.Font("Times New Roman", 1, 36)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 204, 0));
@@ -117,15 +122,31 @@ public class Admin_Frame extends javax.swing.JFrame {
             }
         });
         jPanel2.add(btn_thoat);
+<<<<<<< HEAD
         btn_thoat.setBounds(240, 410, 180, 130);
         jPanel2.add(jLabel2);
         jLabel2.setBounds(0, 0, 700, 480);
+=======
+        btn_thoat.setBounds(480, 270, 180, 130);
+
+        btn_kho.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
+        btn_kho.setText("Quản lí phiếu nhập");
+        btn_kho.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_khoActionPerformed(evt);
+            }
+        });
+        jPanel2.add(btn_kho);
+        btn_kho.setBounds(710, 80, 200, 130);
+>>>>>>> 86fed4738ecf742be1b678a0c13b51baef411d6a
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 700, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 967, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -169,6 +190,12 @@ public class Admin_Frame extends javax.swing.JFrame {
         System.exit(0);
     }//GEN-LAST:event_btn_thoatActionPerformed
 
+    private void btn_khoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_khoActionPerformed
+        QLKho_Frame kho=new QLKho_Frame();
+        kho.setVisible(true);
+        dispose();
+    }//GEN-LAST:event_btn_khoActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -207,6 +234,7 @@ public class Admin_Frame extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_Qlnv;
     private javax.swing.JButton btn_dangxuat;
+    private javax.swing.JButton btn_kho;
     private javax.swing.JButton btn_qlSach;
     private javax.swing.JButton btn_qltk;
     private javax.swing.JButton btn_thoat;

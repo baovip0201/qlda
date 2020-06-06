@@ -5,7 +5,7 @@
  */
 package BUS;
 
-import DAO.loaisachDAO;
+import DAO.LoaiSachDAO;
 import DAO.nxbDAO;
 import DAO.sachDAO;
 import DTO.LoaiSach;

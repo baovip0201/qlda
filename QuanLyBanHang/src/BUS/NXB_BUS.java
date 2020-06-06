@@ -6,7 +6,7 @@
 package BUS;
 
 import DAO.NXB_DAO;
-import DTO.NXB;
+import DTO.NhaXuatBan;
 import java.util.ArrayList;
 import java.util.List;
 

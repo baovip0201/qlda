@@ -113,4 +113,17 @@ public class nxbDAO {
         }
         return false;
     }
+    public static ArrayList<String> getListMaNXB(){
+        ArrayList<String> listNXB=new ArrayList();
+        String sql="select maNXB from capnhatnxb";
+        try {
+            ps=conn.prepareStatement(sql);
+            rs=ps.executeQuery();
+            while(rs.next()){
+                listNXB.add(rs.getString("maNXB"));
+            }
+        } catch (SQLException e) {
+        }
+        return listNXB;
+    }
 }
