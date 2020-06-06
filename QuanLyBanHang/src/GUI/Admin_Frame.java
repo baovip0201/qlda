@@ -37,6 +37,7 @@ public class Admin_Frame extends javax.swing.JFrame {
         btn_dangxuat = new javax.swing.JButton();
         btn_thoat = new javax.swing.JButton();
         btn_kho = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -52,11 +53,7 @@ public class Admin_Frame extends javax.swing.JFrame {
             }
         });
         jPanel2.add(btn_Qlnv);
-<<<<<<< HEAD
         btn_Qlnv.setBounds(20, 80, 180, 140);
-=======
-        btn_Qlnv.setBounds(20, 80, 180, 31);
->>>>>>> 86fed4738ecf742be1b678a0c13b51baef411d6a
 
         jLabel1.setFont(new java.awt.Font("Times New Roman", 1, 36)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 204, 0));
@@ -122,12 +119,7 @@ public class Admin_Frame extends javax.swing.JFrame {
             }
         });
         jPanel2.add(btn_thoat);
-<<<<<<< HEAD
         btn_thoat.setBounds(240, 410, 180, 130);
-        jPanel2.add(jLabel2);
-        jLabel2.setBounds(0, 0, 700, 480);
-=======
-        btn_thoat.setBounds(480, 270, 180, 130);
 
         btn_kho.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         btn_kho.setText("Quản lí phiếu nhập");
@@ -138,7 +130,10 @@ public class Admin_Frame extends javax.swing.JFrame {
         });
         jPanel2.add(btn_kho);
         btn_kho.setBounds(710, 80, 200, 130);
->>>>>>> 86fed4738ecf742be1b678a0c13b51baef411d6a
+
+        jButton1.setText("jButton1");
+        jPanel2.add(jButton1);
+        jButton1.setBounds(250, 250, 170, 130);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -239,6 +234,7 @@ public class Admin_Frame extends javax.swing.JFrame {
     private javax.swing.JButton btn_qltk;
     private javax.swing.JButton btn_thoat;
     private javax.swing.JButton btn_thongke;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel2;
