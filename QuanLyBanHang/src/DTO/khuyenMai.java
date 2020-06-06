@@ -16,15 +16,15 @@ public class khuyenMai {
     private String maGiamGia;
     private String tenChuongTrinh;
     private Date thoiGianBatDau;
-    private Date datetime;
+    private Date thoiGianKetThuc;
     private String noiDungKhuyenMai;
     private float tienKhuyenMai;
 
-    public khuyenMai(String maGiamGia, String tenChuongTrinh, Date thoiGianBatDau, Date datetime, String noiDungKhuyenMai, float tienKhuyenMai) {
+    public khuyenMai(String maGiamGia, String tenChuongTrinh, Date thoiGianBatDau, Date thoiGianKetThuc, String noiDungKhuyenMai, float tienKhuyenMai) {
         this.maGiamGia = maGiamGia;
         this.tenChuongTrinh = tenChuongTrinh;
         this.thoiGianBatDau = thoiGianBatDau;
-        this.datetime = datetime;
+        this.thoiGianKetThuc = thoiGianKetThuc;
         this.noiDungKhuyenMai = noiDungKhuyenMai;
         this.tienKhuyenMai = tienKhuyenMai;
     }
@@ -56,12 +56,12 @@ public class khuyenMai {
         this.thoiGianBatDau = thoiGianBatDau;
     }
 
-    public Date getDatetime() {
-        return datetime;
+    public Date getThoiGianKetThuc() {
+        return thoiGianKetThuc;
     }
 
-    public void setDatetime(Date datetime) {
-        this.datetime = datetime;
+    public void setThoiGianKetThuc(Date thoiGianKetThuc) {
+        this.thoiGianKetThuc = thoiGianKetThuc;
     }
 
     public String getNoiDungKhuyenMai() {
@@ -80,6 +80,9 @@ public class khuyenMai {
         this.tienKhuyenMai = tienKhuyenMai;
     }
 
+    
+
+   
     
 
 }

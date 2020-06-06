@@ -38,7 +38,7 @@ public class Admin_Frame extends javax.swing.JFrame {
         btn_dangxuat = new javax.swing.JButton();
         btn_thoat = new javax.swing.JButton();
         btn_kho = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
+        btn_qlMaKM = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -120,7 +120,7 @@ public class Admin_Frame extends javax.swing.JFrame {
             }
         });
         jPanel2.add(btn_thoat);
-        btn_thoat.setBounds(240, 410, 180, 130);
+        btn_thoat.setBounds(250, 410, 180, 130);
 
         btn_kho.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         btn_kho.setText("Quản lí phiếu nhập");
@@ -130,11 +130,17 @@ public class Admin_Frame extends javax.swing.JFrame {
             }
         });
         jPanel2.add(btn_kho);
-        btn_kho.setBounds(710, 80, 200, 130);
+        btn_kho.setBounds(470, 240, 200, 130);
 
-        jButton1.setText("jButton1");
-        jPanel2.add(jButton1);
-        jButton1.setBounds(250, 250, 170, 130);
+        btn_qlMaKM.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
+        btn_qlMaKM.setText("Quản lý Khuyến Mãi");
+        btn_qlMaKM.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_qlMaKMActionPerformed(evt);
+            }
+        });
+        jPanel2.add(btn_qlMaKM);
+        btn_qlMaKM.setBounds(240, 240, 200, 130);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -192,6 +198,13 @@ public class Admin_Frame extends javax.swing.JFrame {
         dispose();
     }//GEN-LAST:event_btn_khoActionPerformed
 
+    private void btn_qlMaKMActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_qlMaKMActionPerformed
+        // TODO add your handling code here:
+        QLKM_Frame km = new QLKM_Frame();
+        km.setVisible(true);
+        dispose();
+    }//GEN-LAST:event_btn_qlMaKMActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -231,11 +244,11 @@ public class Admin_Frame extends javax.swing.JFrame {
     private javax.swing.JButton btn_Qlnv;
     private javax.swing.JButton btn_dangxuat;
     private javax.swing.JButton btn_kho;
+    private javax.swing.JButton btn_qlMaKM;
     private javax.swing.JButton btn_qlSach;
     private javax.swing.JButton btn_qltk;
     private javax.swing.JButton btn_thoat;
     private javax.swing.JButton btn_thongke;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel2;
