@@ -21,6 +21,18 @@ public class ThongTinSach {
     public ThongTinSach() {
     }
 
+    public ThongTinSach(String maSach, String tenSach, String maLoaiSach, String maNXB, int soLuong, float giaTien, String fileAnh) {
+        this.maSach = maSach;
+        this.tenSach = tenSach;
+        this.maLoaiSach = maLoaiSach;
+        this.maNXB = maNXB;
+        this.soLuong = soLuong;
+        this.giaTien = giaTien;
+        this.fileAnh = fileAnh;
+    }
+    
+    
+
     public String getMaSach() {
         return maSach;
     }

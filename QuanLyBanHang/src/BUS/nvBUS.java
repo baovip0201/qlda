@@ -21,8 +21,8 @@ public class nvBUS{
     public ArrayList<String> list;
     nvDAO data = new nvDAO();
     public nvBUS(){
-        
     }
+    
     public List<NhanVien> docDSNV(){
         if(dsnv==null) dsnv=new ArrayList<>();
         dsnv=data.getListNV();

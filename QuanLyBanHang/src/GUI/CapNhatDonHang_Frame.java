@@ -38,7 +38,6 @@ public class CapNhatDonHang_Frame extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         txt_diaChi = new javax.swing.JTextField();
-        date_ngayDat = new com.toedter.calendar.JDateChooser();
         jPanel3 = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
@@ -71,7 +70,6 @@ public class CapNhatDonHang_Frame extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jButton1.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
-        jButton1.setIcon(new javax.swing.ImageIcon("D:\\Java\\QuanLyBanHang\\img\\arrow-back-icon.png")); // NOI18N
         jButton1.setText("Hệ thống");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -107,9 +105,6 @@ public class CapNhatDonHang_Frame extends javax.swing.JFrame {
 
         txt_diaChi.setFont(new java.awt.Font("Times New Roman", 0, 12)); // NOI18N
 
-        date_ngayDat.setDateFormatString("MMM dd, yyyy");
-        date_ngayDat.setFont(new java.awt.Font("Times New Roman", 0, 12)); // NOI18N
-
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -123,15 +118,12 @@ public class CapNhatDonHang_Frame extends javax.swing.JFrame {
                     .addComponent(txt_tenKhachHang, javax.swing.GroupLayout.DEFAULT_SIZE, 130, Short.MAX_VALUE)
                     .addComponent(txt_sdt))
                 .addGap(18, 18, 18)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel4)
                         .addGap(18, 18, 18)
                         .addComponent(txt_diaChi, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jLabel5)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(date_ngayDat, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addComponent(jLabel5))
                 .addGap(0, 12, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
@@ -144,12 +136,10 @@ public class CapNhatDonHang_Frame extends javax.swing.JFrame {
                     .addComponent(jLabel4)
                     .addComponent(txt_diaChi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel3)
-                        .addComponent(txt_sdt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel5))
-                    .addComponent(date_ngayDat, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(txt_sdt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel5))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -289,39 +279,30 @@ public class CapNhatDonHang_Frame extends javax.swing.JFrame {
         );
 
         btn_taiLai.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
-        btn_taiLai.setIcon(new javax.swing.ImageIcon("D:\\Java\\QuanLyBanHang\\img\\reload-icon.png")); // NOI18N
         btn_taiLai.setText("Tải lại");
 
         btn_themDonHang.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
-        btn_themDonHang.setIcon(new javax.swing.ImageIcon("D:\\Java\\QuanLyBanHang\\img\\Sign-Add-icon.png")); // NOI18N
         btn_themDonHang.setText("Đơn hàng");
 
         btn_suaDonHang.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
-        btn_suaDonHang.setIcon(new javax.swing.ImageIcon("D:\\Java\\QuanLyBanHang\\img\\Repair-icon.png")); // NOI18N
         btn_suaDonHang.setText("Đơn hàng");
 
         btn_xoaDonHang.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
-        btn_xoaDonHang.setIcon(new javax.swing.ImageIcon("D:\\Java\\QuanLyBanHang\\img\\Trash-icon.png")); // NOI18N
         btn_xoaDonHang.setText("Đơn hàng");
 
         btn_themSach.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
-        btn_themSach.setIcon(new javax.swing.ImageIcon("D:\\Java\\QuanLyBanHang\\img\\Sign-Add-icon.png")); // NOI18N
         btn_themSach.setText("Sách");
 
         btn_suaSach.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
-        btn_suaSach.setIcon(new javax.swing.ImageIcon("D:\\Java\\QuanLyBanHang\\img\\Repair-icon.png")); // NOI18N
         btn_suaSach.setText("Sách");
 
         btn_xoaSach.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
-        btn_xoaSach.setIcon(new javax.swing.ImageIcon("D:\\Java\\QuanLyBanHang\\img\\Trash-icon.png")); // NOI18N
         btn_xoaSach.setText("Sách");
 
         btn_luu.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
-        btn_luu.setIcon(new javax.swing.ImageIcon("D:\\Java\\QuanLyBanHang\\img\\save.png")); // NOI18N
         btn_luu.setText("Lưu");
 
         btn_xuatDonHang.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
-        btn_xuatDonHang.setIcon(new javax.swing.ImageIcon("D:\\Java\\QuanLyBanHang\\img\\print.png")); // NOI18N
         btn_xuatDonHang.setText("Xuất đơn hàng");
         btn_xuatDonHang.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btn_xuatDonHang.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
@@ -470,7 +451,6 @@ public class CapNhatDonHang_Frame extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> cbb_loaiSach;
     private javax.swing.JComboBox<String> cbb_maDonHang;
     private javax.swing.JComboBox<String> cbb_tenSach;
-    private com.toedter.calendar.JDateChooser date_ngayDat;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;

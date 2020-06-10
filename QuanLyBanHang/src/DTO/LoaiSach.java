@@ -16,6 +16,12 @@ public class LoaiSach {
     public LoaiSach() {
     }
 
+    public LoaiSach(String maLoaiSach, String tenLoaiSach) {
+        this.maLoaiSach = maLoaiSach;
+        this.tenLoaiSach = tenLoaiSach;
+    }
+
+    
     public String getMaLoaiSach() {
         return maLoaiSach;
     }

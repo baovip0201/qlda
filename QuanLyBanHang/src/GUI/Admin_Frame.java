@@ -2,6 +2,7 @@
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
+ * branch test
  */
 package GUI;
 
@@ -37,6 +38,7 @@ public class Admin_Frame extends javax.swing.JFrame {
         btn_dangxuat = new javax.swing.JButton();
         btn_thoat = new javax.swing.JButton();
         btn_kho = new javax.swing.JButton();
+        btn_qlMaKM = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -52,7 +54,7 @@ public class Admin_Frame extends javax.swing.JFrame {
             }
         });
         jPanel2.add(btn_Qlnv);
-        btn_Qlnv.setBounds(20, 80, 180, 31);
+        btn_Qlnv.setBounds(20, 80, 180, 140);
 
         jLabel1.setFont(new java.awt.Font("Times New Roman", 1, 36)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 204, 0));
@@ -82,7 +84,7 @@ public class Admin_Frame extends javax.swing.JFrame {
             }
         });
         jPanel2.add(btn_qlSach);
-        btn_qlSach.setBounds(23, 270, 180, 130);
+        btn_qlSach.setBounds(20, 250, 180, 130);
 
         btn_qltk.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         btn_qltk.setText("Quản lý tài khoản");
@@ -106,7 +108,7 @@ public class Admin_Frame extends javax.swing.JFrame {
             }
         });
         jPanel2.add(btn_dangxuat);
-        btn_dangxuat.setBounds(250, 270, 180, 130);
+        btn_dangxuat.setBounds(20, 410, 180, 130);
 
         btn_thoat.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         btn_thoat.setText("Thoát");
@@ -118,7 +120,7 @@ public class Admin_Frame extends javax.swing.JFrame {
             }
         });
         jPanel2.add(btn_thoat);
-        btn_thoat.setBounds(480, 270, 180, 130);
+        btn_thoat.setBounds(250, 410, 180, 130);
 
         btn_kho.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         btn_kho.setText("Quản lí phiếu nhập");
@@ -128,7 +130,17 @@ public class Admin_Frame extends javax.swing.JFrame {
             }
         });
         jPanel2.add(btn_kho);
-        btn_kho.setBounds(710, 80, 200, 130);
+        btn_kho.setBounds(470, 240, 200, 130);
+
+        btn_qlMaKM.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
+        btn_qlMaKM.setText("Quản lý Khuyến Mãi");
+        btn_qlMaKM.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_qlMaKMActionPerformed(evt);
+            }
+        });
+        jPanel2.add(btn_qlMaKM);
+        btn_qlMaKM.setBounds(240, 240, 200, 130);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -140,7 +152,7 @@ public class Admin_Frame extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 484, Short.MAX_VALUE)
+            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 555, Short.MAX_VALUE)
         );
 
         pack();
@@ -186,6 +198,13 @@ public class Admin_Frame extends javax.swing.JFrame {
         dispose();
     }//GEN-LAST:event_btn_khoActionPerformed
 
+    private void btn_qlMaKMActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_qlMaKMActionPerformed
+        // TODO add your handling code here:
+        QLKM_Frame km = new QLKM_Frame();
+        km.setVisible(true);
+        dispose();
+    }//GEN-LAST:event_btn_qlMaKMActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -225,6 +244,7 @@ public class Admin_Frame extends javax.swing.JFrame {
     private javax.swing.JButton btn_Qlnv;
     private javax.swing.JButton btn_dangxuat;
     private javax.swing.JButton btn_kho;
+    private javax.swing.JButton btn_qlMaKM;
     private javax.swing.JButton btn_qlSach;
     private javax.swing.JButton btn_qltk;
     private javax.swing.JButton btn_thoat;
