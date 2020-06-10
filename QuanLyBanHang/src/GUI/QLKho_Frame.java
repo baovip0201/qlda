@@ -68,6 +68,11 @@ public class QLKho_Frame extends javax.swing.JFrame {
         jTable1.setModel(model);
 
     }
+    private void resetTable(){
+        model = (DefaultTableModel) jTable1.getModel();
+        model.setRowCount(0);
+        showTable();
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -159,6 +164,7 @@ public class QLKho_Frame extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(jTable1);
 
+        loadBtn.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         loadBtn.setText("Tải danh sách");
         loadBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -166,6 +172,7 @@ public class QLKho_Frame extends javax.swing.JFrame {
             }
         });
 
+        reLoadBtn.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         reLoadBtn.setText("Tải lại");
         reLoadBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -179,8 +186,8 @@ public class QLKho_Frame extends javax.swing.JFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1242, Short.MAX_VALUE)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addComponent(loadBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(36, 36, 36)
+                .addComponent(loadBtn)
+                .addGap(39, 39, 39)
                 .addComponent(reLoadBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
@@ -215,6 +222,7 @@ public class QLKho_Frame extends javax.swing.JFrame {
         jDateChooser5.setDateFormatString("MMM dd, yyyy");
         jDateChooser5.setFont(new java.awt.Font("Times New Roman", 0, 12)); // NOI18N
 
+        addBtn.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         addBtn.setText("Thêm");
         addBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -222,6 +230,7 @@ public class QLKho_Frame extends javax.swing.JFrame {
             }
         });
 
+        delBtn.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         delBtn.setText("Xóa");
         delBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -229,6 +238,7 @@ public class QLKho_Frame extends javax.swing.JFrame {
             }
         });
 
+        updateBtn.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         updateBtn.setText("Cập nhật");
         updateBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -236,6 +246,7 @@ public class QLKho_Frame extends javax.swing.JFrame {
             }
         });
 
+        printBtn.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         printBtn.setText("In danh sách");
         printBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -258,6 +269,7 @@ public class QLKho_Frame extends javax.swing.JFrame {
             }
         });
 
+        cbb_Search.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
         cbb_Search.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Mã nhập hàng", "Mã nhân viên", "Mã NXB" }));
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
@@ -296,13 +308,13 @@ public class QLKho_Frame extends javax.swing.JFrame {
                         .addGap(48, 48, 48)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(delBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(addBtn, javax.swing.GroupLayout.DEFAULT_SIZE, 72, Short.MAX_VALUE))
+                            .addComponent(addBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(46, 46, 46)
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(updateBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(printBtn)))
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(printBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(updateBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addComponent(txt_Search, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(92, Short.MAX_VALUE))
+                .addContainerGap(48, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -436,9 +448,7 @@ public class QLKho_Frame extends javax.swing.JFrame {
     }//GEN-LAST:event_loadBtnActionPerformed
 
     private void reLoadBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reLoadBtnActionPerformed
-        model = (DefaultTableModel) jTable1.getModel();
-        model.setRowCount(0);
-        showTable();
+        resetTable();
     }//GEN-LAST:event_reLoadBtnActionPerformed
 
     private void txt_SearchKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_SearchKeyReleased
@@ -447,21 +457,15 @@ public class QLKho_Frame extends javax.swing.JFrame {
         switch (select) {
             case "Mã nhập hàng":
                 bus.searchByMaNH(tf);
-                model = (DefaultTableModel) jTable1.getModel();
-                model.setRowCount(0);
-                showTable();
+                resetTable();
                 break;
             case "Mã nhân viên":
                 bus.searchByMaNV(tf);
-                model = (DefaultTableModel) jTable1.getModel();
-                model.setRowCount(0);
-                showTable();
+                resetTable();
                 break;
             case "Mã NXB":
                 bus.searchByMaNXB(tf);
-                model = (DefaultTableModel) jTable1.getModel();
-                model.setRowCount(0);
-                showTable();
+                resetTable();
                 break;
         }
     }//GEN-LAST:event_txt_SearchKeyReleased
