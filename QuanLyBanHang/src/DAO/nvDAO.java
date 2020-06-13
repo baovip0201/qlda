@@ -14,15 +14,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import DTO.ChucVu;
-import net.sf.jasperreports.engine.JRException;
-import net.sf.jasperreports.engine.JasperCompileManager;
-import net.sf.jasperreports.engine.JasperFillManager;
-import net.sf.jasperreports.engine.JasperPrint;
-import net.sf.jasperreports.engine.JasperReport;
-import net.sf.jasperreports.engine.design.JRDesignQuery;
-import net.sf.jasperreports.engine.design.JasperDesign;
-import net.sf.jasperreports.engine.xml.JRXmlLoader;
-import net.sf.jasperreports.view.JasperViewer;
+import java.awt.Component;
 
 
 /**
@@ -33,7 +25,6 @@ public class nvDAO {
     private static ConnectDatabase connect = new ConnectDatabase("localhost", "root", "", "qlbansach");
     private static PreparedStatement ps=null;
     private static ResultSet rs=null;
-    
     public void them(NhanVien nv){
         ConnectDatabase.getConnection();
         String sql="insert into thongtinnhanvien(maNV, maChucVu, hoTen, gioiTinh, ngaySinh, diaChi, soDienthoai, Email, luong)"+
@@ -44,7 +35,7 @@ public class nvDAO {
             ps.setString(2, nv.getMaCv());
             ps.setString(3, nv.getHoTen());
             ps.setString(4, nv.getGender());
-            ps.setDate(5, nv.getDob());
+            ps.setString(5, nv.getDob());
             ps.setString(6, nv.getDiaChi());
             ps.setString(7, nv.getSdt());
             ps.setString(8, nv.getEmail());
@@ -55,15 +46,20 @@ public class nvDAO {
         }
     }
     public void sua(NhanVien nv){
-        String sql="update ThongTinNhanVien set maChucVu='"+nv.getMaCv()+"', hoTen='"+nv.getHoTen()+"', gioiTinh='"+nv.getGender()+"',"+
-                "ngaySinh='"+nv.getDob()+"', diaChi='"+nv.getDiaChi()+"',"+
-                "soDienThoai='"+nv.getSdt()+"', email='"+nv.getEmail()+"', luong='"+nv.getLuong()+"' where maNV='"+nv.getMaNv()+"'";
+        ConnectDatabase.getConnection();
+        
         try {
-            //ps=conn.prepareStatement(sql);
+            String sql="update thongtinnhanvien set maChucVu='"+nv.getMaCv()+"', hoTen='"+nv.getHoTen()+"', gioiTinh='"+nv.getGender()+"',"+
+                "ngaySinh='"+nv.getDob()+"', diaChi='"+nv.getDiaChi()+"',soDienThoai='"+nv.getSdt()+"', email='"+nv.getEmail()+"', luong='"+nv.getLuong()+"' where maNV='"+nv.getMaNv()+"'";
+            ps=ConnectDatabase.connection.prepareStatement(sql);
             int i=ps.executeUpdate();
         } catch (SQLException e) {
+            Logger.getLogger(nvDAO.class.getName()).log(Level.SEVERE, null, e);
             JOptionPane.showMessageDialog(null, "Lỗi");
         }
+        
+       
+        
     }
     public void xoa(String nv){
         
@@ -91,7 +87,7 @@ public class nvDAO {
                 nv.setMaCv(rs.getString("maChucVu"));
                 nv.setHoTen(rs.getString("hoTen"));
                 nv.setGender(rs.getString("gioiTinh"));
-                nv.setDob(rs.getDate("ngaySinh"));
+                nv.setDob(rs.getString("ngaySinh"));
                 nv.setDiaChi(rs.getString("diaChi"));
                 nv.setSdt(rs.getString("soDienThoai"));
                 nv.setEmail(rs.getString("email"));
@@ -116,7 +112,7 @@ public class nvDAO {
                 nv.setMaCv(rs.getString("maChucVu"));
                 nv.setHoTen(rs.getString("hoTen"));
                 nv.setGender(rs.getString("gioiTinh"));
-                nv.setDob(rs.getDate("ngaySinh"));
+                nv.setDob(rs.getString("ngaySinh"));
                 nv.setDiaChi(rs.getString("diaChi"));
                 nv.setSdt(rs.getString("soDienThoai"));
                 nv.setEmail(rs.getString("email"));
@@ -140,7 +136,7 @@ public class nvDAO {
                 rs.getString("maChucVu"),
                 rs.getString("hoTen"),
                 rs.getString("gioiTinh"),
-                rs.getDate("ngaySinh"),
+                rs.getString("ngaySinh"),
                 rs.getString("diaChi"),
                 rs.getString("soDienThoai"),
                 rs.getString("email"),
@@ -153,6 +149,7 @@ public class nvDAO {
         return dsnv;    
     }
     public boolean testPrimaryKey(String txt){
+        ConnectDatabase.getConnection();
         String sql="Select * from ThongTinNhanVien where maNV='"+txt+"'";
         try {
             ps=ConnectDatabase.connection.prepareStatement(sql);
@@ -187,33 +184,28 @@ public class nvDAO {
         }
         return cvList;
     }
-    public void report(){
-        String sql="select * from ThongTinNhanVien";
+    public Float fill_LuongNhanVien(String maCV){
+        Float nv = new Float(0);
+        ConnectDatabase.getConnection();
         try {
-            JasperDesign jdesign=JRXmlLoader.load("D:\\Github\\qlda\\QuanLyBanHang\\src\\Report\\report1.jrxml");
-            JRDesignQuery updateQuery=new JRDesignQuery();
-            updateQuery.setText(sql);
+        String sql = "select * from chucvu where maChucVu='"+maCV+"'";
+        ResultSet rs = connect.executeSQL(sql);
         
-            jdesign.setQuery(updateQuery);
-        
-            JasperReport jReport=JasperCompileManager.compileReport(jdesign);
-            JasperPrint jPrint=JasperFillManager.fillReport(jReport,null,ConnectDatabase.getConnection());
-            JasperViewer.viewReport(jPrint);
-        } catch (JRException e) {
-            JOptionPane.showMessageDialog(null, "Lỗi");
-        }
-    }
-    public static ArrayList<String> getListMaNV(){
-        ArrayList<String> listNV=new ArrayList();
-        String sql="select maNV from ThongTinNhanVien";
-        try {
-            ps=ConnectDatabase.getConnection().prepareStatement(sql);
-            rs=ps.executeQuery();
             while(rs.next()){
-                listNV.add(rs.getString("maNV"));
+                Float luong = new Float(rs.getFloat("luong")                        
+                        );
+                nv=luong;
             }
-        } catch (SQLException e) {
+        } catch (SQLException ex) {
+            Logger.getLogger(qltk_DAO.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println("Lỗi");
         }
-        return listNV;
+         finally {                     
+             if (connect != null) {
+                 connect.closeConnection();
+            }
+        }
+        return nv;
     }
+        
 }   
