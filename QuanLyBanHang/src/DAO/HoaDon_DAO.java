@@ -177,4 +177,27 @@ public class HoaDon_DAO {
             Logger.getLogger(HoaDon_DAO.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+    
+    public List<HoaDon> getList(){
+        List<HoaDon> listhd = new ArrayList<>();
+        ConnectDatabase.getConnection();        
+        try {
+            String sql = "select * from hoadon ";
+            rs = connect.executeSQL(sql);
+            while(rs.next()){
+                HoaDon hd = new HoaDon(rs.getString("maHoaDon"),
+                        rs.getString("maNV"),
+                        rs.getString("maKH"),                         
+                        rs.getString("maGiamGia"),
+                        rs.getString("ngayLap"),
+                        rs.getString("gioLap"),
+                        rs.getInt("tongTien"),
+                        rs.getInt("tienGiamGia"));
+                listhd.add(hd);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(sachDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return listhd;
+    }
 }
