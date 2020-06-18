@@ -18,6 +18,11 @@ public class HoaDon_BUS {
     HoaDon_DAO data = new HoaDon_DAO();
     List<HoaDon> listHd = new ArrayList<>();
     List<ThongKe> listTk = new ArrayList<>();
+    public List<HoaDon> getList(){
+        if(listHd==null) listHd=new ArrayList<>();
+         listHd = data.getList();
+         return listHd;
+    }
     public void insert(HoaDon hd){
         data.insert(hd);
         listHd.add(hd);
